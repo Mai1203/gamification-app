@@ -1,36 +1,62 @@
-import { Header } from '@/app/ui/Header';
-import { Carts } from '@/app/ui/Carts';
-import { Footer } from './ui/Footer';
+"use client";
+import { motion } from "framer-motion";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { Header } from "@/app/ui/Header";
+import { Carts } from "@/app/ui/Carts";
+import { Footer } from "./ui/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100"
+    >
       <Header />
-      
       <main className="container mx-auto px-4 py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="lg:w-1/2 space-y-6">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="lg:w-1/2 space-y-6"
+          >
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900">
               ¡La forma divertida de aprender desarrollo web!
             </h1>
             <p className="text-xl text-gray-600">
-              Aprende HTML, CSS y JavaScript de manera interactiva y efectiva. 
+              Aprende HTML, CSS y JavaScript de manera interactiva y efectiva.
               Construye proyectos reales mientras juegas y ganas puntos.
             </p>
-            <div className='flex flex-col sm:flex-row gap-4'>
-              <button
-                className='px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-xl transition-all duration-300 transform'
+            <div className="flex flex-col sm:flex-row gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
+                className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-xl transition-all duration-300 transform"
               >
-                ¡Empieza Ahora!  
-              </button>  
-            </div>  
-          </div>
-
+                ¡Empieza Ahora!
+              </motion.button>
+            </div>
+          </motion.div>
+          <motion.div 
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+            className="lg:w-1/2 flex justify-center"
+          >
+            <DotLottieReact
+              autoplay
+              loop
+              src="/animation/Game.json"
+              className="w-full max-w-md h-auto"
+            />
+          </motion.div>
         </div>
-
         <Carts />
-      </main>  
-        <Footer />
-    </div>
+      </main>
+      <Footer />
+    </motion.div>
   );
 }

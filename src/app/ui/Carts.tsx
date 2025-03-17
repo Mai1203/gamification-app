@@ -1,9 +1,15 @@
+"use client";
 import { Code2, Layout, Palette } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const Carts = () => {
   return (
-    <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <motion.div
+      initial={{ y: 50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+      className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8"
+    >
       <motion.div
         whileHover={{ y: -5, transition: { duration: 0.3 } }}
         className="bg-white p-8 rounded-xl shadow-lg"
@@ -17,7 +23,10 @@ export const Carts = () => {
         </p>
       </motion.div>
 
-      <div className="bg-white p-8 rounded-xl shadow-lg">
+      <motion.div
+        whileHover={{ y: -5, transition: { duration: 0.3 } }}
+        className="bg-white p-8 rounded-xl shadow-lg"
+      >
         <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
           <Palette className="h-6 w-6 text-purple-600" />
         </div>
@@ -25,9 +34,12 @@ export const Carts = () => {
         <p className="text-gray-600">
           Domina el arte del diseño web con CSS moderno y responsive.
         </p>
-      </div>
+      </motion.div>
 
-      <div className="bg-white p-8 rounded-xl shadow-lg">
+      <motion.div
+        whileHover={{ y: -5, transition: { duration: 0.3 } }}
+        className="bg-white p-8 rounded-xl shadow-lg"
+      >
         <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
           <Code2 className="h-6 w-6 text-yellow-600" />
         </div>
@@ -36,7 +48,7 @@ export const Carts = () => {
           Da vida a tus páginas web con interactividad y funcionalidades
           dinámicas.
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
