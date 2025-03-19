@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import Link from 'next/link';
 
 export const Footer = () => {
   return (
@@ -6,18 +7,18 @@ export const Footer = () => {
       <div className="container mx-auto px-4 text-center">
         
         <div className="flex flex-col md:flex-row justify-center gap-8 mb-6">
-          <a href="#" className="hover:text-white transition">
+          <Link href="/" className="hover:text-white transition">
             Inicio
-          </a>
-          <a href="/about" className="hover:text-white transition">
+          </Link>
+          <Link href="/about" className="hover:text-white transition">
             Nosotros
-          </a>
-          <a href="/contact" className="hover:text-white transition">
+          </Link>
+          <Link href="/contact" className="hover:text-white transition">
             Contacto
-          </a>
-          <a href="/faq" className="hover:text-white transition">
+          </Link>
+          <Link href="/faq" className="hover:text-white transition">
             FAQ
-          </a>
+          </Link>
         </div>
 
         <div className="flex justify-center gap-4 mb-6">

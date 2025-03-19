@@ -1,17 +1,17 @@
 import { BookOpen, Code, Play, CheckCircle } from "lucide-react";
 import { modules } from "@/data/modules";
 
-const moduleHtml = modules[0];
+const moduleCss = modules[1];
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
       <div className="bg-white rounded-xl shadow-xl p-8">
-      <h2 className="text-2xl font-bold mb-2">HTML Básico</h2>
-      <p className="text-gray-600 mb-8">Aprende los fundamentos de HTML para crear la estructura de tus páginas web.</p>
+      <h2 className="text-2xl font-bold mb-2">CSS Creativo</h2>
+      <p className="text-gray-600 mb-8">Domina el diseño y estilizado de páginas web con CSS moderno.</p>
 
       <div className="space-y-6">
-        {moduleHtml.lessons.map((lesson, index) => (
+        {moduleCss.lessons.map((lesson, index) => (
           <div
             key={index}
             className="bg-gray-50 rounded-lg p-6 transition-all hover:shadow-md"

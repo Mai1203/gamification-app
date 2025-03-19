@@ -11,7 +11,7 @@ export const Carts = () => {
       className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8"
     >
       <motion.div
-        whileHover={{ y: -5, transition: { duration: 0.3 } }}
+        whileHover={{ y: -10, transition: { duration: 0.3 } }}
         className="bg-white p-8 rounded-xl shadow-lg"
       >
         <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
@@ -24,7 +24,7 @@ export const Carts = () => {
       </motion.div>
 
       <motion.div
-        whileHover={{ y: -5, transition: { duration: 0.3 } }}
+        whileHover={{ y: -10, transition: { duration: 0.3 } }}
         className="bg-white p-8 rounded-xl shadow-lg"
       >
         <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
@@ -37,7 +37,7 @@ export const Carts = () => {
       </motion.div>
 
       <motion.div
-        whileHover={{ y: -5, transition: { duration: 0.3 } }}
+        whileHover={{ y: -10, transition: { duration: 0.3 } }}
         className="bg-white p-8 rounded-xl shadow-lg"
       >
         <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">

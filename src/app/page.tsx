@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Link from "next/link";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Header } from "@/app/ui/Header";
 import { Carts } from "@/app/ui/Carts";
 import { Footer } from "./ui/Footer";
@@ -34,13 +35,18 @@ export default function Home() {
               <motion.button
                 whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                 whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
-                className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-xl transition-all duration-300 transform"
               >
-                ¡Empieza Ahora!
+                <Link
+                  href="/dashboard"
+                  className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-xl transition-all duration-300 transform cursor:pointer"
+                >
+                  ¡Empieza Ahora!
+                </Link>
               </motion.button>
             </div>
           </motion.div>
-          <motion.div 
+
+          <motion.div
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
