@@ -2,6 +2,9 @@ import {
   ClerkProvider,
   SignInButton,
   SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
 } from "@clerk/nextjs";
 import { Code2, UserPlus, LogIn } from "lucide-react";
 import Link from "next/link";
@@ -24,19 +27,27 @@ export const Header = () => {
           <div className="flex items-center gap-4">
             <ClerkProvider>
 
-              <SignInButton forceRedirectUrl="/dashboard">
-              <button className="flex items-center gap-2 px-4 py-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all duration-300 cursor-pointer">
-                <LogIn className="h-4 w-4" />
-                Iniciar Sesión
-              </button>
-              </SignInButton>
-
-              <SignUpButton forceRedirectUrl="/dashboard">
-                <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r bg-indigo-600 to-purple-600 text-white hover:bg-indigo-800 rounded-lg transition-all duration-300 cursor-pointer">
-                  <UserPlus className="h-4 w-4" />
-                  Registrarse
+              <SignedOut>
+                <SignInButton forceRedirectUrl="/dashboard">
+                <button className="flex items-center gap-2 px-4 py-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all duration-300 cursor-pointer">
+                  <LogIn className="h-4 w-4" />
+                  Iniciar Sesión
                 </button>
-              </SignUpButton>
+                </SignInButton>
+
+                <SignUpButton forceRedirectUrl="/dashboard">
+                  <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r bg-indigo-600 to-purple-600 text-white hover:bg-indigo-800 rounded-lg transition-all duration-300 cursor-pointer">
+                    <UserPlus className="h-4 w-4" />
+                    Registrarse
+                  </button>
+                </SignUpButton>
+              </SignedOut>
+
+
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+
             </ClerkProvider>
             
           </div>

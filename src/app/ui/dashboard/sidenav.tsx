@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
+// import { currentUser } from "@clerk/nextjs/server";
 import NavLinks from './nav-links'; 
+import Progres from "./progres";
 
 export default function Sidenav() {
+  // const user = currentUser();
 
   return (
     <motion.div
@@ -15,6 +18,7 @@ export default function Sidenav() {
               <nav className="space-y-2">
                 <NavLinks />
               </nav>
+              <Progres />
             </div>
           </motion.div>
   );

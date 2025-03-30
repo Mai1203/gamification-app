@@ -1,14 +1,14 @@
 'use client';
-import { Layout, Palette, Code2 } from 'lucide-react';
+import { Layout, Palette, House } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 const links = [
-  { name: 'HTML Básico', href: '/dashboard', icon: Layout },
+  { name: 'Home', href: '/dashboard', icon: House },
+  { name: 'HTML Básico', href: '/dashboard/html', icon: Layout },
   { name: 'CSS Creativo', href: '/dashboard/css', icon: Palette },
-  { name: 'JavaScript Dinámico', href: '/dashboard/customers', icon: Code2 },
 ];
 
 export default function NavLinks() {
