@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-            className="lg:col-span-6"
+            className="lg:col-span-9"
           >
             {children}
           </motion.div>
