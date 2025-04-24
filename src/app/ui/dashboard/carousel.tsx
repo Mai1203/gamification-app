@@ -10,31 +10,31 @@ const Carousel = () => {
   const cards = [
     {
       title: "Aprende HTML",
-      description: "Construye castillos con bloques de código.",
+      description: "¡Construye castillos con bloques de código mientras juegas y aprendes!",
       emoji: "🏗️",
       link: "/dashboard/html",
-      imageUrl: "/img/carousel-html.jpg" 
+      imageUrl: "/img/carousel-html.jpg"
     },
     {
       title: "Aprende CSS",
-      description: "Pinta el arcoíris en tus páginas web.",
+      description: "¡Pinta arcoíris en la web mientras dominas el estilo con juegos interactivos!",
       emoji: "🎨",
       link: "/dashboard/css",
-      imageUrl: "/img/carousel-css.jpg" 
+      imageUrl: "/img/carousel-css.jpg"
     },
     {
       title: "Aprende HTML",
-      description: "Construye castillos con bloques de código.",
-      emoji: "🏗️",
+      description: "¡Explora el mundo del código HTML de forma divertida y llena de desafíos!",
+      emoji: "🧩", // Cambiado por uno que representa juego y desafío
       link: "/dashboard/html",
-      imageUrl: "/img/carousel-html2.jpg" 
+      imageUrl: "/img/carousel-html2.jpg"
     },
     {
       title: "Aprende CSS",
-      description: "Pinta el arcoíris en tus páginas web.",
-      emoji: "🎨",
+      description: "¡Juega con colores, formas y estilos mientras aprendes CSS como nunca antes!",
+      emoji: "🌈", // Relacionado con colores y estilo visual
       link: "/dashboard/css",
-      imageUrl: "/img/carousel-css2.jpg" 
+      imageUrl: "/img/carousel-css2.jpg"
     }
   ];
 

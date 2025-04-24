@@ -1,10 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Header } from "@/app/ui/Header";
-import { Carts } from "@/app/ui/Carts";
-import { Footer } from "./ui/Footer";
+import { Header } from "@/app/ui/home/Header";
+import { Carts } from "@/app/ui/home/Carts";
+import { Footer } from "@/app/ui/home/Footer";
+import { Animation } from "@/app/ui/home/Animation"
 
 export default function Home() {
   return (
@@ -31,6 +31,7 @@ export default function Home() {
               Aprende HTML, CSS y JavaScript de manera interactiva y efectiva.
               Construye proyectos reales mientras juegas y ganas puntos.
             </p>
+
             <div className="flex flex-col sm:flex-row gap-4">
               <motion.button
                 whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
@@ -46,19 +47,8 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-            className="lg:w-1/2 flex justify-center"
-          >
-            <DotLottieReact
-              autoplay
-              loop
-              src="/animation/Game.json"
-              className="w-full max-w-md h-auto"
-            />
-          </motion.div>
+          <Animation />
+    
         </div>
         <Carts />
       </main>

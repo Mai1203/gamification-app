@@ -1,6 +1,6 @@
 'use client';
 import { motion } from "framer-motion";
-import { Header } from '@/app/ui/Header';
+import { Header } from '@/app/ui/home/Header';
 import Sidenav from '@/app/ui/dashboard/sidenav';
 
 
