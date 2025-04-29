@@ -8,11 +8,11 @@ import {
 } from "@clerk/nextjs";
 import { Code2, UserPlus, LogIn } from "lucide-react";
 import Link from "next/link";
-import { ThemeToggle } from "@/app/ui/theme/ThemeToggle";
+// import { ThemeToggle } from "@/app/ui/theme/ThemeToggle";
 
 export const Header = () => {
   return (
-    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-sm">
+    <header className="bg-white/80 backdrop-blur-sm shadow-sm">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link 
@@ -26,18 +26,18 @@ export const Header = () => {
           </Link>
 
           <div className="flex items-center gap-4">
-            <ThemeToggle />
             <ClerkProvider>
+
               <SignedOut>
                 <SignInButton forceRedirectUrl="/dashboard">
-                <button className="flex items-center gap-2 px-4 py-2 text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-800 rounded-lg transition-all duration-300 cursor-pointer">
+                <button className="flex items-center gap-2 px-4 py-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all duration-300 cursor-pointer">
                   <LogIn className="h-4 w-4" />
                   Iniciar Sesión
                 </button>
                 </SignInButton>
 
                 <SignUpButton forceRedirectUrl="/dashboard">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:bg-indigo-800 rounded-lg transition-all duration-300 cursor-pointer">
+                  <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r bg-indigo-600 to-purple-600 text-white hover:bg-indigo-800 rounded-lg transition-all duration-300 cursor-pointer">
                     <UserPlus className="h-4 w-4" />
                     Registrarse
                   </button>
