@@ -13,7 +13,7 @@ export default function Home() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100"
+      className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-[#0D0D0D] dark:via-[#0D0D0D] dark:to-[#0D0D0D]"
     >
       <Header />
       <main className="container mx-auto px-4 py-16">
@@ -24,14 +24,14 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="lg:w-1/2 space-y-6"
           >
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900">
+            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white">
               ¡La forma divertida de aprender desarrollo web!
             </h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Aprende HTML, CSS y JavaScript de manera interactiva y efectiva.
               Construye proyectos reales mientras juegas y ganas puntos.
             </p>
-
+  
             <div className="flex flex-col sm:flex-row gap-4">
               <motion.button
                 whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
@@ -46,9 +46,8 @@ export default function Home() {
               </motion.button>
             </div>
           </motion.div>
-
+  
           <Animation />
-    
         </div>
         <Carts />
       </main>
