@@ -27,11 +27,13 @@ export default function NavLinks() {
             <Link
               key={link.name}
               href={link.href}
-              className= {clsx(
-                'w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:bg-indigo-50 hover:text-black',
+              className={clsx(
+                'w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300',
+                'hover:bg-indigo-50 hover:text-black dark:hover:bg-zinc-800 dark:hover:text-white',
                 {
                   'bg-indigo-600 text-white': pathname === link.href,
-                },
+                  'text-gray-700 dark:text-gray-300': pathname !== link.href,
+                }
               )}
             >
               <LinkIcon className="h-5 w-5" />
@@ -42,4 +44,5 @@ export default function NavLinks() {
       })}
     </>
   );
+  
 }

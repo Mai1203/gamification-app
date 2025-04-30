@@ -15,10 +15,10 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ label, progress, color }) => 
   return (
     <div>
       <div className="flex justify-between mb-1">
-        <span className="text-sm font-medium">{label}</span>
-        <span className="text-sm font-medium">{progress}%</span>
+        <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{label}</span>
+        <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{progress}%</span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-2">
+      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
         <div
           className={`${colorClasses[color]} h-2 rounded-full transition-all`}
           style={{ width: `${progress}%` }}
@@ -26,6 +26,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ label, progress, color }) => 
       </div>
     </div>
   );
+  
 };
 
 export default ProgressBar;
