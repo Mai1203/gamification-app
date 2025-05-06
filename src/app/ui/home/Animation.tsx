@@ -33,6 +33,7 @@ export const Animation = () => {
       className="lg:w-1/2 flex justify-center"
     >
       <DotLottieReact
+        key={isDarkMode ? "dark" : "light"}
         autoplay
         loop
         src={isDarkMode ? "/animation/game-dark.json" : "/animation/game-light2.json"}
