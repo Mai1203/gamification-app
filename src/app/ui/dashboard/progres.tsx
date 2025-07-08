@@ -5,9 +5,9 @@ import ProgressBar from "./ProgressBar";
 
 export default function Progres() {
   const [progress] = useState({
-    html: 25,
-    css: 10,
-    javascript: 5,
+    html: 50,
+    css: 25,
+    javascript: 15,
   });
 
   return (

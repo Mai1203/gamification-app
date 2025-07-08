@@ -25,7 +25,7 @@ export default function Home() {
             className="lg:w-1/2 space-y-6"
           >
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white">
-              ¡La forma divertida de aprender desarrollo web!
+              ¡Aprender jugando con desafíos reales!
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300">
               Aprende HTML, CSS y JavaScript de manera interactiva y efectiva.

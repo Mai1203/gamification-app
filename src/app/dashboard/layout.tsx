@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Header } from '@/app/ui/home/Header';
 import Sidenav from '@/app/ui/dashboard/sidenav';
 
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   
   return (
@@ -15,8 +14,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-[#0D0D0D] dark:via-[#0D0D0D] dark:to-[#0D0D0D]"
     >
       <Header />
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <main className="container mx-auto  py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <Sidenav />
           <motion.div
             initial={{ y: 50, opacity: 0 }}

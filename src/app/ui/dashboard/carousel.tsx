@@ -55,7 +55,7 @@ const Carousel = () => {
   }, [isPaused, nextCard]);
 
   return (
-    <div className="relative w-full h-[80vh] mx-auto" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+    <div className="relative w-full h-[70vh] mx-auto" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
       {/* Contenedor principal al 100% */}
       <div className="h-full w-full overflow-hidden">
         <div
