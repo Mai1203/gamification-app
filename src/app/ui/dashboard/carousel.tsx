@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Card from "./card";
+import CardCarousel from "./card-carousel";
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,7 +64,7 @@ const Carousel = () => {
         >
           {cards.map((card, index) => (
             <div key={index} className="w-full h-full flex-shrink-0 px-4">
-              <Card {...card} className="h-full" /> {/* Pasamos className */}
+              <CardCarousel {...card} className="h-full" /> {/* Pasamos className */}
             </div>
           ))}
         </div>

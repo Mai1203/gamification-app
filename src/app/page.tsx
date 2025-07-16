@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Header } from "@/app/ui/home/Header";
-import { Carts } from "@/app/ui/home/Carts";
+import { Cards } from "@/app/ui/home/Cards";
 import { Footer } from "@/app/ui/home/Footer";
 import { Animation } from "@/app/ui/home/Animation"
 
@@ -49,7 +49,7 @@ export default function Home() {
   
           <Animation />
         </div>
-        <Carts />
+        <Cards />
       </main>
       <Footer />
     </motion.div>

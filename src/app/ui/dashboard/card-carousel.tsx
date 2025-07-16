@@ -10,7 +10,7 @@ interface CardProps {
   className?: string;
 }
 
-const Card = ({ title, description, emoji, link, imageUrl, className = "" }:CardProps) => {
+const CardCarousel = ({ title, description, emoji, link, imageUrl, className = "" }:CardProps) => {
   return (
     <Link href={link} className={`block h-full ${className}`}>
       <div className={`
@@ -44,4 +44,4 @@ const Card = ({ title, description, emoji, link, imageUrl, className = "" }:Card
   );
 };
 
-export default Card;
+export default CardCarousel;
