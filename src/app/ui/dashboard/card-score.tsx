@@ -34,7 +34,7 @@ const Card = () => {
           whileHover={{ y: -10, transition: { duration: 0.3 } }}
           className="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-md text-center flex flex-col items-center gap-3"
         >
-          <div className="bg-gradient-to-r bg-gradient-to-r from-indigo-600 to-purple-600 p-4 rounded-full dark:from-indigo-400 dark:to-purple-400">
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 rounded-full dark:from-indigo-400 dark:to-purple-400">
             {card.icon}
           </div>
           <p className="text-xl font-bold dark:text-white">{card.score}</p>
