@@ -1,5 +1,6 @@
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/app/lib/firebaseConfig";
+import { saveUserProgress } from "./userProgressService";
 
 /**
  * Crea un usuario en Firestore si no existe.
@@ -28,6 +29,7 @@ export const createUserIfNotExists = async (
         createdAt: new Date().toISOString(),
       });
       console.log("✅ Usuario creado en Firestore.");
+      await saveUserProgress(userId);
     } else {
       console.log("ℹ️ Usuario ya existe.");
     }
