@@ -1,6 +1,7 @@
 'use client';
 import { motion } from "framer-motion";
 import { Header } from '@/app/ui/home/Header';
+import Navbar from '@/app/ui/learning/navbar';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   
@@ -14,6 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     >
       <Header />
       <main className="container mx-auto  py-8">
+        <Navbar />
         {children}
       </main>
     </motion.div>
