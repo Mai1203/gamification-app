@@ -1,16 +1,16 @@
 // src/utils/recommendations.ts
-import { modules } from "@/data/modules";
+import { initialModules } from "@/data/initialModules";
 
 export function getRecommendedLessons() {
   const recommendations = [];
 
-  for (const mod of modules) {
+  for (const mod of initialModules) {
     const incomplete = mod.lessons.find((l) => !l.completed);
     if (incomplete) {
       recommendations.push({
         moduleTitle: mod.title,
+        Description: mod.description,
         lessonTitle: incomplete.title,
-        lessonDescription: incomplete.description,
         moduleId: mod.id,
       });
     }

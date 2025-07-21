@@ -1,15 +1,17 @@
 'use client';
 import { useUser } from "@clerk/nextjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createUserIfNotExists } from "@/app/services/userService";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+
 
 import Carousel from "../ui/dashboard/carousel";
 import Recommendations from "../ui/dashboard/recommendations";
 import Card from "../ui/dashboard/card-score"
+import AnimationLoaded from "../ui/dashboard/animationLoaded";
 
 export default function Page() {
   const { isLoaded, user } = useUser();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!isLoaded || !user) return;
@@ -22,18 +24,16 @@ export default function Page() {
     }
   }, [isLoaded, user]);
 
-  if (!isLoaded) {
-    return(
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-        <DotLottieReact
-          autoplay
-          loop
-          src="/animation/loaded.json" 
-          className="w-64 h-64"
-        />
-        <p className="text-indigo-600 font-medium text-lg">Cargando usuario...</p>
-      </div>
-    );
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 800); 
+
+    return () => clearTimeout(timeout);
+  }, [user]);
+
+  if (isLoading || !isLoaded) {
+    return <AnimationLoaded />;
   }
 
   return (

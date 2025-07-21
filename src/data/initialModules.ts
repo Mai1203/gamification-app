@@ -1,6 +1,8 @@
 export const initialModules = [
   {
     id: "html",
+    title: '📌 HTML Básico',
+    description: 'Aprende los fundamentos de HTML para crear la estructura de tus páginas web.',
     lessons: [
       { title: "📄 Estructura básica de un documento HTML", completed: false, locked: false },
       { title: "🔤 Encabezados y párrafos", completed: false, locked: true },
@@ -16,6 +18,8 @@ export const initialModules = [
   },
   {
     id: "css",
+    title: '🎨 CSS Creativo',
+    description: 'Domina el diseño y estilizado de páginas web con CSS moderno.',
     lessons: [
       { title: "🔍 Selectores básicos", completed: false, locked: false },
       { title: "🎨 Propiedades de color y fondo", completed: false, locked: true },

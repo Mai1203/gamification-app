@@ -35,7 +35,6 @@ const Recommendations = () => {
             >
               {rec.lessonTitle} ({rec.moduleTitle})
             </Link>
-            <p className="text-gray-600 dark:text-gray-300">{rec.lessonDescription}</p>
           </motion.li>
         ))}
       </ul>
