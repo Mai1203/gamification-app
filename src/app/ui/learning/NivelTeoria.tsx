@@ -66,7 +66,7 @@ export default function NivelTeoria() {
       <div className="w-full max-w-4xl mx-auto space-y-10">
         <div>
           <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
-            🤖 {levelData.title}
+            {levelData.title}
           </h2>
 
           <div className="bg-red-100 text-red-800 dark:bg-red-200/20 dark:text-red-300 rounded-md p-4 mt-4">
@@ -78,7 +78,7 @@ export default function NivelTeoria() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           <div className="space-y-4">
             <h3 className="text-xl font-bold flex items-center gap-2">
-              💻 {levelData.intro.question}
+              {levelData.intro.question}
             </h3>
             <p className="text-sm md:text-base">{levelData.intro.content}</p>
             <pre className="bg-white/80 dark:bg-zinc-800 p-4 rounded-md text-sm overflow-auto border border-gray-200 dark:border-zinc-700">
@@ -111,7 +111,7 @@ export default function NivelTeoria() {
 
         <div className="space-y-4">
           <h3 className="text-xl font-bold flex items-center gap-2">
-            💻 {levelData.extra.title}
+            {levelData.extra.title}
           </h3>
           <p className="text-sm md:text-base">{levelData.extra.content}</p>
 

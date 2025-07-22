@@ -1,10 +1,10 @@
 export const theoryData = {
   html: {
     "1": {
-      title: "Nivel 1 - Estructura básica de un documento HTML",
+      title: "🤖 Nivel 1 - Estructura básica de un documento HTML",
       objective: "Comprender qué es HTML y cómo se estructura un documento básico.",
       intro: {
-        question: "¿Qué es HTML?",
+        question: "💻 ¿Qué es HTML?",
         content:
           "HTML (HyperText Markup Language) es el lenguaje estándar para construir páginas web.",
         code: `<!DOCTYPE html>
@@ -24,7 +24,7 @@ export const theoryData = {
         "✔️ Siempre debes cerrar correctamente las etiquetas.",
       ],
       extra: {
-        title: "¿Qué son las etiquetas HTML?",
+        title: "💻 ¿Qué son las etiquetas HTML?",
         content:
           "Son instrucciones que le dicen al navegador cómo mostrar el contenido.",
         example: `<etiqueta>Contenido</etiqueta>
