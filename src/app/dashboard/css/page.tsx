@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { BookOpen, Code, Play, CheckCircle, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import { useModulesWithProgress } from "@/app/hooks/useModulesWithProgress";
+import { useRouter } from "next/navigation";
 
 import AnimationLoaded from "../../ui/dashboard/animationLoaded";
 
 export default function Page() {
   const modules = useModulesWithProgress();
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const cssModule = modules.find((mod) => mod.id === "css");
 
@@ -43,6 +45,12 @@ export default function Page() {
         {cssModule.lessons.map((lesson, index) => {
           const isCompleted = lesson.completed;
           const isLocked = lesson.locked;
+
+          const handleClick = () => {
+            if (!isLocked) {
+              router.push(`/learning?module=css&level=${index + 1}`);
+            }
+          };
 
           return (
             <motion.div
@@ -86,6 +94,7 @@ export default function Page() {
               </div>
 
               <button
+                onClick={handleClick}
                 disabled={isLocked}
                 className={`px-4 py-2 text-sm rounded-lg font-medium flex items-center gap-2 transition-all ${
                   isCompleted

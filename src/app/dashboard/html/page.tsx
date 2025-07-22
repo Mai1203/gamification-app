@@ -48,7 +48,7 @@ export default function Page() {
 
           const handleClick = () => {
             if (!isLocked) {
-              router.push(`/learning?level=${index + 1}`);
+              router.push(`/learning?module=html&level=${index + 1}`);
             }
           };
 

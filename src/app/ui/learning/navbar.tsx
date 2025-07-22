@@ -1,16 +1,44 @@
-'use client';
+// components/Navbar.tsx
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, ChevronUp, Lock } from 'lucide-react';
-import Link from 'next/link';
-import { useModulesWithProgress } from '@/app/hooks/useModulesWithProgress';
+import { useState } from "react";
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
+import { Menu, ChevronUp, Lock } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { useEffect } from "react";
 
-export default function Navbar() {
+type Lesson = {
+  title: string;
+  locked: boolean;
+};
+
+type NavbarProps = {
+  moduleId: string;
+  title: string;
+  lessons: Lesson[];
+};
+
+export default function Navbar({ moduleId, title, lessons }: NavbarProps) {
+  const searchParams = useSearchParams();
+  const currentLevel = parseInt(searchParams.get('level') || '1', 10);
+  
   const [showPanel, setShowPanel] = useState(false);
-  const modules = useModulesWithProgress();
 
-  const htmlModule = modules.find((mod) => mod.id === 'html');
+  const totalLessons = lessons.length;
+  const unlockedLessons = lessons.filter((l) => !l.locked).length;
+  const progress = Math.round((unlockedLessons / totalLessons) * 100);
+
+  const motionValue = useMotionValue(0);
+  const rounded = useTransform(motionValue, (latest) => Math.round(latest));
+
+  useEffect(() => {
+    const controls = animate(motionValue, progress, {
+      duration: 1,
+      ease: "easeOut",
+    });
+    return controls.stop;
+  }, [progress]);
 
   return (
     <div className="relative">
@@ -18,22 +46,22 @@ export default function Navbar() {
       <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl dark:shadow-zinc-800 px-6 py-4 flex items-center justify-between w-full max-w-4xl mx-auto"
       >
-        {/* Menú a la izquierda */}
         <div
           onClick={() => setShowPanel(!showPanel)}
           className="flex items-center gap-3 text-zinc-600 dark:text-zinc-300 cursor-pointer"
         >
           <Menu className="w-5 h-5" />
           <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700" />
-          <span className="text-sm md:text-base font-medium">🤖 Nivel 1 – 10</span>
+          <span className="text-sm md:text-base font-medium">
+            Nivel {currentLevel} – 10
+          </span>
         </div>
 
-        {/* Módulo a la derecha */}
         <div className="flex items-center gap-3 text-zinc-600 dark:text-zinc-300">
-          <span className="text-sm md:text-base font-medium">HTML Básico</span>
+          <span className="text-sm md:text-base font-medium">{title}</span>
           <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700" />
           <ChevronUp className="w-4 h-4" />
         </div>
@@ -41,7 +69,7 @@ export default function Navbar() {
 
       {/* Panel lateral */}
       <AnimatePresence>
-        {showPanel && htmlModule && (
+        {showPanel && (
           <motion.div
             initial={{ x: -300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -50,17 +78,17 @@ export default function Navbar() {
             className="absolute left-5 top-full mt-2 bg-white dark:bg-zinc-800 shadow-xl rounded-lg w-64 z-50 p-4 space-y-2"
           >
             <h3 className="text-lg font-bold mb-2 text-zinc-800 dark:text-zinc-100">Niveles</h3>
-            {htmlModule.lessons.map((lesson, index) => (
+            {lessons.map((level, index) => (
               <div key={index}>
-                {lesson.locked ? (
+                {level.locked ? (
                   <div className="flex items-center justify-between px-3 py-2 bg-zinc-100 dark:bg-zinc-700 rounded text-gray-400 cursor-not-allowed">
-                    <span className="text-sm">Nivel {index + 1}: {lesson.title}</span>
+                    <span className="text-sm">Nivel {index + 1}: {level.title}</span>
                     <Lock className="w-4 h-4" />
                   </div>
                 ) : (
-                  <Link href={`/learning?level=${index + 1}`}>
+                  <Link href={`/learning?module=${moduleId}&level=${index + 1}`}>
                     <div className="flex items-center justify-between px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded cursor-pointer text-zinc-700 dark:text-zinc-200">
-                      <span className="text-sm">Nivel {index + 1}: {lesson.title}</span>
+                      <span className="text-sm">Nivel {index + 1}: {level.title}</span>
                     </div>
                   </Link>
                 )}
@@ -69,6 +97,21 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Barra de progreso */}
+      <div className="mt-4 max-w-4xl mx-auto px-2">
+        <div className="w-full bg-gray-200 dark:bg-zinc-700 h-3 rounded-full overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="h-full bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full"
+          />
+        </div>
+        <div className="text-right text-xs mt-1 text-zinc-500 dark:text-zinc-400">
+          Progreso: <motion.span>{rounded}</motion.span>%
+        </div>
+      </div>
     </div>
   );
 }

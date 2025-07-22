@@ -1,9 +1,9 @@
-import NivelUno from "@/app/ui/learning/NivelTeoria.tsx";
+import NivelTeoria from "@/app/ui/learning/NivelTeoria";
 
 export default function Page() {
   return (
     <>
-      <NivelUno />
+      <NivelTeoria />
     </>
   );
 }

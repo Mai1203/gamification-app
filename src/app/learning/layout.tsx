@@ -1,10 +1,20 @@
 'use client';
 import { motion } from "framer-motion";
+import { useSearchParams } from 'next/navigation';
+
+import { useModulesWithProgress } from '@/app/hooks/useModulesWithProgress';
 import { Header } from '@/app/ui/home/Header';
 import Navbar from '@/app/ui/learning/navbar';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  
+  const searchParams = useSearchParams();
+  const moduleId = searchParams.get("module") || "html"; // valor por defecto
+  const modules = useModulesWithProgress();
+
+  const currentModule = modules.find((m) => m.id === moduleId);
+
+  if (!currentModule) return null;
+
   return (
     <motion.div 
       initial={{ opacity: 0 }} 
@@ -15,7 +25,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     >
       <Header />
       <main className="container mx-auto  py-8">
-        <Navbar />
+        <Navbar 
+          moduleId={currentModule.id}
+          title={currentModule.title}
+          lessons={currentModule.lessons}
+        />
         {children}
       </main>
     </motion.div>
