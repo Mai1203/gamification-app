@@ -1,23 +1,24 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { BookOpen, Code, Play, CheckCircle, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import { useModulesWithProgress } from "@/app/hooks/useModulesWithProgress";
+import { useRouter } from "next/navigation";
 
 import AnimationLoaded from "../../ui/dashboard/animationLoaded";
 
 export default function Page() {
   const modules = useModulesWithProgress();
-  console.log(modules);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const htmlModule = modules.find((mod) => mod.id === "html");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 800); 
+    }, 800);
 
     return () => clearTimeout(timeout);
   }, [modules]);
@@ -44,6 +45,12 @@ export default function Page() {
         {htmlModule.lessons.map((lesson, index) => {
           const isCompleted = lesson.completed;
           const isLocked = lesson.locked;
+
+          const handleClick = () => {
+            if (!isLocked) {
+              router.push(`/learning?level=${index + 1}`);
+            }
+          };
 
           return (
             <motion.div
@@ -87,6 +94,7 @@ export default function Page() {
               </div>
 
               <button
+                onClick={handleClick}
                 disabled={isLocked}
                 className={`px-4 py-2 text-sm rounded-lg font-medium flex items-center gap-2 transition-all ${
                   isCompleted

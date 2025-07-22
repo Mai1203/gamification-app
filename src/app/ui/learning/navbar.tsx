@@ -16,7 +16,6 @@ const levels = [
   { id: 8, title: "Imágenes y enlaces", locked: true },
   { id: 9, title: "Anidamiento", locked: true },
   { id: 10, title: "Imágenes y enlaces", locked: true },
-  // Agrega hasta el nivel 10...
 ];
 
 export default function Navbar() {
@@ -68,7 +67,7 @@ export default function Navbar() {
                     <Lock className="w-4 h-4" />
                   </div>
                 ) : (
-                  <Link href={`/niveles/html/nivel-${level.id}`}>
+                  <Link href={`/learning?level=${level.id}`}>
                     <div className="flex items-center justify-between px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded cursor-pointer text-zinc-700 dark:text-zinc-200">
                       <span className="text-sm">Nivel {level.id}: {level.title}</span>
                     </div>
