@@ -6,6 +6,8 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useSearchParams } from "next/navigation";
 import { theoryData } from "@/data/theory";
 
+import EditorLive from "./EditorLive";
+
 export default function NivelTeoria() {
   const searchParams = useSearchParams();
   const modKey = searchParams.get("module") ?? "html";
@@ -119,6 +121,12 @@ export default function NivelTeoria() {
             {levelData.extra.example}
           </pre>
         </div>
+
+        <div className="space-y-6">
+          <h3 className="text-xl font-bold flex items-center gap-2">🧪 ¡Prueba el código!</h3>
+          <EditorLive key={levelParam} defaultCode={levelData.intro.code} />
+        </div>
+
 
         <div className="text-center">
           <button className="px-6 py-3 text-base font-semibold rounded-lg transition-all flex items-center justify-center gap-2 mx-auto bg-indigo-600 text-white hover:bg-indigo-700 cursor-pointer">
