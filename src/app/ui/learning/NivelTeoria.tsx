@@ -132,7 +132,8 @@ export default function NivelTeoria() {
 
 
         <div className="text-center">
-          <button className="px-6 py-3 text-base font-semibold rounded-lg transition-all flex items-center justify-center gap-2 mx-auto bg-indigo-600 text-white hover:bg-indigo-700 cursor-pointer">
+          <button 
+            className="px-6 py-3 text-base font-semibold rounded-lg transition-all flex items-center justify-center gap-2 mx-auto bg-indigo-600 text-white hover:bg-indigo-700 cursor-pointer">
             <MousePointerClick size={20} />
             ¡Empezar Desafío!
           </button>
