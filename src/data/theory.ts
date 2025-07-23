@@ -35,6 +35,15 @@ Ejemplo:
   <title>Mi primera Página</title>
 </head>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "2": {
       title: "📝 Nivel 2 – Encabezados y párrafos en HTML",
@@ -65,6 +74,24 @@ Ejemplo:
 que puede tener varias líneas 
 de contenido.</p>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>Este es un encabezado principal</h1>
+    <h2>Este es un subtítulo</h2>
+    <h3>Este es un subtítulo de nivel 3</h3>
+    <h4>Subtítulo nivel 4</h4>
+    <h5>Subtítulo nivel 5</h5>
+    <h6>Subtítulo menos importante</h6>
+
+    <p>Este es un párrafo de texto 
+    que puede tener varias líneas 
+    de contenido.</p>
+  </body>
+</html>`,
     },
     "3": {
       title: "🔗 Nivel 3 – Enlaces en HTML",
@@ -89,6 +116,15 @@ de contenido.</p>`,
         example: `<a href="contacto.html">Página de contacto</a> <!-- Enlace interno -->
 <a href="https://ejemplo.com" target="_blank">Visitar sitio externo</a>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <a href="https://www.youtube.com/" target="_blank">Visitar YouTube en Sitio Externo</a>
+  </body>
+</html>`,
     },
     "4": {
       title: "🖼️ Nivel 4 – Imágenes en HTML",
@@ -112,6 +148,15 @@ de contenido.</p>`,
           "El atributo src indica la ruta de la imagen (puede ser local o externa). El atributo alt proporciona un texto alternativo visible si la imagen no se carga.",
         example: `<img src="imagenes/paisaje.jpg" alt="Paisaje natural">`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <img src="https://i.blogs.es/c7b68e/chatgpt-studio-ghibli-portada/1200_800.jpeg" alt="Imagen de ChatGPT Studio GHIBLI" width="400">
+  </body>
+</html>`,
     },
     "5": {
       title: "📋 Nivel 5 – Listas en HTML",
@@ -156,6 +201,25 @@ de contenido.</p>`,
   <li>Visitar un sitio web</li>
 </ol>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+
+    <ol>
+      <li>Instalar editor de código</li>
+      <li>Crear archivo HTML</li>
+      <li>Escribir contenido</li>
+    </ol>
+  </body>
+</html>`,
     },
     "6": {
       title: "📊 Nivel 6 – Tablas en HTML",
@@ -203,6 +267,28 @@ de contenido.</p>`,
     </tr>
   </table>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+      </tr>
+      <tr>
+        <td>Ana</td>
+        <td>22</td>
+      </tr>
+      <tr>
+        <td>Luis</td>
+        <td>30</td>
+      </tr>
+    </table>
+  </body>
+</html>`,
     },
     "7": {
       title: "📨 Nivel 7 – Formularios en HTML",
@@ -256,6 +342,30 @@ de contenido.</p>`,
   <button type="submit">Enviar</button>
 </form>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>Datos personales</legend>
+
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo" required>
+
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad">
+      </fieldset>
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje"></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </body>
+</html>`,
     },
     "8": {
       title: "🧠 Nivel 8 – Semántica en HTML5",
@@ -324,6 +434,39 @@ de contenido.</p>`,
   <p>Consejos para aprender HTML desde cero.</p>
 </article>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <header>
+      <h1>Mi Blog</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="inicio.html">Inicio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <article>
+        <h2>Título del artículo</h2>
+        <p>Contenido del artículo...</p>
+      </article>
+
+      <aside>
+        <p>Contenido extra: enlaces, banners, etc.</p>
+      </aside>
+    </main>
+
+    <footer>
+      <p>© 2025 - Todos los derechos reservados</p>
+    </footer>
+  </body>
+</html>`,
     },
     "9": {
       title: "🎵 Nivel 9 – Multimedia en HTML (Audio y Video)",
@@ -370,6 +513,23 @@ de contenido.</p>`,
   Tu navegador no puede reproducir el video.
 </video>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <audio controls>
+      <source src="musica.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio HTML5.
+    </audio>
+
+    <video width="320" height="240" controls>
+      <source src="video.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+  </body>
+</html>`,
     },
     "10": {
       title: "♿ Nivel 10 – Accesibilidad básica en HTML",
@@ -414,6 +574,25 @@ de contenido.</p>`,
   <img src="menu.svg" alt="">
 </button>`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <img src="logo.png" alt="Logo de la empresa TuplaCore">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre">
+
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="inicio.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>`,
     },
   },
   css: {
@@ -464,6 +643,15 @@ de contenido.</p>`,
       background-color: yellow;
     }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "2": {
       title: "🌈 Nivel 12 – Propiedades de color y fondo en CSS",
@@ -515,6 +703,15 @@ de contenido.</p>`,
       background-size: cover;
     }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "3": {
       title: "✍️ Nivel 13 – Tipografía y fuentes en CSS",
@@ -563,6 +760,15 @@ body {
   font-family: 'Roboto', sans-serif;
 }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "4": {
       title: "📦 Nivel 14 – Box Model (Modelo de Caja)",
@@ -602,6 +808,15 @@ body {
   box-sizing: border-box;
 }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "5": {
       title: "📍 Nivel 15 – Posicionamiento en CSS",
@@ -647,6 +862,15 @@ body {
   right: 0;
 }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "6": {
       title: "📐 Nivel 16 – Propiedad display en CSS",
@@ -690,6 +914,15 @@ body {
 <span>, <a>    → inline
 <img>          → inline-block`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "7": {
       title: "📦 Nivel 17 – Flexbox básico en CSS",
@@ -736,6 +969,15 @@ body {
   gap: 20px;
 }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "8": {
       title: "🔲 Nivel 18 – Grid básico en CSS",
@@ -776,6 +1018,15 @@ body {
   align-items: center;
 }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "9": {
       title: "🎞️ Nivel 19 – Transiciones en CSS",
@@ -812,6 +1063,15 @@ body {
   transform: rotate(5deg);
 }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
     "10": {
       title: "📱 Nivel 20 – Responsive Design con Media Queries",
@@ -864,6 +1124,15 @@ body {
     flex-direction: row;
   }`,
       },
+      lifeCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi Primera Página</title>
+  </head>
+  <body>
+    <h1>¡Bienvenido!</h1>
+  </body>
+</html>`,
     },
   },
 };

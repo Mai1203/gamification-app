@@ -91,9 +91,12 @@ export default function NivelTeoria() {
           <div className="space-y-6">
             <div className="bg-yellow-100 p-4 rounded-md text-center dark:text-black">
               <p className="font-bold text-lg">&lt;html&gt;</p>
-              <div className="flex justify-center mt-2 gap-4 text-sm font-semibold">
+              <div className="flex flex-wrap justify-center mt-2 gap-2 text-sm font-semibold max-w-full">
                 {levelData.tags.map((tag: string) => (
-                  <span key={tag} className="bg-blue-200 px-3 py-1 rounded">
+                  <span
+                    key={tag}
+                    className="bg-blue-200 px-3 py-1 rounded whitespace-nowrap"
+                  >
                     {tag}
                   </span>
                 ))}
@@ -124,7 +127,7 @@ export default function NivelTeoria() {
 
         <div className="space-y-6">
           <h3 className="text-xl font-bold flex items-center gap-2">🧪 ¡Prueba el código!</h3>
-          <EditorLive key={levelParam} defaultCode={levelData.intro.code} />
+          <EditorLive key={levelParam} defaultCode={levelData.lifeCode} />
         </div>
 
 
