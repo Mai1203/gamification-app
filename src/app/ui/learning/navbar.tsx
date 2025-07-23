@@ -60,11 +60,13 @@ export default function Navbar({ moduleId, title, lessons }: NavbarProps) {
           </span>
         </div>
 
-        <div className="flex items-center gap-3 text-zinc-600 dark:text-zinc-300">
-          <span className="text-sm md:text-base font-medium">{title}</span>
-          <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700" />
-          <ChevronUp className="w-4 h-4" />
-        </div>
+        <Link href={`/dashboard/${moduleId}`}>
+          <div className="flex items-center gap-3 text-zinc-600 dark:text-zinc-300">
+            <span className="text-sm md:text-base font-medium">{title}</span>
+            <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700" />
+            <ChevronUp className="w-4 h-4" />
+          </div>
+        </Link>
       </motion.div>
 
       {/* Panel lateral */}

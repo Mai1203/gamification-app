@@ -154,7 +154,8 @@ de contenido.</p>`,
     <title>Mi Primera Página</title>
   </head>
   <body>
-    <img src="https://i.blogs.es/c7b68e/chatgpt-studio-ghibli-portada/1200_800.jpeg" alt="Imagen de ChatGPT Studio GHIBLI" width="400">
+    <h2>Esto es una imagen</h2>
+    <img src="https://i.blogs.es/c7b68e/chatgpt-studio-ghibli-portada/1200_800.jpeg" alt="Imagen de ChatGPT Studio GHIBLI" width="300">
   </body>
 </html>`,
     },
@@ -207,12 +208,14 @@ de contenido.</p>`,
     <title>Mi Primera Página</title>
   </head>
   <body>
+    <h2>Listas Desordenadas</h2>
     <ul>
       <li>HTML</li>
       <li>CSS</li>
       <li>JavaScript</li>
     </ul>
 
+    <h2>Listas Ordenadas</h2>
     <ol>
       <li>Instalar editor de código</li>
       <li>Crear archivo HTML</li>
@@ -274,6 +277,8 @@ de contenido.</p>`,
   </head>
   <body>
     <table border="1">
+      <h2>Tabla de Edades</h2>
+      
       <tr>
         <th>Nombre</th>
         <th>Edad</th>
@@ -519,13 +524,17 @@ de contenido.</p>`,
     <title>Mi Primera Página</title>
   </head>
   <body>
+    <h1>🎵 Audio y 🎥 Video en HTML</h1>
+
+    <p>Ejemplo de audio:</p>
     <audio controls>
-      <source src="musica.mp3" type="audio/mpeg">
+      <source src="/audio/Hear What They Say.mp3" type="audio/mpeg">
       Tu navegador no soporta audio HTML5.
     </audio>
-
+    
+    <p>Ejemplo de video:</p>
     <video width="320" height="240" controls>
-      <source src="video.mp4" type="video/mp4">
+      <source src="/video/coding-loop.mp4" type="video/mp4">
       Tu navegador no soporta video HTML5.
     </video>
   </body>
