@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { MousePointerClick } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useSearchParams } from "next/navigation";
-import { theoryData } from "@/data/theory";
+import { useRouter } from "next/navigation";
 
+import { theoryData } from "@/data/theory";
 import EditorLive from "./EditorLive";
 
 export default function NivelTeoria() {
@@ -16,6 +17,7 @@ export default function NivelTeoria() {
   const moduleTheory = theoryData[modKey as keyof typeof theoryData];
   const levelData = moduleTheory?.[levelParam as keyof typeof moduleTheory];
 
+  const router = useRouter();
 
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -133,6 +135,7 @@ export default function NivelTeoria() {
 
         <div className="text-center">
           <button 
+            onClick={() => router.push(`/learning/activities?module=${modKey}&level=${levelParam}`)}
             className="px-6 py-3 text-base font-semibold rounded-lg transition-all flex items-center justify-center gap-2 mx-auto bg-indigo-600 text-white hover:bg-indigo-700 cursor-pointer">
             <MousePointerClick size={20} />
             ¡Empezar Desafío!

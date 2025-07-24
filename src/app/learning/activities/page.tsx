@@ -1,24 +1,33 @@
-import CodeFillGame from "@/app/ui/activities/CompleteCodeGame";
+"use client";
 
-export default function page() {
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import ActivityRenderer from "@/app/ui/activities/ActivityRenderer";
+import { getActivityData } from "@/app/services/activitiesService";
+import { ActivityProps } from "@/types/activities"; // Importa el tipo ya definido
+
+export default function ActividadPage() {
+  const searchParams = useSearchParams();
+  const modKey = searchParams.get("module") ?? "html";
+  const level = parseInt(searchParams.get("level") ?? "1");
+
+  const [data, setData] = useState<ActivityProps | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getActivityData(modKey, level);
+      setData(result);
+    };
+    fetchData();
+  }, [modKey, level]);
+
+  if (!data) return <p className="text-center mt-10">Cargando actividad...</p>;
+
+  console.log(data);
+
   return (
-    <section className="max-w-4xl mx-auto p-4">
-    <h2 className="text-xl font-semibold text-center mb-2">
-      Actividad: Completa el Código HTML
-    </h2>
-    <p className="text-sm text-center text-zinc-600 mb-4">
-      ✍️ Escribe manualmente en los espacios en blanco para completar la estructura HTML.
-    </p>
-    <CodeFillGame content={`<!DOCTYPE html>
-  <html>
-  _____
-    <title>Mi Página</title>
-  </head>
-  <body>
-    <h1>Hola Mundo</h1>
-  _____
-  </html>`} 
-  answers={["<head>", "</body>"]}/>
-  </section>
+    <main className="min-h-screen px-6 py-10 md:px-20">
+      <ActivityRenderer {...data} />
+    </main>
   );
 }

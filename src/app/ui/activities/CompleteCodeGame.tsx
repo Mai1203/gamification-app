@@ -79,7 +79,7 @@ export default function CodeFillGame({ content, answers }: CodeFillProps) {
 
         let y = 20;
         lines.forEach((line) => {
-          const parts = line.split("_____");
+          const parts = line.split("____");
           let x = 20;
 
           parts.forEach((part, i) => {
