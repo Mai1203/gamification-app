@@ -28,7 +28,7 @@ export default function CodeFillGame({ content, answers }: CodeFillProps) {
 
       create() {
 
-        const particles = this.add.particles(0, 0, "particle", {
+        this.add.particles(0, 0, "particles", {
           x: { min: 0, max: 800 },
           y: 0,
           lifespan: 6000,
@@ -37,7 +37,7 @@ export default function CodeFillGame({ content, answers }: CodeFillProps) {
           alpha: { start: 0.4, end: 0 },
           quantity: 2,
           blendMode: "ADD",
-        });
+        })
 
         const lines = content.split("\n");
         const style = { font: "16px monospace", fill: "#fff" };
@@ -71,11 +71,11 @@ export default function CodeFillGame({ content, answers }: CodeFillProps) {
         bubble.fillStyle(0xffffff, 0.9);
         bubble.fillRoundedRect(160, 450, 300, 80, 16);
 
-        const text = this.add.text(180, 470, "¡Completa los espacios con las etiquetas correctas!", {
+        this.add.text(180, 470, "¡Completa los espacios con las etiquetas correctas!", {
           font: "16px Arial",
           color: "#333",
           wordWrap: { width: 280 }
-        });
+        })
 
         let y = 20;
         lines.forEach((line) => {
@@ -199,7 +199,7 @@ export default function CodeFillGame({ content, answers }: CodeFillProps) {
 
     const game = new Phaser.Game(config);
     return () => game.destroy(true);
-  }, [content]);
+  }, [content, answers]);
 
   return <div ref={gameRef} className="w-full h-[600px] flex justify-center items-center" />;
 }

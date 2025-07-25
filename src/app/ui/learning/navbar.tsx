@@ -55,7 +55,7 @@ export default function Navbar({ moduleId, title, lessons }: NavbarProps) {
         >
           <Menu className="w-5 h-5" />
           <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700" />
-          <span className="text-sm md:text-base font-medium">
+          <span className="text-sm md:text-base font-medium p-4">
             Nivel {currentLevel} – 10
           </span>
         </div>

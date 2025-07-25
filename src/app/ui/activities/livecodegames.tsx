@@ -13,7 +13,7 @@ export default function LiveHtmlGame({ initialCode }: LiveHtmlGameProps) {
 
   useEffect(() => {
     updateIframeContent(initialCode); // Renderizar el código inicial
-  }, []);
+  }, [initialCode]);
 
   const updateIframeContent = (html: string) => {
     const iframe = iframeRef.current;
