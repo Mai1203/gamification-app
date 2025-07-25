@@ -13,45 +13,52 @@ export default function Home() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-[#0D0D0D] dark:via-[#0D0D0D] dark:to-[#0D0D0D]"
+      className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:bg-gradient-to-br dark:from-[#0D0D0D] dark:via-[#0D0D0D] dark:to-[#0D0D0D]"
     >
-      <Header />
-      <main className="container mx-auto px-4 py-16">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="lg:w-1/2 space-y-6"
-          >
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white">
-              ¡Aprender jugando con desafíos reales!
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Aprende HTML, CSS y JavaScript de manera interactiva y efectiva.
-              Construye proyectos reales mientras juegas y ganas puntos.
-            </p>
-  
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-                whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
-              >
-                <Link
-                  href="/dashboard"
-                  className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-xl transition-all duration-300 transform cursor:pointer"
+      <div className="hidden dark:block absolute inset-0 z-0">
+        <div className="absolute top-[5%] left-[5%] w-[1000px] h-[1000px] bg-purple-600 rounded-full blur-3xl opacity-30" />
+        <div className="absolute top-[5%] right-[5%] w-[1000px] h-[1000px] bg-indigo-600 rounded-full blur-3xl opacity-30" />
+      </div> 
+
+      <div className="relative z-10">
+        <Header />
+        <main className="container mx-auto px-4 py-16">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              className="lg:w-1/2 space-y-6"
+            >
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white">
+                ¡Aprender jugando con desafíos reales!
+              </h1>
+              <p className="text-xl text-gray-600 dark:text-gray-300">
+                Aprende HTML, CSS y JavaScript de manera interactiva y efectiva.
+                Construye proyectos reales mientras juegas y ganas puntos.
+              </p>
+    
+              <div className="flex flex-col sm:flex-row gap-4">
+                <motion.button
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                  whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
                 >
-                  ¡Empieza Ahora!
-                </Link>
-              </motion.button>
-            </div>
-          </motion.div>
-  
-          <Animation />
-        </div>
-        <Cards />
-      </main>
-      <Footer />
+                  <Link
+                    href="/dashboard"
+                    className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-xl transition-all duration-300 transform cursor:pointer"
+                  >
+                    ¡Empieza Ahora!
+                  </Link>
+                </motion.button>
+              </div>
+            </motion.div>
+    
+            <Animation />
+          </div>
+          <Cards />
+        </main>
+        <Footer />
+      </div>
     </motion.div>
   );
 }

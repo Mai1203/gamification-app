@@ -36,7 +36,7 @@ export const Animation = () => {
         key={isDarkMode ? "dark" : "light"}
         autoplay
         loop
-        src={isDarkMode ? "/animation/game-dark.json" : "/animation/game-light2.json"}
+        src={isDarkMode ? "/animation/game-dark2.json" : "/animation/game-light2.json"}
         className="w-full max-w-2xl h-auto"
       />
     </motion.div>
