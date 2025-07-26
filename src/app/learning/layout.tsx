@@ -35,14 +35,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-[#424242] dark:via-[#0D0D0D] dark:to-[#4d4d4d]"
+      className="relative min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-black dark:via-black dark:to-black"
     >
-      <Header />
-      <main className="container mx-auto py-8">
-        <Suspense fallback={<Loading />}> {/* Envolver en Suspense */}
-          <LayoutContent>{children}</LayoutContent>
-        </Suspense>
-      </main>
+      <div className="hidden dark:block fixed inset-0 z-0">
+        <div className="absolute top-[5%] left-[5%] w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] bg-purple-600 rounded-full blur-3xl opacity-30" />
+        <div className="absolute top-[5%] right-[5%] w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] bg-indigo-600 rounded-full blur-3xl opacity-30" />
+      </div> 
+
+      <div className="relative z-10">
+        <Header />
+        <main className="container mx-auto py-8">
+          <Suspense fallback={<Loading />}>
+            <LayoutContent>{children}</LayoutContent>
+          </Suspense>
+        </main>
+      </div>
     </motion.div>
   );
 }
