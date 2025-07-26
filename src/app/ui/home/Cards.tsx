@@ -41,7 +41,7 @@ export const Cards = () => {
           <div className={`w-12 h-12 ${card.bgIcon} rounded-lg flex items-center justify-center mb-4`}>
             {card.icon}
           </div>
-          <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
+          <h3 className="text-xl font-semibold mb-2 text-zinc-800">{card.title}</h3>
           <p className="text-gray-600 dark:text-gray-300">{card.description}</p>
         </motion.div>
       ))}

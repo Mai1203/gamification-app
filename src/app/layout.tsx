@@ -9,7 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className=''>
+      <html lang="es" className=''>
         <body
           className={`${inter.className} antialiased`}
         >
