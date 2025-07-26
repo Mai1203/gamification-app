@@ -1,47 +1,98 @@
 import Link from "next/link";
-import Image from "next/image";
+import { motion } from "framer-motion";
 
-interface CardProps {
+interface CardCarouselProps {
   title: string;
   description: string;
-  emoji: string;       
+  emoji: string;
   link: string;
   imageUrl: string;
+  color?: string;
   className?: string;
+  isActive?: boolean;
 }
 
-const CardCarousel = ({ title, description, emoji, link, imageUrl, className = "" }:CardProps) => {
+export default function CardCarousel({
+  title,
+  description,
+  emoji,
+  link,
+  imageUrl,
+  color = "from-blue-500 to-indigo-600",
+  className = "",
+  isActive = false
+}: CardCarouselProps) {
   return (
-    <Link href={link} className={`block h-full ${className}`}>
-      <div className={`
-        h-full w-full rounded-2xl p-6 cursor-pointer
-        flex flex-col md:flex-row overflow-hidden
-        border-2 border-white/30
-        bg-gradient-to-br from-indigo-600 to-purple-600
-        backdrop-blur-md
-        shadow-xl hover:shadow-2xl
-        transition-all duration-300
-      `}>
-        {/* Imagen (en móvil va arriba, en desktop a la izquierda) */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full relative">
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            className="object-cover rounded-t-2xl rounded-b-2xl"
-          />
-        </div>
-
-        {/* Contenido de texto */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full p-6 flex flex-col justify-center items-center text-white">
-          <span className="text-5xl mb-4">{emoji}</span>
-          <h2 className="text-3xl font-bold mb-4 text-center">{title}</h2>
-          <p className="text-xl mb-6 text-center">{description}</p>
-          <div className="animate-pulse text-lg">👉 ¡Toca para explorar! 👈</div>
-        </div>
+    <motion.div 
+      className={`relative h-full w-full rounded-2xl overflow-hidden ${className}`}
+      animate={{ 
+        scale: isActive ? 1 : 0.95,
+        opacity: isActive ? 1 : 0.7
+      }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Imagen de fondo con gradiente */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${color} z-0`}></div>
+      
+      {/* Imagen de fondo */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center z-0 opacity-20"
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></div>
+      
+      {/* Contenido */}
+      <div className="relative z-10 h-full flex flex-col justify-center items-center text-center p-8">
+        <motion.span 
+          className="text-6xl mb-6"
+          animate={{ 
+            scale: isActive ? [1, 1.2, 1] : 1,
+            rotate: isActive ? [0, 10, -10, 0] : 0
+          }}
+          transition={{ 
+            duration: 0.8,
+            times: [0, 0.2, 0.8, 1]
+          }}
+        >
+          {emoji}
+        </motion.span>
+        
+        <motion.h2 
+          className="text-4xl font-bold text-white mb-4"
+          animate={{ 
+            y: isActive ? 0 : 20,
+            opacity: isActive ? 1 : 0
+          }}
+          transition={{ delay: 0.1 }}
+        >
+          {title}
+        </motion.h2>
+        
+        <motion.p 
+          className="text-xl text-white/90 max-w-md mb-8"
+          animate={{ 
+            y: isActive ? 0 : 20,
+            opacity: isActive ? 1 : 0
+          }}
+          transition={{ delay: 0.2 }}
+        >
+          {description}
+        </motion.p>
+        
+        <motion.div
+          animate={{ 
+            y: isActive ? 0 : 20,
+            opacity: isActive ? 1 : 0
+          }}
+          transition={{ delay: 0.3 }}
+        >
+          <Link 
+            href={link}
+            className="inline-block bg-white text-gray-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+          >
+            Explorar ahora
+          </Link>
+        </motion.div>
       </div>
-    </Link>
+    </motion.div>
   );
-};
-
-export default CardCarousel;
+}
