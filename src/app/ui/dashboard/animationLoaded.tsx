@@ -2,7 +2,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function AnimationLoaded() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+    <div className="flex flex-col items-center gap-4 m-40">
       <DotLottieReact
         autoplay
         loop
