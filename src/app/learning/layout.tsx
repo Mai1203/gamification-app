@@ -9,9 +9,9 @@ import Navbar from '@/app/ui/learning/navbar';
 import Loading from '@/app/ui/loading';
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
-  const searchParams = useSearchParams(); // Uso normal
+  const searchParams = useSearchParams(); 
   const moduleId = searchParams.get("module") || "html";
-  const modules = useModulesWithProgress(); // Uso normal
+  const modules = useModulesWithProgress(); 
   const currentModule = modules.find((m) => m.id === moduleId);
 
   if (!currentModule) return null;

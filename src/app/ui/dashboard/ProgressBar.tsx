@@ -1,32 +1,40 @@
+import { motion } from "framer-motion";
 
 interface ProgressBarProps {
   label: string;
   progress: number;
-  color: 'rose' | 'blue' | 'yellow';
+  color: 'indigo' | 'purple';
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ label, progress, color }) => {
   const colorClasses = {
-    rose: 'bg-rose-500',
-    blue: 'bg-blue-500',
-    yellow: 'bg-yellow-500'
+    indigo: 'bg-indigo-600 dark:bg-indigo-800',
+    purple: 'bg-purple-600  dark:bg-purple-800',
   };
 
   return (
-    <div>
-      <div className="flex justify-between mb-1">
-        <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{label}</span>
-        <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{progress}%</span>
+    <div className="w-full">
+      <div className="flex justify-between mb-2">
+        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          {label}
+        </span>
+        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          {progress}%
+        </span>
       </div>
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-        <div
-          className={`${colorClasses[color]} h-2 rounded-full transition-all`}
-          style={{ width: `${progress}%` }}
-        ></div>
+
+      <div className="w-full bg-gray-300 dark:bg-gray-800 rounded-full h-4 shadow-inner overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className={`h-full rounded-full relative ${colorClasses[color]}`}
+        >
+          <span className="absolute right-0 top-0 h-full w-2 rounded-full bg-white/50 animate-pulse" />
+        </motion.div>
       </div>
     </div>
   );
-  
 };
 
 export default ProgressBar;

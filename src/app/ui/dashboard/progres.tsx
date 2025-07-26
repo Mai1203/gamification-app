@@ -1,23 +1,35 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { Award, Star, Trophy } from "lucide-react";
 import ProgressBar from "./ProgressBar";
+import { useModulesWithProgress } from '@/app/hooks/useModulesWithProgress';
 
 export default function Progres() {
-  const [progress] = useState({
-    html: 50,
-    css: 25,
-    javascript: 15,
-  });
+  const modules = useModulesWithProgress(); 
+  const currentModulehtml = modules.find((m) => m.id === "html");
+  const currentModulecss = modules.find((m) => m.id === "css");
+
+  const totalLessonsHtml = currentModulehtml?.lessons.length ?? 0;
+  const totalLessonsCss = currentModulecss?.lessons.length ?? 0;
+
+  const completedHtml = currentModulehtml?.lessons.filter((l) => l.completed).length ?? 0;
+  const completedCss = currentModulecss?.lessons.filter((l) => l.completed).length ?? 0;
+
+  const progresshtml = totalLessonsHtml > 0 ? Math.round((completedHtml / totalLessonsHtml) * 100) : 0;
+  const progresscss = totalLessonsCss > 0 ? Math.round((completedCss / totalLessonsCss) * 100) : 0;
+
+  const isLoading = modules.length === 0 || totalLessonsHtml === 0 || totalLessonsCss === 0;
+
+  if (isLoading) {
+    return <p className="text-center mt-10 text-gray-500">Cargando progreso...</p>;
+  }
 
   return (
     <>
       <div className="mt-8">
         <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Tu Progreso</h3>
         <div className="space-y-4">
-          <ProgressBar label="HTML" progress={progress.html} color="rose" />
-          <ProgressBar label="CSS" progress={progress.css} color="blue" />
-          <ProgressBar label="JavaScript" progress={progress.javascript} color="yellow" />
+          <ProgressBar label="HTML" progress={progresshtml} color="indigo" />
+          <ProgressBar label="CSS" progress={progresscss} color="purple" />
         </div>
       </div>
   
