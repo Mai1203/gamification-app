@@ -18,22 +18,20 @@ export default function NivelTeoria() {
   const levelData = moduleTheory?.[levelParam as keyof typeof moduleTheory];
 
   const router = useRouter();
-
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showAnimations, setShowAnimations] = useState(false);
 
   useEffect(() => {
-    const dark = document.documentElement.classList.contains("dark");
-    setIsDarkMode(dark);
-    const observer = new MutationObserver(() => {
-      setIsDarkMode(document.documentElement.classList.contains("dark"));
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    return () => observer.disconnect();
+    // Detectar tamaño de pantalla
+    const checkResponsive = () => {
+      setShowAnimations(window.innerWidth >= 1024); // Solo mostrar animaciones en pantallas grandes
+    };
+    
+    checkResponsive();
+    window.addEventListener("resize", checkResponsive);
+    
+    return () => {
+      window.removeEventListener("resize", checkResponsive);
+    };
   }, []);
 
   if (!levelData) {
@@ -41,105 +39,119 @@ export default function NivelTeoria() {
   }
 
   return (
-    <section className="min-h-screen px-6 py-10 md:px-20 relative dark:text-zinc-300">
-      {/* Animaciones Lottie */}
-      <div className="absolute top-40 left-15 hidden md:block w-75">
-        <DotLottieReact
-          autoplay
-          loop
-          src="/animation/learning robot.json"
-          className="w-full max-w-2xl h-auto"
-        />
-      </div>
-
-      <div className="absolute bottom-55 right-5 hidden md:block w-100">
-        <DotLottieReact
-          key={isDarkMode ? "dark" : "light"}
-          autoplay
-          loop
-          src={
-            isDarkMode
-              ? "/animation/animation-learning-dark.json"
-              : "/animation/animation-learning.json"
-          }
-          className="w-full max-w-2xl h-auto"
-        />
-      </div>
-
-      {/* Contenido */}
-      <div className="w-full max-w-4xl mx-auto space-y-10">
-        <div>
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
-            {levelData.title}
-          </h2>
-
-          <div className="bg-red-100 text-red-800 dark:bg-red-200/20 dark:text-red-300 rounded-md p-4 mt-4">
-            <p className="font-semibold">🎯 Objetivo de nivel:</p>
-            <p className="text-sm md:text-base">{levelData.objective}</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold flex items-center gap-2">
-              {levelData.intro.question}
-            </h3>
-            <p className="text-sm md:text-base">{levelData.intro.content}</p>
-            <pre className="bg-white/80 dark:bg-zinc-800 p-4 rounded-md text-sm overflow-auto border border-gray-200 dark:border-zinc-700">
-              {levelData.intro.code}
-            </pre>
+    <section className="min-h-screen px-4 py-8 md:px-8 lg:px-20 relative dark:text-zinc-300">
+      {/* Animaciones Lottie - Solo en pantallas grandes */}
+      {showAnimations && (
+        <>
+          <div className="absolute top-40 left-0 lg:left-15 w-60 lg:w-75 z-0">
+            <DotLottieReact
+              autoplay
+              loop
+              src="/animation/learning robot.json"
+              className="w-full h-auto max-w-md"
+            />
           </div>
 
-          <div className="space-y-6">
-            <div className="bg-yellow-100 p-4 rounded-md text-center dark:text-black">
-              <p className="font-bold text-lg">&lt;html&gt;</p>
-              <div className="flex flex-wrap justify-center mt-2 gap-2 text-sm font-semibold max-w-full">
-                {levelData.tags.map((tag: string) => (
-                  <span
-                    key={tag}
-                    className="bg-blue-200 px-3 py-1 rounded whitespace-nowrap"
-                  >
-                    {tag}
-                  </span>
-                ))}
+          <div className="absolute bottom-40 right-0 lg:right-5 w-60 lg:w-100 z-0">
+            <DotLottieReact
+              autoplay
+              loop
+              src="/animation/animation-learning-dark.json"
+              className="w-full h-auto max-w-md"
+            />
+          </div>
+        </>
+      )}
+
+      {/* Contenido principal */}
+      <div className="w-full max-w-4xl mx-auto space-y-8 relative z-10">
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-zinc-800">
+          <div className="mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+              {levelData.title}
+            </h2>
+
+            <div className="bg-red-100 text-red-800 dark:bg-red-200/20 dark:text-red-300 rounded-xl p-4 mt-4">
+              <p className="font-semibold flex items-center gap-2">
+                <span className="text-lg">🎯</span> Objetivo de nivel:
+              </p>
+              <p className="text-sm md:text-base mt-2">{levelData.objective}</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div className="space-y-5">
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                {levelData.intro.question}
+              </h3>
+              <p className="text-base">{levelData.intro.content}</p>
+              <div className="overflow-x-auto">
+                <pre className="bg-gray-50 dark:bg-zinc-800 p-4 rounded-lg text-sm border border-gray-200 dark:border-zinc-700 min-w-min">
+                  {levelData.intro.code}
+                </pre>
               </div>
             </div>
 
-            <div className="bg-white dark:bg-zinc-900 p-4 rounded-md text-sm shadow-md border border-gray-200 dark:border-zinc-800">
-              <p className="font-bold mb-2">✅ ¿Qué debes recordar?</p>
-              <ul className="space-y-2">
-                {levelData.tips.map((tip: string, i: number) => (
-                  <li key={i}>{tip}</li>
-                ))}
-              </ul>
+            <div className="space-y-6">
+              <div className="bg-yellow-100 p-4 rounded-xl text-center dark:text-black">
+                <p className="font-bold text-lg flex items-center justify-center gap-2">
+                  &lt;{modKey}&gt;
+                </p>
+                <div className="flex flex-wrap justify-center mt-3 gap-2 text-sm font-semibold">
+                  {levelData.tags.map((tag: string) => (
+                    <span
+                      key={tag}
+                      className="bg-blue-200 px-3 py-1.5 rounded-lg whitespace-nowrap"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl text-sm shadow-sm border border-gray-100 dark:border-zinc-700">
+                <p className="font-bold mb-3 flex items-center gap-2">
+                  <span className="text-green-500">✅</span> ¿Qué debes recordar?
+                </p>
+                <ul className="space-y-3">
+                  {levelData.tips.map((tip: string, i: number) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span>•</span> {tip}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="space-y-4">
-          <h3 className="text-xl font-bold flex items-center gap-2">
-            {levelData.extra.title}
-          </h3>
-          <p className="text-sm md:text-base">{levelData.extra.content}</p>
+          <div className="mt-8 space-y-5">
+            <h3 className="text-xl font-bold flex items-center gap-2">
+              {levelData.extra.title}
+            </h3>
+            <p className="text-base">{levelData.extra.content}</p>
 
-          <pre className="bg-white/80 dark:bg-zinc-800 p-4 rounded-md text-sm overflow-auto border border-gray-200 dark:border-zinc-700">
-            {levelData.extra.example}
-          </pre>
-        </div>
+            <div className="overflow-x-auto">
+              <pre className="bg-gray-50 dark:bg-zinc-800 p-4 rounded-lg text-sm border border-gray-200 dark:border-zinc-700 min-w-min">
+                {levelData.extra.example}
+              </pre>
+            </div>
+          </div>
 
-        <div className="space-y-6">
-          <h3 className="text-xl font-bold flex items-center gap-2">🧪 ¡Prueba el código!</h3>
-          <EditorLive key={levelParam} defaultCode={levelData.lifeCode} />
-        </div>
+          <div className="mt-10 space-y-6">
+            <h3 className="text-xl font-bold flex items-center gap-2">
+              <span className="text-purple-500">🧪</span> ¡Prueba el código!
+            </h3>
+            <EditorLive key={levelParam} defaultCode={levelData.lifeCode} />
+          </div>
 
-
-        <div className="text-center">
-          <button 
-            onClick={() => router.push(`/learning/activities?module=${modKey}&level=${levelParam}`)}
-            className="px-6 py-3 text-base font-semibold rounded-lg transition-all flex items-center justify-center gap-2 mx-auto bg-indigo-600 text-white hover:bg-indigo-700 cursor-pointer">
-            <MousePointerClick size={20} />
-            ¡Empezar Desafío!
-          </button>
+          <div className="text-center mt-10">
+            <button 
+              onClick={() => router.push(`/learning/activities?module=${modKey}&level=${levelParam}`)}
+              className="px-6 py-3 text-base font-semibold rounded-xl transition-all flex items-center justify-center gap-2 mx-auto bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 cursor-pointer shadow-md hover:shadow-lg">
+              <MousePointerClick size={20} />
+              ¡Empezar Desafío!
+            </button>
+          </div>
         </div>
       </div>
     </section>

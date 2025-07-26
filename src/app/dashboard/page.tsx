@@ -40,7 +40,7 @@ export default function Page() {
   }
 
   return (
-    <div className="max-h-[780px] overflow-y-auto pr-2">
+    <div className="overflow-y-auto pr-2">
       {/* Banner superior único para invitados */}
       {!isSignedIn && showGuestBanner && (
         <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 border-b border-blue-200 dark:border-gray-700 p-4 mb-6">
