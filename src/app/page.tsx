@@ -15,10 +15,10 @@ export default function Home() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:bg-gradient-to-br dark:from-[#0D0D0D] dark:via-[#0D0D0D] dark:to-[#0D0D0D]"
     >
-      <div className="hidden dark:block absolute inset-0 z-0">
-        <div className="absolute top-[5%] left-[5%] w-[1000px] h-[1000px] bg-purple-600 rounded-full blur-3xl opacity-30" />
-        <div className="absolute top-[5%] right-[5%] w-[1000px] h-[1000px] bg-indigo-600 rounded-full blur-3xl opacity-30" />
-      </div> 
+      <div className="hidden dark:block fixed inset-0 z-0">
+        <div className="absolute top-[5%] left-[5%] w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] bg-purple-600 rounded-full blur-3xl opacity-30" />
+        <div className="absolute top-[5%] right-[5%] w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] bg-indigo-600 rounded-full blur-3xl opacity-30" />
+      </div>  
 
       <div className="relative z-10">
         <Header />
