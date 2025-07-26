@@ -1,10 +1,48 @@
 import { motion } from "framer-motion";
-import { Award, Star, Trophy } from "lucide-react";
+import { Award, Star, Trophy} from "lucide-react";
 import ProgressBar from "./ProgressBar";
 import { useModulesWithProgress } from '@/app/hooks/useModulesWithProgress';
+import { useUser } from "@clerk/nextjs";
 
 export default function Progres() {
+  const { isLoaded, isSignedIn } = useUser();
   const modules = useModulesWithProgress(); 
+  
+  // Si Clerk aún no ha cargado o el usuario no está autenticado
+  if (!isLoaded) {
+    return (
+      <div className="mt-8">
+        <div className="animate-pulse space-y-4">
+          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+        </div>
+      </div>
+    );
+  }
+
+  // Usuario no autenticado
+  if (!isSignedIn) {
+    return (
+      <>
+      </>
+    );
+  }
+
+  // Usuario autenticado pero datos aún cargando
+  if (modules.length === 0) {
+    return (
+      <div className="mt-8">
+        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Tu Progreso</h3>
+        <div className="space-y-4">
+          <div className="animate-pulse h-4 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+          <div className="animate-pulse h-4 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+        </div>
+      </div>
+    );
+  }
+
+  // Datos cargados y usuario autenticado
   const currentModulehtml = modules.find((m) => m.id === "html");
   const currentModulecss = modules.find((m) => m.id === "css");
 
@@ -16,12 +54,6 @@ export default function Progres() {
 
   const progresshtml = totalLessonsHtml > 0 ? Math.round((completedHtml / totalLessonsHtml) * 100) : 0;
   const progresscss = totalLessonsCss > 0 ? Math.round((completedCss / totalLessonsCss) * 100) : 0;
-
-  const isLoading = modules.length === 0 || totalLessonsHtml === 0 || totalLessonsCss === 0;
-
-  if (isLoading) {
-    return <p className="text-center mt-10 text-gray-500">Cargando progreso...</p>;
-  }
 
   return (
     <>
