@@ -1,31 +1,248 @@
 'use client';
 
-import Editor from '@monaco-editor/react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import Editor, { OnMount } from '@monaco-editor/react';
+import * as monaco from 'monaco-editor';
+import { RotateCw, Eye, CodeIcon, Copy, Check, Maximize, Minimize } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type Props = {
   defaultCode: string;
 };
 
+type IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor;
+
 export default function EditorLive({ defaultCode }: Props) {
   const [code, setCode] = useState(defaultCode);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [viewMode, setViewMode] = useState<'split' | 'code' | 'preview'>('split');
+  const editorRef = useRef<IStandaloneCodeEditor | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Toggle fullscreen mode
+  const toggleFullscreen = () => {
+    if (!isFullscreen && containerRef.current) {
+      containerRef.current.requestFullscreen().catch(console.error);
+    } else if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+    setIsFullscreen(!isFullscreen);
+  };
+
+  // Handle fullscreen change events
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  // Copy code to clipboard
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy code', err);
+    }
+  };
+
+  // Reset to default code
+  const resetCode = () => {
+    setCode(defaultCode);
+    if (editorRef.current) {
+      editorRef.current.setValue(defaultCode);
+    }
+  };
+
+  // Handle editor mount
+  const handleEditorDidMount: OnMount = (editor) => {
+    editorRef.current = editor;
+  };
 
   return (
-    <div className="border rounded-lg overflow-hidden shadow-md dark:bg-zinc-900">
-      <Editor
-        height="300px"
-        defaultLanguage="html"
-        defaultValue={defaultCode}
-        theme="vs-dark"
-        onChange={(value) => setCode(value || "")}
-      />
-      <div className="mt-4 bg-white p-4 dark:bg-zinc-800">
-        <iframe
-          className="w-full h-64 border rounded"
-          srcDoc={code}
-          title="Resultado"
-        />
+    <motion.div
+      ref={containerRef}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={`bg-white dark:bg-zinc-900 rounded-xl shadow-xl overflow-hidden border border-gray-200 dark:border-zinc-800 ${
+        isFullscreen ? 'fixed inset-0 z-50' : 'relative'
+      }`}
+    >
+      {/* Header with controls */}
+      <div className="flex justify-between items-center bg-gray-50 dark:bg-zinc-800 px-4 py-3 border-b border-gray-200 dark:border-zinc-700">
+        <div className="flex items-center space-x-2">
+          <div className="flex space-x-1">
+            <div className="w-3 h-3 rounded-full bg-red-400"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+            <div className="w-3 h-3 rounded-full bg-green-400"></div>
+          </div>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300 ml-2">
+            editor.html
+          </span>
+        </div>
+        
+        <div className="flex space-x-2">
+          {/* View mode toggle */}
+          <div className="hidden md:flex items-center bg-gray-100 dark:bg-zinc-700 rounded-lg p-1">
+            <button
+              onClick={() => setViewMode('code')}
+              className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
+                viewMode === 'code' 
+                  ? 'bg-white dark:bg-zinc-600 shadow' 
+                  : 'text-gray-500 dark:text-gray-400'
+              }`}
+            >
+              <CodeIcon size={16} className="inline mr-1" />
+              Código
+            </button>
+            <button
+              onClick={() => setViewMode('preview')}
+              className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
+                viewMode === 'preview' 
+                  ? 'bg-white dark:bg-zinc-600 shadow' 
+                  : 'text-gray-500 dark:text-gray-400'
+              }`}
+            >
+              <Eye size={16} className="inline mr-1" />
+              Vista
+            </button>
+            <button
+              onClick={() => setViewMode('split')}
+              className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
+                viewMode === 'split' 
+                  ? 'bg-white dark:bg-zinc-600 shadow' 
+                  : 'text-gray-500 dark:text-gray-400'
+              }`}
+            >
+              <div className="flex items-center">
+                <CodeIcon size={16} className="mr-1" />
+                <span className="mx-1">|</span>
+                <Eye size={16} className="ml-1" />
+              </div>
+            </button>
+          </div>
+          
+          {/* Action buttons */}
+          <button
+            onClick={resetCode}
+            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+            title="Resetear código"
+          >
+            <RotateCw size={18} />
+          </button>
+          
+          <button
+            onClick={copyToClipboard}
+            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+            title="Copiar código"
+          >
+            {copied ? <Check size={18} className="text-green-500" /> : <Copy size={18} />}
+          </button>
+          
+          <button
+            onClick={toggleFullscreen}
+            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+            title={isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
+          >
+            {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+          </button>
+        </div>
       </div>
-    </div>
+
+      {/* Editor and Preview */}
+      <div className="flex flex-col md:flex-row">
+        {(viewMode === 'split' || viewMode === 'code') && (
+          <div className={`w-full ${viewMode === 'split' ? 'md:w-1/2' : ''}`}>
+            <Editor
+              height="300px"
+              defaultLanguage="html"
+              value={code}
+              theme="vs-dark"
+              onChange={(value) => setCode(value || "")}
+              onMount={handleEditorDidMount}
+              options={{
+                minimap: { enabled: false },
+                fontSize: 14,
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+                fontFamily: "'Fira Code', monospace",
+                fontLigatures: true,
+                lineNumbers: 'on',
+              }}
+            />
+          </div>
+        )}
+        
+        {(viewMode === 'split' || viewMode === 'preview') && (
+          <div 
+            className={`w-full bg-gray-50 dark:bg-zinc-800 ${
+              viewMode === 'split' ? 'md:w-1/2' : ''
+            } ${viewMode === 'split' ? 'border-l border-gray-200 dark:border-zinc-700' : ''}`}
+          >
+            <div className="p-2 text-xs text-gray-500 dark:text-gray-400 flex justify-between">
+              <span>Vista previa</span>
+              <span>HTML</span>
+            </div>
+            <iframe
+              className="w-full h-64 md:h-[300px] bg-white"
+              srcDoc={code}
+              title="Resultado"
+              sandbox="allow-same-origin allow-scripts"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Status bar */}
+      <div className="bg-gray-50 dark:bg-zinc-800 px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-zinc-700 flex justify-between">
+        <div>
+          HTML <span className="hidden md:inline">| Live Preview</span>
+        </div>
+        <div>
+          {code.length} caracteres
+        </div>
+      </div>
+      
+      {/* Floating action buttons for mobile */}
+      <div className="md:hidden fixed bottom-4 right-4 flex flex-col space-y-2 z-10">
+        <AnimatePresence>
+          {copied && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="bg-green-500 text-white px-3 py-2 rounded-lg shadow-lg"
+            >
+              ¡Código copiado!
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        <div className="flex space-x-2">
+          <button
+            onClick={() => setViewMode(viewMode === 'split' ? 'preview' : viewMode === 'preview' ? 'code' : 'split')}
+            className="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors"
+            title="Cambiar vista"
+          >
+            {viewMode === 'code' ? <Eye size={20} /> : 
+             viewMode === 'preview' ? <CodeIcon size={20} /> : 
+             <div className="flex"><CodeIcon size={14} className="mr-0.5"/>|<Eye size={14} className="ml-0.5"/></div>}
+          </button>
+          
+          <button
+            onClick={toggleFullscreen}
+            className="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors"
+            title={isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
+          >
+            {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+          </button>
+        </div>
+      </div>
+    </motion.div>
   );
 }
