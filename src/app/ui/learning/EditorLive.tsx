@@ -19,6 +19,7 @@ export default function EditorLive({ defaultCode }: Props) {
   const [viewMode, setViewMode] = useState<'split' | 'code' | 'preview'>('split');
   const editorRef = useRef<IStandaloneCodeEditor | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLIFrameElement>(null);
 
   // Toggle fullscreen mode
   const toggleFullscreen = () => {
@@ -33,12 +34,20 @@ export default function EditorLive({ defaultCode }: Props) {
   // Handle fullscreen change events
   useEffect(() => {
     const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+      const isCurrentlyFullscreen = !!document.fullscreenElement;
+      setIsFullscreen(isCurrentlyFullscreen);
+      
+      // Forzar actualización del iframe
+      setTimeout(() => {
+        if (previewRef.current) {
+          previewRef.current.srcdoc = code;
+        }
+      }, 100);
     };
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  }, []);
+  }, [code]);
 
   // Copy code to clipboard
   const copyToClipboard = async () => {
@@ -70,7 +79,7 @@ export default function EditorLive({ defaultCode }: Props) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`bg-white dark:bg-zinc-900 rounded-xl shadow-xl overflow-hidden border border-gray-200 dark:border-zinc-800 ${
-        isFullscreen ? 'fixed inset-0 z-50' : 'relative'
+        isFullscreen ? 'fixed inset-0 z-50 h-screen' : 'relative'
       }`}
     >
       {/* Header with controls */}
@@ -119,7 +128,7 @@ export default function EditorLive({ defaultCode }: Props) {
                   : 'text-gray-500 dark:text-gray-400'
               }`}
             >
-              <div className="flex items-center">
+              <div className="flex items-center cursor-pointer">
                 <CodeIcon size={16} className="mr-1" />
                 <span className="mx-1">|</span>
                 <Eye size={16} className="ml-1" />
@@ -155,11 +164,11 @@ export default function EditorLive({ defaultCode }: Props) {
       </div>
 
       {/* Editor and Preview */}
-      <div className="flex flex-col md:flex-row">
+      <div className={`flex flex-col md:flex-row ${isFullscreen ? 'h-[calc(100vh-7.5rem)]' : ''}`}>
         {(viewMode === 'split' || viewMode === 'code') && (
-          <div className={`w-full ${viewMode === 'split' ? 'md:w-1/2' : ''}`}>
+          <div className={`w-full ${viewMode === 'split' ? 'md:w-1/2' : ''} ${isFullscreen ? 'h-full' : ''}`}>
             <Editor
-              height="300px"
+              height={isFullscreen ? "100%" : "300px"}
               defaultLanguage="html"
               value={code}
               theme="vs-dark"
@@ -182,14 +191,15 @@ export default function EditorLive({ defaultCode }: Props) {
           <div 
             className={`w-full bg-gray-50 dark:bg-zinc-800 ${
               viewMode === 'split' ? 'md:w-1/2' : ''
-            } ${viewMode === 'split' ? 'border-l border-gray-200 dark:border-zinc-700' : ''}`}
+            } ${viewMode === 'split' ? 'border-l border-gray-200 dark:border-zinc-700' : ''} ${isFullscreen ? 'h-full' : ''}`}
           >
             <div className="p-2 text-xs text-gray-500 dark:text-gray-400 flex justify-between">
               <span>Vista previa</span>
               <span>HTML</span>
             </div>
             <iframe
-              className="w-full h-64 md:h-[300px] bg-white"
+              ref={previewRef}
+              className={`w-full ${isFullscreen ? 'h-[calc(100%-2rem)]' : 'h-64 md:h-[300px]'} bg-white`}
               srcDoc={code}
               title="Resultado"
               sandbox="allow-same-origin allow-scripts"
