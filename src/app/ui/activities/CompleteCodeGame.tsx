@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import * as Phaser from "phaser";
 
+import PagFinalizar from "./pagFinalizar/pagFinal"
+
 type CodeFillProps = {
   content: string;
   answers: string[];
@@ -365,27 +367,13 @@ export default function CodeFillGame({ content, answers }: CodeFillProps) {
     return () => game.destroy(true);
   }, [content, answers]);
 
+  if(gameComplete){
+    return <PagFinalizar score={score} total={total} />
+  }
+
   return (
     <div className="w-full flex flex-col items-center">
       <div ref={gameRef} className="w-full h-[600px] max-w-4xl rounded-xl overflow-hidden shadow-2xl" />
-      
-      {gameComplete && (
-        <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
-          <div className="p-4 bg-gradient-to-r from-green-600 to-emerald-700 rounded-lg text-white text-center animate-fade-in">
-            <h3 className="text-xl font-bold mb-2">¡Juego Completado!</h3>
-            <p className="text-lg">
-              Puntuación final: <span className="font-mono font-bold">{score}/{total}</span>
-            </p>
-          </div>
-          
-          <button 
-            onClick={() => alert("Aquí iría la lógica para pasar al siguiente nivel")}
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer"
-          >
-            Siguiente Nivel →
-          </button>
-        </div>
-      )}
     </div>
   );
 }

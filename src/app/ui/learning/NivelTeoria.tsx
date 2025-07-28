@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { MousePointerClick } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { theoryData } from "@/data/theory";
 import EditorLive from "./EditorLive";
