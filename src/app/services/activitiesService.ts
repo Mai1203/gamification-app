@@ -27,10 +27,9 @@ export const getActivities = async () => {
  * La subcolección "activities" debe estar bajo cada lección.
  */
 export const getActivityData = async (module: string, level: number) => {
-  const lessonId = `${module}-1`; // ejemplo: html-1
-  const levelId = `level-${level}`; // ejemplo: level-1
+  const lessonId = `${module}-1`; 
+  const levelId = `level-${level}`; 
 
-  // Verifica que el nivel exista
   const levelRef = doc(
     db,
     "modules",
@@ -41,9 +40,8 @@ export const getActivityData = async (module: string, level: number) => {
     levelId
   );
   const levelSnap = await getDoc(levelRef);
-  if (!levelSnap.exists()) return null;
+  if (!levelSnap.exists()) return console.error("Nivel no encontrado");
 
-  // Carga la actividad
   const activityId = "actividad-1";
 
   const activityRef = doc(
@@ -58,7 +56,7 @@ export const getActivityData = async (module: string, level: number) => {
     activityId
   );
   const activitySnap = await getDoc(activityRef);
-  if (!activitySnap.exists()) return null;
+  if (!activitySnap.exists()) return console.error("Actividad no encontrada");
 
   const activityData = activitySnap.data();
 

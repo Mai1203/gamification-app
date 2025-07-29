@@ -2,7 +2,7 @@ import CodeFillGame from "./CompleteCodeGame";
 import MultipleChoiceGame from "./opcionMultiple";
 import DragDropGame from "./dragDrop";
 import FindError from "./findError";
-import LiveCodeGame from "./livecodegames";
+import LiveCodingActivity from "./livecodegames";
 import {
   ActivityProps,
   CodeFillContent,
@@ -51,10 +51,11 @@ export default function ActivityRenderer(props: ActivityProps) {
         />
       );
 
-    case "live-code":
+    case "live-coding":
+      const liveContent = props.content as LiveCodeContent;
       return (
-        <LiveCodeGame
-          initialCode={(props.content as LiveCodeContent).code}
+        <LiveCodingActivity 
+          content={liveContent}
         />
       );
 

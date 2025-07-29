@@ -10,14 +10,12 @@ type DragDropGameProps = {
   code: string;
   options: string[];
   answers: string[];
-  onGameComplete?: (correct: number, total: number) => void;
 };
 
 export default function DragDropGame({ 
   code, 
   options, 
   answers,
-  onGameComplete
 }: DragDropGameProps) {
   const [drops, setDrops] = useState<(string | null)[]>(Array(answers.length).fill(null));
   const [selected, setSelected] = useState<string | null>(null);
@@ -67,11 +65,8 @@ export default function DragDropGame({
   useEffect(() => {
     if (submitted && correctCount === totalQuestions) {
       setIsCompleted(true);
-      if (onGameComplete) {
-        onGameComplete(correctCount, totalQuestions);
-      }
     }
-  }, [submitted, correctCount, totalQuestions, onGameComplete]);
+  }, [submitted, correctCount, totalQuestions]);
 
   const codeParts = code.split("_____");
 

@@ -25,11 +25,17 @@ export type FindErrorContent = {
 };
 
 export type LiveCodeContent = {
-  code: string;
+  description: string;
+  initialCode: string;
+  validation: string;
+  hints: string[];
+  resources: { label: string; code: string }[];
+  difficulty: string;
+  points: number;
 };
 
 export type ActivityProps = {
-  type: "fill-in-the-blanks" | "multiple-choice" | "drag-and-drop" | "find-error" | "live-code";
+  type: "fill-in-the-blanks" | "multiple-choice" | "drag-and-drop" | "find-error" | "live-coding";
   content:
     | CodeFillContent
     | MultipleChoiceContent
