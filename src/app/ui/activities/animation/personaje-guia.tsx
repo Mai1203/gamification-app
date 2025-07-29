@@ -11,7 +11,6 @@ export const PersonajeGuia = ({ mensaje }: PersonajeGuiaProps) => {
   const prevMessageRef = useRef("");
 
   useEffect(() => {
-    // ⚠️ Solo reactiva la animación si el mensaje cambió
     if (prevMessageRef.current === mensaje) return;
 
     prevMessageRef.current = mensaje;
