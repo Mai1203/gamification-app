@@ -9,6 +9,7 @@ export type MultipleChoiceContent = {
     question: string;
     options: string[];
     correctAnswer: string;
+    hint?: string;
   }[];
 };
 
