@@ -40,7 +40,7 @@ export const getActivityData = async (module: string, level: number) => {
     levelId
   );
   const levelSnap = await getDoc(levelRef);
-  if (!levelSnap.exists()) return console.error("Nivel no encontrado");
+  if (!levelSnap.exists()) return null;
 
   const activityId = "actividad-1";
 
@@ -56,7 +56,7 @@ export const getActivityData = async (module: string, level: number) => {
     activityId
   );
   const activitySnap = await getDoc(activityRef);
-  if (!activitySnap.exists()) return console.error("Actividad no encontrada");
+  if (!activitySnap.exists()) return null;
 
   const activityData = activitySnap.data();
 
