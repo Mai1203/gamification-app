@@ -1,19 +1,26 @@
 import { motion } from "framer-motion";
 import { Trophy } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useUser } from "@clerk/nextjs"
 
+import { updateProgress } from "@/app/services/progressService";
 import { AnimationConfety } from "../animation/animationConfety"
 
 export default function PagFinal({ score, total }: { score: number; total: number }) {
+  const { isLoaded, isSignedIn, user } = useUser();
   const router = useRouter();
   const searchParams = useSearchParams();
   const modKey = searchParams.get("module") ?? "html";
   const levelParam = searchParams.get("level") ?? "1";
   
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const nextLevel = Number(levelParam) + 1;
     const maxLevel = 10;
+
+    if (!isLoaded || !isSignedIn || !user?.id) return;
+
+    await updateProgress(user.id, modKey, Number(levelParam)-1);
 
     if (nextLevel > maxLevel) {
       router.push(`/learning?module=css&level=1`);
