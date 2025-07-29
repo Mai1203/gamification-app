@@ -38,7 +38,7 @@ export default function Navbar({ moduleId, title, lessons }: NavbarProps) {
       ease: "easeOut",
     });
     return controls.stop;
-  }, [progress]);
+  }, [progress, motionValue]);
 
   return (
     <div className="relative">

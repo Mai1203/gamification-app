@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { PersonajeGuia } from "./animation/personaje-guia";
@@ -25,12 +25,12 @@ export default function DragDropGame({
   
   // Mensajes para el personaje guía
   const [mensajeRobot, setMensajeRobot] = useState("¡Vamos! Coloca la etiqueta correcta en su lugar 😄");
-  const mensajes = [
+  const mensajes = useMemo(() => [
     "¡Excelente elección! Sigue así 💪",
     "Cada etiqueta tiene su lugar específico 🧩",
     "Recuerda cerrar las etiquetas correctamente 🔐",
     "¡Estás mejorando con cada intento! 🚀"
-  ];
+  ], []);
 
   const totalQuestions = answers.length;
 
@@ -60,7 +60,7 @@ export default function DragDropGame({
         setMensajeRobot("¡Vamos! Coloca la etiqueta correcta en su lugar 😄");
       }
     }
-  }, [drops, calculateCorrect, totalQuestions, submitted]);
+  }, [drops, calculateCorrect, totalQuestions, submitted, mensajes]);
 
   useEffect(() => {
     if (submitted && correctCount === totalQuestions) {

@@ -1,7 +1,7 @@
 "use client";
 
 import Editor from "@monaco-editor/react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { ValidationFunction, ValidationResult } from "@/types/liveCoding";
 
 import PagFinal from "./pagFinalizar/pagFinal";
@@ -31,35 +31,7 @@ export default function LiveCodingActivity({
   const validationFnRef = useRef<ValidationFunction | null>(null);
   const [nextLevel, setNextLevel] = useState(false);
 
-  // Crear función de validación con tipo seguro
-  useEffect(() => {
-    try {
-      // Crear la función con tipo explícito
-      const fn: ValidationFunction = new Function(
-        "doc",
-        `return (${content.validation})(doc)`
-      ) as ValidationFunction;
-      
-      validationFnRef.current = fn;
-    } catch (error) {
-      console.error("Error creating validation function", error);
-      validationFnRef.current = null;
-      setValidationMessage("Error en la función de validación");
-    }
-    updateIframeContent(code);
-  }, [content.validation]);
-
-  const updateIframeContent = (html: string) => {
-    const iframe = iframeRef.current;
-    if (iframe && iframe.contentDocument) {
-      iframe.contentDocument.open();
-      iframe.contentDocument.write(html);
-      iframe.contentDocument.close();
-      validateContent();
-    }
-  };
-
-  const validateContent = () => {
+  const validateContent = useCallback(() => {
     const iframe = iframeRef.current;
     if (iframe && iframe.contentDocument && validationFnRef.current) {
       try {
@@ -76,7 +48,34 @@ export default function LiveCodingActivity({
         setValidationMessage("Error en validación: " + (error as Error).message);
       }
     }
-  };
+  }, [completed]);
+
+  const updateIframeContent = useCallback((html: string) => {
+    const iframe = iframeRef.current;
+    if (iframe && iframe.contentDocument) {
+      iframe.contentDocument.open();
+      iframe.contentDocument.write(html);
+      iframe.contentDocument.close();
+      validateContent();
+    }
+  }, [validateContent]);
+  // Crear función de validación con tipo seguro
+  useEffect(() => {
+    try {
+      // Crear la función con tipo explícito
+      const fn: ValidationFunction = new Function(
+        "doc",
+        `return (${content.validation})(doc)`
+      ) as ValidationFunction;
+      
+      validationFnRef.current = fn;
+    } catch (error) {
+      console.error("Error creating validation function", error);
+      validationFnRef.current = null;
+      setValidationMessage("Error en la función de validación");
+    }
+    updateIframeContent(code);
+  }, [content.validation, code, updateIframeContent]);
 
   const handleNextLevel = () => {
     setNextLevel(true);

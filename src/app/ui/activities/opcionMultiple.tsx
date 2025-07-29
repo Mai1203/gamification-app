@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, RotateCcw, Lightbulb, XCircle, CheckCircle } from "lucide-react";
 
@@ -35,11 +35,11 @@ export default function MultipleChoiceGame({
 
   const [mensajeRobot, setMensajeRobot] = useState("");
 
-  const robotMessages = [
+  const robotMessages =  useMemo(() => [
     "Esta es muy fácil, ¡piensa en los párrafos! 📝",
     "¿Dónde se muestra el contenido? 🤔",
     "¡Genial, estás cerca del final! 🚀",
-  ];
+  ], []);
 
   useEffect(() => {
     if (current === 0) {
@@ -53,7 +53,7 @@ export default function MultipleChoiceGame({
     setSubmitted(false);
     setShowHint(false);
     setShowCorrectAnswer(false);
-  }, [current]);
+  }, [current, robotMessages]);
 
   const handleVerify = () => {
     if (!selected) return;
