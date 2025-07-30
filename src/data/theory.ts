@@ -545,62 +545,101 @@ de contenido.</p>`,
       objective:
         "Aprender buenas prácticas básicas para hacer páginas web accesibles para todas las personas, incluyendo aquellas con discapacidades visuales, motrices o cognitivas.",
       intro: {
-        question: "🧩 ¿Qué es la accesibilidad web?",
+        question: "🧩 ¿Por qué la accesibilidad web es fundamental?",
         content:
-          "La accesibilidad web significa construir sitios que puedan ser usados por cualquier persona, sin importar sus capacidades físicas o tecnológicas. Esto incluye navegación con teclado, lectores de pantalla, y una estructura clara.",
-        code: `<img src="logo.png" alt="Logo de la empresa TuplaCore">
-
-<label for="nombre">Nombre:</label>
-<input type="text" id="nombre" name="nombre">
-
-<nav aria-label="Navegación principal">
+          "La accesibilidad no es solo un requisito legal, sino un compromiso ético. Más de mil millones de personas viven con algún tipo de discapacidad. Al diseñar sitios accesibles:\n - Permites que lectores de pantalla interpreten tu contenido\n - Facilitas la navegación con teclado - Mejoras la experiencia para personas con daltonismo o baja visión - Beneficias a usuarios en entornos limitados (poca luz, sin audio) ¡Una web accesible es mejor para todos!",
+        code: `<!-- Ejemplo de buenas prácticas -->
+<img src="logo.png" alt="TuplaCore: Plataforma de aprendizaje interactivo">
+    
+<form>
+  <label for="email">Correo electrónico:</label>
+  <input type="email" id="email" aria-describedby="email-help">
+  <small id="email-help">Nunca compartiremos tu email</small>
+</form>
+    
+<nav aria-label="Menú principal">
   <ul>
-    <li><a href="inicio.html">Inicio</a></li>
-    <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="/" aria-current="page">Inicio</a></li>
+    <li><a href="/cursos">Cursos</a></li>
   </ul>
 </nav>`,
       },
       tags: [
-        "alt",
+        "alt-text",
         "aria-label",
-        "aria-labelledby",
-        "role",
-        "semántica",
-        "accesibilidad",
+        "semantic-html",
+        "keyboard-navigation",
+        "contrast-ratio",
+        "skip-links",
+        "focus-indicators",
       ],
       tips: [
-        "✔️ Usa el atributo alt para describir imágenes.",
-        "✔️ Conecta <label> con <input> usando for e id.",
-        "✔️ Usa etiquetas semánticas como <header>, <main>, <footer>.",
-        "✔️ Mantén un orden lógico en los encabezados (<h1>, <h2>, <h3>...).",
-        "✔️ Usa atributos ARIA solo si es necesario.",
+        "✔️ Prioriza etiquetas semánticas: <nav> es más significativo que <div class='menu'>",
+        "✔️ Alt text descriptivo: 'Gráfico de crecimiento Q3 2024' en lugar de 'gráfico'",
+        "✔️ Verifica navegación con teclado (Tab/Shift+Tab)",
+        "✔️ Contraste mínimo 4.5:1 para texto (usa herramientas como contrastchecker.com)",
+        "✔️ Asegura compatibilidad con lectores de pantalla (NVDA, VoiceOver)",
       ],
       extra: {
-        title: "🛠️ ¿Qué es WAI-ARIA y cómo ayuda?",
+        title: "🛠️ Atributos ARIA: Potencia cuando el HTML semántico no basta",
         content:
-          'WAI-ARIA (Web Accessibility Initiative – Accessible Rich Internet Applications) es un conjunto de atributos que mejora la accesibilidad en contenido dinámico. Por ejemplo, aria-label o role="button" ayudan a lectores de pantalla.',
-        example: `<button aria-label="Abrir menú de navegación">
-  <img src="menu.svg" alt="">
-</button>`,
+          'Los atributos ARIA actúan como "traductores" para tecnologías asistivas: - `aria-label`: Proporciona etiqueta invisible cuando el elemento no tiene texto visible - `aria-labelledby`: Conecta elementos con texto descriptivo existente - `role`: Define la función de un elemento (navigation, banner, search) - `aria-live`: Para contenido dinámico que se actualiza (notificaciones en tiempo real) ¡Úsalos como refuerzo, nunca como reemplazo de HTML semántico!',
+        example: `<!-- Menú desplegable accesible -->
+<div class="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button id="menuBtn" aria-controls="menuList">
+    Opciones
+  </button>
+  <ul id="menuList" role="menu" aria-labelledby="menuBtn" hidden>
+    <li role="menuitem">Perfil</li>
+    <li role="menuitem">Configuración</li>
+  </ul>
+</div>`,
       },
       lifeCode: `<!DOCTYPE html>
-<html>
-  <head>
-    <title>Mi Primera Página</title>
-  </head>
-  <body>
-    <img src="logo.png" alt="Logo de la empresa TuplaCore">
-
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre">
-
-    <nav aria-label="Navegación principal">
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TuplaCore - Accesibilidad</title>
+  <style>
+    :focus { outline: 3px solid #0066cc; }
+    .skip-link { 
+      position: absolute; 
+      left: -999px;
+    }
+    .skip-link:focus { left: 10px; }
+  </style>
+</head>
+<body>
+  <!-- Salto de navegación para usuarios de teclado -->
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+    
+  <header role="banner">
+    <img src="logo.svg" alt="TuplaCore" width="200">
+    <nav aria-label="Navegación primaria">
       <ul>
-        <li><a href="inicio.html">Inicio</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#blog">Blog</a></li>
       </ul>
     </nav>
-  </body>
+  </header>
+
+  <main id="main" role="main">
+    <article>
+      <h1>Bienvenido a la Revolución Educativa</h1>
+      <img src="estudiantes.jpg" alt="Grupo diverso de estudiantes colaborando en un proyecto digital">
+        
+      <section aria-labelledby="formacion-titulo">
+        <h2 id="formacion-titulo">Programas de Formación</h2>
+        <p>Descripción de programas...</p>
+      </section>
+    </article>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 TuplaCore. Todos los derechos reservados.</p>
+  </footer>
+</body>
 </html>`,
     },
   },
