@@ -108,11 +108,11 @@ export default function LiveCodingActivity({
   if (nextLevel) return <PagFinal score={1} total={1} />;
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
       <div className="p-5 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
         <div className="flex justify-between items-center">
           <div>
-            <span className="bg-white text-blue-800 px-3 py-1 rounded-full text-sm font-bold">
+            <span className="bg-white dark:bg-gray-700 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-bold">
               {content.difficulty === "beginner" 
                 ? "Principiante" 
                 : content.difficulty === "advanced" 
@@ -129,22 +129,22 @@ export default function LiveCodingActivity({
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
         <div className="space-y-4">
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <h3 className="font-bold text-lg mb-2">🎯 Objetivo</h3>
-            <p className="mb-4">{content.description}</p>
-            <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+          <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+            <h3 className="font-bold text-lg mb-2 text-gray-600 dark:text-white">🎯 Objetivo</h3>
+            <p className="mb-4 text-gray-600 dark:text-gray-300">{content.description}</p>
+            <div className="bg-yellow-50 dark:bg-yellow-900 p-3 rounded-lg border border-yellow-200 dark:border-yellow-800">
               <div className="flex justify-between items-center mb-2">
-                <h4 className="font-bold">💡 Pistas</h4>
+                <h4 className="font-bold text-gray-600 dark:text-yellow-200">💡 Pistas</h4>
                 <button 
                   onClick={showHint}
                   disabled={currentHint >= content.hints.length}
-                  className="bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-3 py-1 rounded text-sm disabled:opacity-50"
+                  className="bg-yellow-100 hover:bg-yellow-200 dark:bg-yellow-800 dark:hover:bg-yellow-700 text-yellow-800 dark:text-yellow-100 px-3 py-1 rounded text-sm disabled:opacity-50"
                 >
                   Mostrar pista
                 </button>
               </div>
               {currentHint > 0 && (
-                <ul className="list-disc pl-5 space-y-1 text-yellow-700">
+                <ul className="list-disc pl-5 space-y-1 text-yellow-700 dark:text-yellow-200">
                   {content.hints.slice(0, currentHint).map((hint, index) => (
                     <li key={index}>{hint}</li>
                   ))}
@@ -153,7 +153,7 @@ export default function LiveCodingActivity({
             </div>
           </div>
 
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-hidden dark:border-gray-600">
             <Editor
               height="400px"
               defaultLanguage="html"
@@ -178,7 +178,7 @@ export default function LiveCodingActivity({
             </button>
             <button
               onClick={resetChallenge}
-              className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-3 rounded-lg"
+              className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 px-4 py-3 rounded-lg"
               title="Reiniciar desafío"
             >
               🔄
@@ -190,9 +190,9 @@ export default function LiveCodingActivity({
           <div className={`border-2 rounded-lg overflow-hidden transition-all ${
             isAdvanced ? "border-purple-500 shadow-lg" : 
             isValid ? "border-green-500" : "border-red-500"
-          }`}>
-            <div className="p-3 bg-gray-100 flex justify-between items-center">
-              <strong>Resultado</strong>
+          } dark:border-gray-600`}>
+            <div className="p-3 bg-gray-100 dark:bg-gray-700 flex justify-between items-center">
+              <strong className="dark:text-white">Resultado</strong>
               <div className={`px-3 py-1 rounded-full text-sm font-bold ${
                 isAdvanced ? "bg-purple-500 text-white" : 
                 isValid ? "bg-green-500 text-white" : "bg-red-500 text-white"
@@ -203,14 +203,17 @@ export default function LiveCodingActivity({
             <iframe
               ref={iframeRef}
               title="Resultado"
-              className="w-full h-[400px] bg-white"
+              className="w-full h-[400px] text-gray-600 bg-white dark:bg-gray-800 dark:text-white"
               sandbox="allow-same-origin"
             />
           </div>
 
           <div className={`p-4 rounded-lg ${
-            isAdvanced ? "bg-purple-100 text-purple-800 border border-purple-300" : 
-            isValid ? "bg-green-100 text-green-800 border border-green-300" : "bg-red-100 text-red-800 border border-red-300"
+            isAdvanced 
+              ? "bg-purple-100 text-purple-800 border border-purple-300 dark:bg-purple-900 dark:text-purple-200 dark:border-purple-700" 
+              : isValid 
+                ? "bg-green-100 text-green-800 border border-green-300 dark:bg-green-900 dark:text-green-200 dark:border-green-700" 
+                : "bg-red-100 text-red-800 border border-red-300 dark:bg-red-900 dark:text-red-200 dark:border-red-700"
           }`}>
             {validationMessage || (isValid ? "¡Código válido!" : "Ejecuta tu código para validar")}
           </div>
@@ -234,12 +237,12 @@ export default function LiveCodingActivity({
           )}
 
           {content.resources.length > 0 && (
-            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <h3 className="font-bold mb-3">📚 Recursos útiles</h3>
+            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+              <h3 className="font-bold mb-3 text-gray-600 dark:text-white">📚 Recursos útiles</h3>
               <div className="grid grid-cols-1 gap-3">
                 {content.resources.map((resource, index) => (
-                  <div key={index} className="bg-white p-3 rounded border border-gray-200">
-                    <div className="font-medium">{resource.label}</div>
+                  <div key={index} className="bg-white dark:bg-gray-800 p-3 rounded border border-gray-200 dark:border-gray-700">
+                    <div className="font-medium text-gray-600 dark:text-gray-300">{resource.label}</div>
                     <pre className="text-xs bg-gray-800 text-green-400 p-2 rounded mt-1 overflow-x-auto">
                       {resource.code}
                     </pre>
