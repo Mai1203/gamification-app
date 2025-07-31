@@ -35,7 +35,8 @@ Ejemplo:
   <title>Mi primera Página</title>
 </head>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -44,6 +45,8 @@ Ejemplo:
     <h1>¡Bienvenido!</h1>
   </body>
 </html>`,
+        css: ""
+      },
     },
     "2": {
       title: "📝 Nivel 2 – Encabezados y párrafos en HTML",
@@ -74,7 +77,8 @@ Ejemplo:
 que puede tener varias líneas 
 de contenido.</p>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -92,6 +96,8 @@ de contenido.</p>`,
     de contenido.</p>
   </body>
 </html>`,
+        css: ""
+      },
     },
     "3": {
       title: "🔗 Nivel 3 – Enlaces en HTML",
@@ -116,7 +122,8 @@ de contenido.</p>`,
         example: `<a href="contacto.html">Página de contacto</a> <!-- Enlace interno -->
 <a href="https://ejemplo.com" target="_blank">Visitar sitio externo</a>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -125,6 +132,8 @@ de contenido.</p>`,
     <a href="https://www.youtube.com/" target="_blank">Visitar YouTube en Sitio Externo</a>
   </body>
 </html>`,
+        css: ""
+      },
     },
     "4": {
       title: "🖼️ Nivel 4 – Imágenes en HTML",
@@ -148,7 +157,8 @@ de contenido.</p>`,
           "El atributo src indica la ruta de la imagen (puede ser local o externa). El atributo alt proporciona un texto alternativo visible si la imagen no se carga.",
         example: `<img src="imagenes/paisaje.jpg" alt="Paisaje natural">`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -158,6 +168,8 @@ de contenido.</p>`,
     <img src="https://i.blogs.es/c7b68e/chatgpt-studio-ghibli-portada/1200_800.jpeg" alt="Imagen de ChatGPT Studio GHIBLI" width="300">
   </body>
 </html>`,
+        css: ""
+      },
     },
     "5": {
       title: "📋 Nivel 5 – Listas en HTML",
@@ -202,7 +214,8 @@ de contenido.</p>`,
   <li>Visitar un sitio web</li>
 </ol>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -223,6 +236,8 @@ de contenido.</p>`,
     </ol>
   </body>
 </html>`,
+        css: ""
+      },
     },
     "6": {
       title: "📊 Nivel 6 – Tablas en HTML",
@@ -270,7 +285,8 @@ de contenido.</p>`,
     </tr>
   </table>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -294,6 +310,8 @@ de contenido.</p>`,
     </table>
   </body>
 </html>`,
+        css: ""
+      },
     },
     "7": {
       title: "📨 Nivel 7 – Formularios en HTML",
@@ -347,7 +365,8 @@ de contenido.</p>`,
   <button type="submit">Enviar</button>
 </form>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -371,6 +390,8 @@ de contenido.</p>`,
     </form>
   </body>
 </html>`,
+        css: ""
+      },
     },
     "8": {
       title: "🧠 Nivel 8 – Semántica en HTML5",
@@ -439,7 +460,8 @@ de contenido.</p>`,
   <p>Consejos para aprender HTML desde cero.</p>
 </article>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -472,6 +494,8 @@ de contenido.</p>`,
     </footer>
   </body>
 </html>`,
+        css: ""
+      },
     },
     "9": {
       title: "🎵 Nivel 9 – Multimedia en HTML (Audio y Video)",
@@ -518,7 +542,8 @@ de contenido.</p>`,
   Tu navegador no puede reproducir el video.
 </video>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
@@ -539,6 +564,8 @@ de contenido.</p>`,
     </video>
   </body>
 </html>`,
+        css: ""
+      },
     },
     "10": {
       title: "♿ Nivel 10 – Accesibilidad básica en HTML",
@@ -595,7 +622,8 @@ de contenido.</p>`,
   </ul>
 </div>`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -641,6 +669,8 @@ de contenido.</p>`,
   </footer>
 </body>
 </html>`,
+        css: ""
+      },
     },
   },
   css: {
@@ -691,15 +721,43 @@ de contenido.</p>`,
       background-color: yellow;
     }`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+        html: `<!DOCTYPE html>
 <html>
   <head>
     <title>Mi Primera Página</title>
   </head>
   <body>
     <h1>¡Bienvenido!</h1>
+    <div class="contenedor">
+      <p class="destacado">Texto de ejemplo</p>
+    </div>
   </body>
 </html>`,
+        css: `/* Estilos CSS */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.contenedor {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.destacado {
+  color: #3498db;
+  font-weight: bold;
+  border-left: 4px solid #3498db;
+  padding-left: 10px;
+}`
+      },
     },
     "2": {
       title: "🌈 Nivel 12 – Propiedades de color y fondo en CSS",
@@ -751,15 +809,47 @@ de contenido.</p>`,
       background-size: cover;
     }`,
       },
-      lifeCode: `<!DOCTYPE html>
+      lifeCode: {
+    html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Colores y Fondos</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Explorando Colores en CSS</h1>
+    <div class="contenedor">
+      <p class="destacado">Este texto tiene color y fondo personalizados.</p>
+    </div>
   </body>
 </html>`,
+    css: `/* Estilos CSS */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  background-image: url("textura.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.contenedor {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.destacado {
+  color: #e91e63;
+  font-weight: bold;
+  font-size: 18px;
+}`
+  },
     },
     "3": {
       title: "✍️ Nivel 13 – Tipografía y fuentes en CSS",
@@ -808,15 +898,49 @@ body {
   font-family: 'Roboto', sans-serif;
 }`,
       },
-      lifeCode: `<!DOCTYPE html>
-<html>
+      lifeCode: {
+    html: `<!DOCTYPE html>
+<html lang="es">
   <head>
-    <title>Mi Primera Página</title>
+    <meta charset="UTF-8">
+    <title>Tipografía en CSS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Explorando la Tipografía</h1>
+    <p class="intro">La tipografía hace tu contenido más legible y atractivo.</p>
+    <p class="destacado">¡Experimenta con tamaños, estilos y fuentes!</p>
   </body>
 </html>`,
+    css: `/* Estilos de Tipografía */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin: 0;
+  padding: 20px;
+  background-color: #fefefe;
+}
+
+h1 {
+  font-size: 32px;
+  text-align: center;
+  color: #34495e;
+}
+
+.intro {
+  font-style: italic;
+  text-align: justify;
+}
+
+.destacado {
+  font-weight: bold;
+  font-size: 18px;
+  color: #e67e22;
+}`
+  },
     },
     "4": {
       title: "📦 Nivel 14 – Box Model (Modelo de Caja)",
@@ -856,15 +980,49 @@ body {
   box-sizing: border-box;
 }`,
       },
-      lifeCode: `<!DOCTYPE html>
-<html>
+      lifeCode: {
+    html: `<!DOCTYPE html>
+<html lang="es">
   <head>
-    <title>Mi Primera Página</title>
+    <meta charset="UTF-8" />
+    <title>Modelo de Caja</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Modelo de Caja en CSS</h1>
+    <div class="caja">
+      <p>Esta es una caja con padding, borde y margen.</p>
+    </div>
   </body>
 </html>`,
+    css: `/* Estilos para el modelo de caja */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eef2f3;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.caja {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid #333;
+  margin: 30px auto;
+  background-color: #f5f5f5;
+  text-align: center;
+  border-radius: 8px;
+}`
+  },
     },
     "5": {
       title: "📍 Nivel 15 – Posicionamiento en CSS",
@@ -910,15 +1068,58 @@ body {
   right: 0;
 }`,
       },
-      lifeCode: `<!DOCTYPE html>
-<html>
+      lifeCode: {
+    html: `<!DOCTYPE html>
+<html lang="es">
   <head>
-    <title>Mi Primera Página</title>
+    <meta charset="UTF-8">
+    <title>Posicionamiento en CSS</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Ejemplo de Posicionamiento</h1>
+    <div class="contenedor">
+      <div class="caja">Caja posicionada</div>
+    </div>
   </body>
 </html>`,
+    css: `/* Estilos de posicionamiento */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #fafafa;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contenedor {
+  position: relative;
+  height: 300px;
+  background: #eee;
+  border: 2px dashed #ccc;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.caja {
+  position: absolute;
+  top: 50px;
+  left: 100px;
+  width: 200px;
+  height: 100px;
+  background: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 1px solid #333;
+}`
+  },
     },
     "6": {
       title: "📐 Nivel 16 – Propiedad display en CSS",
@@ -962,15 +1163,61 @@ body {
 <span>, <a>    → inline
 <img>          → inline-block`,
       },
-      lifeCode: `<!DOCTYPE html>
-<html>
+      lifeCode: {
+    html: `<!DOCTYPE html>
+<html lang="es">
   <head>
-    <title>Mi Primera Página</title>
+    <meta charset="UTF-8">
+    <title>Ejemplo de Display</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Demostración de display en CSS</h1>
+
+    <div class="caja block">Elemento Block</div>
+    <span class="caja inline">Elemento Inline</span>
+    <span class="caja inline">Otro Inline</span>
+    <span class="caja inline-block">Inline-Block 1</span>
+    <span class="caja inline-block">Inline-Block 2</span>
+
+    <p>Este es un párrafo <span class="caja inline">con un inline</span> embebido.</p>
   </body>
 </html>`,
+    css: `body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f5f5f5;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.caja {
+  background: lightblue;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #333;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+  background: lightgreen;
+}
+
+.inline-block {
+  display: inline-block;
+  background: lightcoral;
+  width: 120px;
+  text-align: center;
+}`
+  },
     },
     "7": {
       title: "📦 Nivel 17 – Flexbox básico en CSS",
@@ -1017,15 +1264,55 @@ body {
   gap: 20px;
 }`,
       },
-      lifeCode: `<!DOCTYPE html>
-<html>
+      lifeCode: {
+  html: `<!DOCTYPE html>
+<html lang="es">
   <head>
-    <title>Mi Primera Página</title>
+    <meta charset="UTF-8" />
+    <title>Ejemplo Flexbox Básico</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Distribución con Flexbox</h1>
+
+    <div class="contenedor">
+      <div class="item">Elemento 1</div>
+      <div class="item">Elemento 2</div>
+      <div class="item">Elemento 3</div>
+    </div>
   </body>
 </html>`,
+  css: `body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f5f5f5;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contenedor {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  background: #e0e0e0;
+  padding: 20px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.item {
+  background: #90caf9;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  text-align: center;
+}`
+  },
     },
     "8": {
       title: "🔲 Nivel 18 – Grid básico en CSS",
@@ -1066,15 +1353,53 @@ body {
   align-items: center;
 }`,
       },
-      lifeCode: `<!DOCTYPE html>
-<html>
+      lifeCode: {
+  html: `<!DOCTYPE html>
+<html lang="es">
   <head>
-    <title>Mi Primera Página</title>
+    <meta charset="UTF-8" />
+    <title>Ejemplo de CSS Grid</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Demostración de CSS Grid</h1>
+
+    <div class="grid-container">
+      <div class="item">Elemento 1</div>
+      <div class="item">Elemento 2</div>
+      <div class="item">Elemento 3</div>
+      <div class="item">Elemento 4</div>
+      <div class="item">Elemento 5</div>
+      <div class="item">Elemento 6</div>
+    </div>
   </body>
 </html>`,
+  css: `body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f9f9f9;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.item {
+  background-color: #add8e6;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #333;
+  font-weight: bold;
+}`
+  },
     },
     "9": {
       title: "🎞️ Nivel 19 – Transiciones en CSS",
@@ -1111,15 +1436,45 @@ body {
   transform: rotate(5deg);
 }`,
       },
-      lifeCode: `<!DOCTYPE html>
-<html>
+      lifeCode: {
+    html: `<!DOCTYPE html>
+<html lang="es">
   <head>
-    <title>Mi Primera Página</title>
+    <meta charset="UTF-8" />
+    <title>Botón con Transición</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Botón Animado</h1>
+    <button class="boton">Pasa el mouse</button>
   </body>
 </html>`,
+    css: `body {
+  font-family: Arial, sans-serif;
+  padding: 40px;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.boton {
+  background-color: royalblue;
+  color: white;
+  padding: 15px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+  background-color: darkblue;
+}`
+  },
     },
     "10": {
       title: "📱 Nivel 20 – Responsive Design con Media Queries",
@@ -1172,15 +1527,77 @@ body {
     flex-direction: row;
   }`,
       },
-      lifeCode: `<!DOCTYPE html>
-<html>
+      lifeCode: {
+    html: `<!DOCTYPE html>
+<html lang="es">
   <head>
-    <title>Mi Primera Página</title>
+    <meta charset="UTF-8" />
+    <title>Diseño Responsive con Media Queries</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>¡Bienvenido!</h1>
+    <h1>Ejemplo Responsive</h1>
+    <p class="mensaje">Ajusta el tamaño de la ventana para ver los cambios.</p>
+    <div class="contenedor">
+      <div class="caja">Caja 1</div>
+      <div class="caja">Caja 2</div>
+      <div class="caja">Caja 3</div>
+    </div>
   </body>
 </html>`,
+    css: `body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #ffffff;
+  color: #333;
+  text-align: center;
+}
+
+.contenedor {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.caja {
+  background-color: #a0c4ff;
+  padding: 30px;
+  border: 2px solid #333;
+  flex: 1 1 200px;
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  body {
+    background-color: #ffe0e0;
+  }
+  .mensaje::after {
+    content: " - Vista móvil";
+  }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    background-color: #fff5ba;
+  }
+  .mensaje::after {
+    content: " - Vista tablet";
+  }
+}
+
+/* Escritorios */
+@media (min-width: 769px) {
+  body {
+    background-color: #e0ffe0;
+  }
+  .mensaje::after {
+    content: " - Vista escritorio";
+  }
+}`
+  },
     },
   },
 };

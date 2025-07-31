@@ -8,9 +8,11 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { theoryData } from "@/data/theory";
 import EditorLive from "./EditorLive";
 
+type ValidModule = "html" | "css";
+
 export default function NivelTeoria() {
   const searchParams = useSearchParams();
-  const modKey = searchParams.get("module") ?? "html";
+  const modKey = (searchParams.get("module") as ValidModule) ?? "html";
   const levelParam = searchParams.get("level") ?? "1";
 
   const moduleTheory = theoryData[modKey as keyof typeof theoryData];
@@ -140,7 +142,20 @@ export default function NivelTeoria() {
             <h3 className="text-xl font-bold flex items-center gap-2">
               <span className="text-purple-500">🧪</span> ¡Prueba el código!
             </h3>
-            <EditorLive key={levelParam} defaultCode={levelData.lifeCode} />
+            {modKey === "css" ? (
+              <EditorLive 
+                key={levelParam}
+                defaultHtml={levelData.lifeCode.html}
+                defaultCss={levelData.lifeCode.css}
+                mode={modKey}
+              />
+            ) : (
+              <EditorLive 
+                key={levelParam}
+                defaultHtml={levelData.lifeCode.html}
+                mode={modKey}
+              />
+            )}
           </div>
 
           <div className="text-center mt-10">

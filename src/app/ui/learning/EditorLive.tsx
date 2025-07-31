@@ -7,19 +7,36 @@ import { RotateCw, Eye, CodeIcon, Copy, Check, Maximize, Minimize } from 'lucide
 import { motion, AnimatePresence } from 'framer-motion';
 
 type Props = {
-  defaultCode: string;
+  defaultHtml: string;
+  defaultCss?: string;
+  mode?: 'html' | 'css'; // Nuevo prop para identificar el módulo
 };
 
 type IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor;
 
-export default function EditorLive({ defaultCode }: Props) {
-  const [code, setCode] = useState(defaultCode);
+export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html' }: Props) {
+  const [htmlCode, setHtmlCode] = useState(defaultHtml);
+  const [cssCode, setCssCode] = useState(defaultCss);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [viewMode, setViewMode] = useState<'split' | 'code' | 'preview'>('split');
+  const [activeTab, setActiveTab] = useState<'html' | 'css'>('html'); // Nuevo estado para pestañas
   const editorRef = useRef<IStandaloneCodeEditor | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const previewRef = useRef<HTMLIFrameElement>(null);
+
+  // Combinar HTML + CSS para la vista previa
+  const fullCode = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>${cssCode}</style>
+    </head>
+    <body>
+      ${htmlCode}
+    </body>
+    </html>
+  `;
 
   // Toggle fullscreen mode
   const toggleFullscreen = () => {
@@ -37,22 +54,22 @@ export default function EditorLive({ defaultCode }: Props) {
       const isCurrentlyFullscreen = !!document.fullscreenElement;
       setIsFullscreen(isCurrentlyFullscreen);
       
-      // Forzar actualización del iframe
       setTimeout(() => {
         if (previewRef.current) {
-          previewRef.current.srcdoc = code;
+          previewRef.current.srcdoc = fullCode;
         }
       }, 100);
     };
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  }, [code]);
+  }, [fullCode]);
 
   // Copy code to clipboard
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(code);
+      const codeToCopy = mode === 'css' ? cssCode : htmlCode;
+      await navigator.clipboard.writeText(codeToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -62,9 +79,10 @@ export default function EditorLive({ defaultCode }: Props) {
 
   // Reset to default code
   const resetCode = () => {
-    setCode(defaultCode);
+    setHtmlCode(defaultHtml);
+    setCssCode(defaultCss || '');
     if (editorRef.current) {
-      editorRef.current.setValue(defaultCode);
+      editorRef.current.setValue(mode === 'css' ? defaultCss : defaultHtml);
     }
   };
 
@@ -73,6 +91,7 @@ export default function EditorLive({ defaultCode }: Props) {
     editorRef.current = editor;
   };
 
+  // Render principal
   return (
     <motion.div
       ref={containerRef}
@@ -82,7 +101,7 @@ export default function EditorLive({ defaultCode }: Props) {
         isFullscreen ? 'fixed inset-0 z-50 h-screen' : 'relative'
       }`}
     >
-      {/* Header with controls */}
+      {/* Header con controles */}
       <div className="flex justify-between items-center bg-gray-50 dark:bg-zinc-800 px-4 py-3 border-b border-gray-200 dark:border-zinc-700">
         <div className="flex items-center space-x-2">
           <div className="flex space-x-1">
@@ -91,12 +110,12 @@ export default function EditorLive({ defaultCode }: Props) {
             <div className="w-3 h-3 rounded-full bg-green-400"></div>
           </div>
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300 ml-2">
-            editor.html
+            {mode === 'css' ? 'styles.css' : 'index.html'}
           </span>
         </div>
         
         <div className="flex space-x-2">
-          {/* View mode toggle */}
+          {/* Selector de vista */}
           <div className="hidden md:flex items-center bg-gray-100 dark:bg-zinc-700 rounded-lg p-1">
             <button
               onClick={() => setViewMode('code')}
@@ -136,7 +155,7 @@ export default function EditorLive({ defaultCode }: Props) {
             </button>
           </div>
           
-          {/* Action buttons */}
+          {/* Botones de acción */}
           <button
             onClick={resetCode}
             className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
@@ -163,16 +182,54 @@ export default function EditorLive({ defaultCode }: Props) {
         </div>
       </div>
 
-      {/* Editor and Preview */}
+      {/* Editor y Vista Previa */}
       <div className={`flex flex-col md:flex-row ${isFullscreen ? 'h-[calc(100vh-7.5rem)]' : ''}`}>
         {(viewMode === 'split' || viewMode === 'code') && (
           <div className={`w-full ${viewMode === 'split' ? 'md:w-1/2' : ''} ${isFullscreen ? 'h-full' : ''}`}>
+            {/* Pestañas solo en modo CSS */}
+            {mode === 'css' && (
+              <div className="flex bg-gray-100 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700">
+                <button
+                  className={`px-4 py-2 text-sm font-medium ${
+                    activeTab === 'html'
+                      ? 'text-indigo-600 border-b-2 border-indigo-500 bg-white dark:bg-zinc-700'
+                      : 'text-gray-500 hover:text-gray-700 dark:text-gray-400'
+                  }`}
+                  onClick={() => setActiveTab('html')}
+                >
+                  HTML
+                </button>
+                <button
+                  className={`px-4 py-2 text-sm font-medium ${
+                    activeTab === 'css'
+                      ? 'text-indigo-600 border-b-2 border-indigo-500 bg-white dark:bg-zinc-700'
+                      : 'text-gray-500 hover:text-gray-700 dark:text-gray-400'
+                  }`}
+                  onClick={() => setActiveTab('css')}
+                >
+                  CSS
+                </button>
+              </div>
+            )}
+
+            {/* Editor principal */}
             <Editor
+              key={mode === 'css' ? activeTab : 'html'}
               height={isFullscreen ? "100%" : "300px"}
-              defaultLanguage="html"
-              value={code}
+              defaultLanguage={mode === 'css' && activeTab === 'css' ? 'css' : 'html'}
+              value={mode === 'css' ? (activeTab === 'html' ? htmlCode : cssCode) : htmlCode}
               theme="vs-dark"
-              onChange={(value) => setCode(value || "")}
+              onChange={(value) => {
+                if (mode === 'css') {
+                  if (activeTab === 'html') {
+                    setHtmlCode(value || "");
+                  } else {
+                    setCssCode(value || "");
+                  }
+                } else {
+                  setHtmlCode(value || "");
+                }
+              }}
               onMount={handleEditorDidMount}
               options={{
                 minimap: { enabled: false },
@@ -195,12 +252,12 @@ export default function EditorLive({ defaultCode }: Props) {
           >
             <div className="p-2 text-xs text-gray-500 dark:text-gray-400 flex justify-between">
               <span>Vista previa</span>
-              <span>HTML</span>
+              <span>{mode === 'css' ? 'HTML + CSS' : 'HTML'}</span>
             </div>
             <iframe
               ref={previewRef}
               className={`w-full ${isFullscreen ? 'h-[calc(100%-2rem)]' : 'h-64 md:h-[300px]'} bg-white`}
-              srcDoc={code}
+              srcDoc={fullCode}
               title="Resultado"
               sandbox="allow-same-origin allow-scripts"
             />
@@ -208,17 +265,19 @@ export default function EditorLive({ defaultCode }: Props) {
         )}
       </div>
 
-      {/* Status bar */}
+      {/* Barra de estado */}
       <div className="bg-gray-50 dark:bg-zinc-800 px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-zinc-700 flex justify-between">
         <div>
-          HTML <span className="hidden md:inline">| Live Preview</span>
+          {mode === 'css' ? 'HTML + CSS' : 'HTML'} <span className="hidden md:inline">| Live Preview</span>
         </div>
         <div>
-          {code.length} caracteres
+          {mode === 'css' 
+            ? `${htmlCode.length + cssCode.length} caracteres` 
+            : `${htmlCode.length} caracteres`}
         </div>
       </div>
       
-      {/* Floating action buttons for mobile */}
+      {/* Botones flotantes para móviles */}
       <div className="md:hidden fixed bottom-4 right-4 flex flex-col space-y-2 z-10">
         <AnimatePresence>
           {copied && (
@@ -234,6 +293,16 @@ export default function EditorLive({ defaultCode }: Props) {
         </AnimatePresence>
         
         <div className="flex space-x-2">
+          {mode === 'css' && (
+            <button
+              onClick={() => setActiveTab(activeTab === 'html' ? 'css' : 'html')}
+              className="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors"
+              title={`Cambiar a ${activeTab === 'html' ? 'CSS' : 'HTML'}`}
+            >
+              {activeTab === 'html' ? 'CSS' : 'HTML'}
+            </button>
+          )}
+          
           <button
             onClick={() => setViewMode(viewMode === 'split' ? 'preview' : viewMode === 'preview' ? 'code' : 'split')}
             className="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors"
