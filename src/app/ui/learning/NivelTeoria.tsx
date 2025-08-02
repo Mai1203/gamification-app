@@ -129,7 +129,7 @@ export default function NivelTeoria() {
             <h3 className="text-xl font-bold flex items-center gap-2">
               {levelData.extra.title}
             </h3>
-            <p className="text-base">{levelData.extra.content}</p>
+            <p className="text-base whitespace-pre-line">{levelData.extra.content}</p>
 
             <div className="overflow-x-auto">
               <pre className="bg-gray-50 dark:bg-zinc-800 p-4 rounded-lg text-sm border border-gray-200 dark:border-zinc-700 min-w-min">

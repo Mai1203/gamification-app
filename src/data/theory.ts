@@ -249,40 +249,62 @@ de contenido.</p>`,
           "Las tablas permiten mostrar datos estructurados en filas y columnas. Se construyen con varias etiquetas: <table>, <tr>, <td> y <th>.",
         code: 
 `<table>
-  <tr>
-    <th>Nombre</th>
-    <th>Edad</th>
-  </tr>
-  <tr>
-    <td>Ana</td>
-    <td>22</td>
-  </tr>
-  <tr>
-    <td>Luis</td>
-    <td>30</td>
-  </tr>
+  <-- Cabecera -->
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+    </tr>
+  </thead>
+
+  <-- Cuerpo -->
+  <tbody>
+    <tr>
+      <td>Ana</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>Luis</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+  <-- Pie de página -->
+  <tfoot>
+    <tr>
+      <td colspan="2">Sin datos adicionales</td>
+    </tr>
+  </tfoot>
 </table>`,
       },
-      tags: ["<table>", "<tr>", "<td>", "<th>"],
+      tags: ["<table>", "<thead>", "<tbody>", "<tfoot>", "<tr>", "<td>", "<th>" ],
       tips: [
-        "✔️ <th> se usa para encabezados de columna (generalmente la primera fila).",
+        "✔️ <thead> se usa para encabezados de columna (generalmente la primera fila).",
+        "✔️ <tbody> se usa para contener los datos de cada fila.",
         "✔️ <td> contiene los datos de cada celda.",
         "✔️ <tr> representa una fila de la tabla.",
       ],
       extra: {
         title: "🧩 ¿Cómo organizar la tabla?",
         content:
-          "Primero defines la tabla con <table>. Luego, cada fila se escribe con <tr> y dentro de cada fila colocas celdas de datos <td> o encabezados <th>.",
+          `Primero defines la tabla con <table>. Luego, cada fila se escribe con <tr> y dentro de cada fila colocas celdas de datos <td> o encabezados <th>.
+          También se puede unir dos celdas con el atributo colspan = 'number'.`,
         example: 
   `<table>
-    <tr>
-      <th>Producto</th>
-      <th>Precio</th>
-    </tr>
-    <tr>
-      <td>Camisa</td>
-      <td>$25</td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Camisa</td>
+        <td>$25</td>
+      </tr>
+      <tr>
+        <td colspan="2">Sin datos adicionales</td>
+      </tr>
+    </tbody>
   </table>`,
       },
       lifeCode: {
@@ -292,21 +314,31 @@ de contenido.</p>`,
     <title>Mi Primera Página</title>
   </head>
   <body>
+    <h2>Tabla de Edades</h2>
+    
     <table border="1">
-      <h2>Tabla de Edades</h2>
-      
-      <tr>
-        <th>Nombre</th>
-        <th>Edad</th>
-      </tr>
-      <tr>
-        <td>Ana</td>
-        <td>22</td>
-      </tr>
-      <tr>
-        <td>Luis</td>
-        <td>30</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Ana</td>
+          <td>22</td>
+        </tr>
+        <tr>
+          <td>Luis</td>
+          <td>30</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">Sin datos adicionales</td>
+        </tr>
+      </tfoot>
     </table>
   </body>
 </html>`,
