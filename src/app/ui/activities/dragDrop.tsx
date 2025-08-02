@@ -110,7 +110,7 @@ export default function DragDropGame({
       </div>
 
       {/* Panel del juego */}
-      <div className="w-full max-w-3xl p-4 lg:p-6 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 rounded-3xl shadow-xl space-y-4 lg:space-y-6 border border-indigo-200 dark:border-zinc-600">
+      <div className="w-full max-w-3xl p-4 lg:p-6 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-indigo-800 dark:via-purple-800 dark:to-pink-800 rounded-3xl shadow-xl space-y-4 lg:space-y-6 border border-indigo-200 dark:border-zinc-600">
         <motion.h2
           className="text-xl lg:text-2xl font-bold text-center text-zinc-800 dark:text-white flex items-center justify-center gap-2"
           initial={{ opacity: 0, y: -10 }}
