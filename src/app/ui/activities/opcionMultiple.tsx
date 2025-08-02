@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, RotateCcw, Lightbulb, XCircle, CheckCircle } from "lucide-react";
 
@@ -12,6 +12,7 @@ type QuizItem = {
   options: string[];
   correctAnswer: string;
   hint?: string;
+  message: string;
 };
 
 type MultipleChoiceGameProps = {
@@ -35,25 +36,15 @@ export default function MultipleChoiceGame({
 
   const [mensajeRobot, setMensajeRobot] = useState("");
 
-  const robotMessages =  useMemo(() => [
-    "Esta es muy fácil, ¡piensa en los párrafos! 📝",
-    "¿Dónde se muestra el contenido? 🤔",
-    "¡Genial, estás cerca del final! 🚀",
-  ], []);
-
   useEffect(() => {
-    if (current === 0) {
-      setMensajeRobot("¡Vamos! El título es importante 😎");
-    } else {
-      setMensajeRobot(robotMessages[current - 1] ?? "¡Vamos con esta! 😄");
-    }
+    setMensajeRobot(currentQuiz.message);
     
     // Resetear estados al cambiar de pregunta
     setSelected(null);
     setSubmitted(false);
     setShowHint(false);
     setShowCorrectAnswer(false);
-  }, [current, robotMessages]);
+  }, [current, currentQuiz]);
 
   const handleVerify = () => {
     if (!selected) return;
