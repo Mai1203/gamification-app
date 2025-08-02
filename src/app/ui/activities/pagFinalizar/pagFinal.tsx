@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Trophy } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -5,6 +6,7 @@ import { useUser } from "@clerk/nextjs"
 
 import { updateProgress } from "@/app/services/progressService";
 import { AnimationConfety } from "../animation/animationConfety"
+import CompletionCard from "./completionCard";
 
 export default function PagFinal({ score, total }: { score: number; total: number }) {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -12,11 +14,20 @@ export default function PagFinal({ score, total }: { score: number; total: numbe
   const searchParams = useSearchParams();
   const modKey = searchParams.get("module") ?? "html";
   const levelParam = searchParams.get("level") ?? "1";
+  const [final, setFinal] = useState(false);
+  const maxLevel = 10;
   
+  // Usa useEffect para actualizar el estado basado en parámetros
+  useEffect(() => {
+    if (modKey === "css" && levelParam === maxLevel.toString()) {
+      setFinal(true);
+    } else {
+      setFinal(false);
+    }
+  }, [modKey, levelParam]); // Dependencias del efecto
 
   const handleClick = async () => {
     const nextLevel = Number(levelParam) + 1;
-    const maxLevel = 10;
 
     if (!isLoaded || !isSignedIn || !user?.id) return;
 
@@ -28,6 +39,10 @@ export default function PagFinal({ score, total }: { score: number; total: numbe
       router.push(`/learning?module=${modKey}&level=${nextLevel}`);
     }
   };
+
+  if (final) {
+    return <CompletionCard />;
+  }
 
   return (
         <>

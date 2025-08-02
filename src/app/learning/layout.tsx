@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useModulesWithProgress } from '@/app/hooks/useModulesWithProgress';
 import { Header } from '@/app/ui/home/Header';
 import Navbar from '@/app/ui/learning/navbar';
-import Loading from '@/app/ui/loading';
+import AnimationLoaded from '@/app/ui/dashboard/animationLoaded';
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams(); 
@@ -45,7 +45,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="relative z-10">
         <Header />
         <main className="container mx-auto py-8">
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<AnimationLoaded />}>
             <LayoutContent>{children}</LayoutContent>
           </Suspense>
         </main>

@@ -6,6 +6,7 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
+  ClerkLoaded,
 } from "@clerk/nextjs";
 import { Code2, UserPlus, LogIn, Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -39,25 +40,27 @@ export const Header = () => {
           <div className="hidden md:flex items-center gap-4">
             <ThemeToggle />
 
-            <SignedOut>
-              <SignInButton forceRedirectUrl="/dashboard" mode="modal">
-                <button className="w-full flex items-center gap-2 px-4 py-2 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-zinc-800 rounded-lg transition-all duration-300 cursor-pointer">
-                  <LogIn className="h-5 w-5" />
-                  Iniciar Sesión
-                </button>
-              </SignInButton>
+            <ClerkLoaded>
+              <SignedOut>
+                <SignInButton forceRedirectUrl="/dashboard" mode="modal">
+                  <button className="w-full flex items-center gap-2 px-4 py-2 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-zinc-800 rounded-lg transition-all duration-300 cursor-pointer">
+                    <LogIn className="h-5 w-5" />
+                    Iniciar Sesión
+                  </button>
+                </SignInButton>
 
-              <SignUpButton forceRedirectUrl="/dashboard" mode="modal">
-                <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:bg-indigo-800 dark:from-indigo-500 dark:to-purple-500 dark:hover:bg-indigo-700 rounded-lg transition-all duration-300 cursor-pointer">
-                  <UserPlus className="h-5 w-5" />
-                  Registrarse
-                </button>
-              </SignUpButton>
-            </SignedOut>
+                <SignUpButton forceRedirectUrl="/dashboard" mode="modal">
+                  <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:bg-indigo-800 dark:from-indigo-500 dark:to-purple-500 dark:hover:bg-indigo-700 rounded-lg transition-all duration-300 cursor-pointer">
+                    <UserPlus className="h-5 w-5" />
+                    Registrarse
+                  </button>
+                </SignUpButton>
+              </SignedOut>
 
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </ClerkLoaded>
           </div>
         </div>
 
@@ -66,25 +69,27 @@ export const Header = () => {
           <div className="md:hidden mt-4 flex flex-col gap-4 items-start">
             <ThemeToggle />
 
-            <SignedOut>
-              <SignInButton forceRedirectUrl="/dashboard" mode="modal">
-                <button className="w-full flex items-center gap-2 px-4 py-2 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-zinc-800 rounded-lg transition-all duration-300 cursor-pointer">
-                  <LogIn className="h-4 w-4" />
-                  Iniciar Sesión
-                </button>
-              </SignInButton>
+            <ClerkLoaded>
+              <SignedOut>
+                <SignInButton forceRedirectUrl="/dashboard" mode="modal">
+                  <button className="w-full flex items-center gap-2 px-4 py-2 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-zinc-800 rounded-lg transition-all duration-300 cursor-pointer">
+                    <LogIn className="h-4 w-4" />
+                    Iniciar Sesión
+                  </button>
+                </SignInButton>
 
-              <SignUpButton forceRedirectUrl="/dashboard" mode="modal">
-                <button className="w-full flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:bg-indigo-800 dark:from-indigo-500 dark:to-purple-500 dark:hover:bg-indigo-700 rounded-lg transition-all duration-300 cursor-pointer">
-                  <UserPlus className="h-4 w-4" />
-                  Registrarse
-                </button>
-              </SignUpButton>
-            </SignedOut>
+                <SignUpButton forceRedirectUrl="/dashboard" mode="modal">
+                  <button className="w-full flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:bg-indigo-800 dark:from-indigo-500 dark:to-purple-500 dark:hover:bg-indigo-700 rounded-lg transition-all duration-300 cursor-pointer">
+                    <UserPlus className="h-4 w-4" />
+                    Registrarse
+                  </button>
+                </SignUpButton>
+              </SignedOut>
 
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </ClerkLoaded>
           </div>
         )}
       </div>

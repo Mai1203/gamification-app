@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ActivityRenderer from "@/app/ui/activities/ActivityRenderer";
 import { getActivityData } from "@/app/services/activitiesService";
 import { ActivityProps } from "@/types/activities";
+import AnimationLoaded  from "@/app/ui/dashboard/animationLoaded";
 
 export default function ActividadContent() {
   const searchParams = useSearchParams();
@@ -30,7 +31,7 @@ export default function ActividadContent() {
     fetchData();
   }, [modKey, level]);
 
-  if (isLoading) return <p className="text-center mt-10">Cargando actividad...</p>;
+  if (isLoading) return <AnimationLoaded />;
   if (error) return <p className="text-center text-red-500 mt-10">{error}</p>;
   if (!data) return <p className="text-center mt-10">No se encontró la actividad</p>;
 

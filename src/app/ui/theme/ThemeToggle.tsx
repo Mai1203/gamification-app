@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 
 export const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const dark = localStorage.theme === 'dark' ||
+    const dark =
+      localStorage.theme === 'dark' ||
       (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    if (dark) document.documentElement.classList.add('dark');
-    else document.documentElement.classList.remove('dark');
+
+    document.documentElement.classList.toggle('dark', dark);
     setIsDark(dark);
   }, []);
 
@@ -20,6 +21,9 @@ export const ThemeToggle = () => {
     localStorage.theme = isNowDark ? 'dark' : 'light';
     setIsDark(isNowDark);
   };
+
+  // Evita render hasta que se determine el tema
+  if (isDark === null) return null;
 
   return (
     <button
@@ -32,7 +36,6 @@ export const ThemeToggle = () => {
       ) : (
         <Moon className="w-5 h-5 text-gray-800 dark:text-gray-200" />
       )}
-      {/* Solo visible en mobile */}
       <span className="text-sm text-gray-700 dark:text-gray-300 md:hidden">
         {isDark ? 'Modo claro' : 'Modo oscuro'}
       </span>

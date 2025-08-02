@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import ActividadContent from "./ActividadContent";
+import AnimationLoaded from "@/app/ui/dashboard/animationLoaded";
 
 export default function ActividadPage() {
   return (
-    <Suspense fallback={<p className="text-center mt-10">Cargando...</p>}>
+    <Suspense fallback={<AnimationLoaded />}>
       <ActividadContent />
     </Suspense>
   );
