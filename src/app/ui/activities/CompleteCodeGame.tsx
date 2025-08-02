@@ -8,9 +8,10 @@ import PagFinalizar from "./pagFinalizar/pagFinal"
 type CodeFillProps = {
   content: string;
   answers: string[];
+  description: string;
 };
 
-export default function CodeFillGame({ content, answers }: CodeFillProps) {
+export default function CodeFillGame({ content, answers, description }: CodeFillProps) {
   const gameRef = useRef<HTMLDivElement>(null);
   const [score, setScore] = useState(0);
   const [total, setTotal] = useState(0);
@@ -88,7 +89,7 @@ export default function CodeFillGame({ content, answers }: CodeFillProps) {
         bubble.strokeRoundedRect(160, 450, 320, 80, 16);
 
         // TEXTO DE LA BURBUJA CON POSICIÓN AJUSTADA
-        this.add.text(190, 470, "¡Completa los espacios con las etiquetas correctas!", {
+        this.add.text(190, 470, description, {
           font: "16px 'Inter', sans-serif",
           color: "#e2e8f0",
           wordWrap: { width: 280 },
@@ -365,7 +366,7 @@ export default function CodeFillGame({ content, answers }: CodeFillProps) {
 
     const game = new Phaser.Game(config);
     return () => game.destroy(true);
-  }, [content, answers]);
+  }, [content, answers, description]);
 
   if(gameComplete){
     return <PagFinalizar score={score} total={total} />

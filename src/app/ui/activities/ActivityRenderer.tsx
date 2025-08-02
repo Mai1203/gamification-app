@@ -21,6 +21,7 @@ export default function ActivityRenderer(props: ActivityProps) {
         <CodeFillGame
           content={fillContent.htmlCode}
           answers={fillContent.answers}
+          description={props.description}
         />
       );
 

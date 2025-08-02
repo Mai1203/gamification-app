@@ -38,6 +38,7 @@ export type LiveCodeContent = {
 
 export type ActivityProps = {
   type: "fill-in-the-blanks" | "multiple-choice" | "drag-and-drop" | "find-error" | "live-coding";
+  description: string;
   content:
     | CodeFillContent
     | MultipleChoiceContent
