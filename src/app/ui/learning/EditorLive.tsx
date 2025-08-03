@@ -308,9 +308,15 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
             className="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors"
             title="Cambiar vista"
           >
-            {viewMode === 'code' ? <Eye size={20} /> : 
-             viewMode === 'preview' ? <CodeIcon size={20} /> : 
-             <div className="flex"><CodeIcon size={14} className="mr-0.5"/>|<Eye size={14} className="ml-0.5"/></div>}
+            {viewMode === 'code' ? (
+              <div className="flex items-center justify-center">
+                <CodeIcon size={14} className="mr-0.5"/>|<Eye size={14} className="ml-0.5"/>
+              </div>
+            ) : viewMode === 'preview' ? (
+              <CodeIcon size={20} />
+            ) : ( 
+              <Eye size={20} />
+            )}
           </button>
           
           <button
