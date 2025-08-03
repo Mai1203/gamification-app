@@ -707,7 +707,7 @@ de contenido.</p>`,
   },
   css: {
     "1": {
-      title: "🎨 Nivel 11 – Selectores básicos en CSS",
+      title: "🎨 Nivel 1 – Selectores básicos en CSS",
       objective:
         "Aprender a seleccionar elementos HTML desde CSS para aplicar estilos, utilizando selectores básicos como etiquetas, clases e identificadores.",
       intro: {
@@ -792,7 +792,7 @@ body {
       },
     },
     "2": {
-      title: "🌈 Nivel 12 – Propiedades de color y fondo en CSS",
+      title: "🌈 Nivel 2 – Propiedades de color y fondo en CSS",
       objective:
         "Aprender a cambiar el color del texto, el fondo y aplicar estilos visuales utilizando las propiedades color, background-color y background-image.",
       intro: {
@@ -884,7 +884,7 @@ body {
   },
     },
     "3": {
-      title: "✍️ Nivel 13 – Tipografía y fuentes en CSS",
+      title: "✍️ Nivel 3 – Tipografía y fuentes en CSS",
       objective:
         "Aprender a cambiar el tamaño, estilo, grosor, alineación y tipo de fuente del texto en una página web utilizando CSS.",
       intro: {
@@ -975,7 +975,7 @@ h1 {
   },
     },
     "4": {
-      title: "📦 Nivel 14 – Box Model (Modelo de Caja)",
+      title: "📦 Nivel 4 – Box Model (Modelo de Caja)",
       objective:
         "Comprender cómo está estructurado visualmente cada elemento HTML utilizando el modelo de caja de CSS, y aprender a modificar márgenes, bordes, rellenos y contenidos.",
       intro: {
@@ -1057,7 +1057,7 @@ h1 {
   },
     },
     "5": {
-      title: "📍 Nivel 15 – Posicionamiento en CSS",
+      title: "📍 Nivel 5 – Posicionamiento en CSS",
       objective:
         "Aprender a controlar la posición de los elementos en la página usando las propiedades position, top, left, right, bottom y comprender la diferencia entre los tipos de posicionamiento.",
       intro: {
@@ -1154,7 +1154,7 @@ h1 {
   },
     },
     "6": {
-      title: "📐 Nivel 16 – Propiedad display en CSS",
+      title: "📐 Nivel 6 – Propiedad display en CSS",
       objective:
         "Comprender cómo se comportan visualmente los elementos HTML (como bloques o en línea), y aprender a modificar ese comportamiento usando la propiedad display.",
       intro: {
@@ -1252,7 +1252,7 @@ h1 {
   },
     },
     "7": {
-      title: "📦 Nivel 17 – Flexbox básico en CSS",
+      title: "📦 Nivel 7 – Flexbox básico en CSS",
       objective:
         "Aprender a utilizar Flexbox para alinear y distribuir elementos dentro de un contenedor, de forma horizontal o vertical, con propiedades como display: flex, justify-content y align-items.",
       intro: {
@@ -1347,7 +1347,7 @@ h1 {
   },
     },
     "8": {
-      title: "🔲 Nivel 18 – Grid básico en CSS",
+      title: "🔲 Nivel 8 – Grid básico en CSS",
       objective:
         "Aprender a utilizar CSS Grid para crear diseños de dos dimensiones (filas y columnas), organizando visualmente los elementos en estructuras complejas con total control.",
       intro: {
@@ -1434,7 +1434,7 @@ h1 {
   },
     },
     "9": {
-      title: "🎞️ Nivel 19 – Transiciones en CSS",
+      title: "🎞️ Nivel 9 – Transiciones en CSS",
       objective:
         "Aprender a aplicar transiciones suaves entre estados de un elemento HTML cuando cambian propiedades como color, tamaño, posición, entre otras.",
       intro: {
@@ -1509,7 +1509,7 @@ h1 {
   },
     },
     "10": {
-      title: "📱 Nivel 20 – Responsive Design con Media Queries",
+      title: "📱 Nivel 10 – Responsive Design con Media Queries",
       objective:
         "Aprender a utilizar media queries en CSS para adaptar el diseño de una página web a diferentes tamaños de pantalla, como celulares, tablets y escritorios.",
       intro: {
