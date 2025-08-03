@@ -728,7 +728,7 @@ de contenido.</p>`,
   <a href="#main" class="skip-link">Saltar al contenido principal</a>
     
   <header role="banner">
-    <img src="logo.svg" alt="TuplaCore" width="200">
+    <img src="/img/banner-nivel10-html.jpeg" alt="TuplaCore" width="400">
     <nav aria-label="Navegación primaria">
       <ul>
         <li><a href="#cursos">Cursos</a></li>
@@ -768,23 +768,23 @@ de contenido.</p>`,
         content:
           "CSS (Cascading Style Sheets) permite controlar la apariencia de elementos HTML. Un selector en CSS le indica al navegador qué elementos deben recibir un conjunto de estilos.",
         code: `/* Selector por etiqueta */
-    p {
-      color: blue;
-    }
+p {
+  color: blue;
+}
 
-    /* Selector por clase */
-    .destacado {
-      font-weight: bold;
-      color: red;
-    }
+/* Selector por clase */
+.destacado {
+  font-weight: bold;
+  color: red;
+}
 
-    /* Selector por ID */
-    #titulo-principal {
-      font-size: 32px;
-      text-align: center;
-    }`,
+/* Selector por ID */
+#titulo-principal {
+  font-size: 32px;
+  text-align: center;
+}`,
       },
-      tags: ["selector", "clase", "id", "etiqueta", "CSS básico"],
+      tags: ["selector", "clase", "id", "etiqueta"],
       tips: [
         "✔️ Usa clases (.clase) para aplicar estilos a varios elementos.",
         "✔️ Usa IDs (#id) solo cuando el elemento es único en la página.",
@@ -794,32 +794,36 @@ de contenido.</p>`,
         title: "🆚 Diferencias entre clase e ID",
         content:
           "Una clase puede repetirse en varios elementos. Un ID debe ser único. Las clases se declaran con un punto (.) y los IDs con una almohadilla (#).",
-        example: `<!-- HTML -->
-    <h1 id="titulo">Título</h1>
-    <p class="resaltado">Texto resaltado</p>
+        example: `    <!-- HTML -->
+<h1 id="titulo">Título</h1>
+<p class="resaltado">Texto resaltado</p>
 
     <!-- CSS -->
-    #titulo {
-      color: navy;
-    }
-    .resaltado {
-      background-color: yellow;
-    }`,
+#titulo {
+  color: navy;
+}
+.resaltado {
+  background-color: yellow;
+}`,
       },
       lifeCode: {
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Mi Primera Página con CSS</title>
   </head>
   <body>
     <h1>¡Bienvenido!</h1>
-    <div class="contenedor">
-      <p class="destacado">Texto de ejemplo</p>
+    <div class="contenedor"> <!-- Usa clase -->
+      <p id="destacado">Texto de ejemplo</p> <!-- Usa ID -->
+    </div>
+
+    <div class="contenedor"> <!-- Usa clase -->
+      <p>Texto de ejemplo</p> <!-- No Usa ID -->
     </div>
   </body>
 </html>`,
-        css: `/* Estilos CSS */
+        css: `/* Selector por etiqueta */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -827,16 +831,19 @@ body {
   background-color: #f0f0f0;
 }
 
-.contenedor {
+/* Selector por clase */
+.contenedor { 
   max-width: 800px;
   margin: 0 auto;
+  margin-top: 10px;
   background: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.destacado {
+/* Selector por ID */
+#destacado {
   color: #3498db;
   font-weight: bold;
   border-left: 4px solid #3498db;
@@ -853,29 +860,27 @@ body {
         content:
           "CSS permite cambiar los colores del texto y del fondo para mejorar el diseño de la página. Puedes usar nombres, códigos hexadecimales, RGB, HSL y más.",
         code: `/* Cambiar color del texto */
-    p {
-      color: red;
-    }
+p {
+  color: red;
+}
 
-    /* Cambiar color de fondo */
-    div {
-      background-color: lightblue;
-    }
+/* Cambiar color de fondo */
+div {
+  background-color: lightblue;
+}
 
-    /* Imagen de fondo */
-    body {
-      background-image: url("fondo.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    }`,
+/* Imagen de fondo */
+body {
+  background-image: url("fondo.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}`,
       },
       tags: [
         "color",
         "background-color",
         "background-image",
-        "estilos visuales",
-        "contraste",
       ],
       tips: [
         "✔️ Usa colores contrastantes para asegurar buena legibilidad.",
@@ -899,7 +904,6 @@ body {
 <html>
   <head>
     <title>Colores y Fondos</title>
-    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <h1>Explorando Colores en CSS</h1>
@@ -908,25 +912,24 @@ body {
     </div>
   </body>
 </html>`,
-    css: `/* Estilos CSS */
-body {
+    css: `body {  /* Estilos generales para el body */
   font-family: 'Segoe UI', sans-serif;
   background-color: #f9f9f9;
-  background-image: url("textura.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: 0;
-  padding: 20px;
+  background-image: url(/img/textura-nivel2-css.jpg); /* URL relativa */
+  background-size: cover;         /* Tamaño de la imagen */
+  background-repeat: repeat-y;    /* Repite la imagen verticalmente */
+  background-position: center;    /* Posición de la imagen */
+  margin: 0;                      /* Márgenes */  
+  padding: 20px;                  /* Márgenes */
 }
 
 .contenedor {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8); /* Color de fondo */
   padding: 20px;
-  border-radius: 8px;
-  max-width: 700px;
-  margin: 0 auto;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  border-radius: 8px;       /* Radio de bordes */
+  max-width: 700px;         /* Ancho máximo */
+  margin: 0 auto;           /* Centrado */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);   /* Sombra */
 }
 
 .destacado {
@@ -990,7 +993,6 @@ body {
     <meta charset="UTF-8">
     <title>Tipografía en CSS</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <h1>Explorando la Tipografía</h1>
@@ -1000,30 +1002,30 @@ body {
 </html>`,
     css: `/* Estilos de Tipografía */
 body {
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #2c3e50;
-  margin: 0;
-  padding: 20px;
-  background-color: #fefefe;
+  font-family: 'Roboto', Arial, sans-serif;   /* Fuentes */
+  font-size: 16px;                            /* Tamaño de fuente */
+  line-height: 1.6;                           /* Interlineado */
+  color: #2c3e50;                             /* Color de fuente */
+  margin: 0;                                  /* Márgenes */
+  padding: 20px;                              /* Márgenes */
+  background-color: #fefefe;                  /* Color de fondo */
 }
 
 h1 {
-  font-size: 32px;
-  text-align: center;
-  color: #34495e;
+  font-size: 32px;                            /* Tamaño de fuente */
+  text-align: center;                         /* Alineación */
+  color: #34495e;                             /* Color de fuente */
 }
 
 .intro {
-  font-style: italic;
-  text-align: justify;
+  font-style: italic;                         /* Estilo de fuente */
+  text-align: justify;                        /* Alineación */
 }
 
 .destacado {
-  font-weight: bold;
-  font-size: 18px;
-  color: #e67e22;
+  font-weight: bold;                          /* Estilo de fuente */
+  font-size: 18px;                            /* Tamaño de fuente */
+  color: #e67e22;                             /* Color de fuente */
 }`
   },
     },
@@ -1063,7 +1065,19 @@ h1 {
           "Usar box-sizing: border-box te ayuda a evitar que el padding y el borde aumenten el tamaño total del elemento.",
         example: `* {
   box-sizing: border-box;
-}`,
+}
+  
+┌───────────────────────────────────────┐
+│                MARGIN                 │
+│       ┌───────────────────────┐       │
+│       │       PADDING         │       │
+│       │   ┌───────────────┐   │       │
+│       │   │   CONTENIDO   │   │       │       Modelo De Caja, con padding, border y margin
+│       │   └───────────────┘   │       │
+│       │                       │       │
+│       └───────────────────────┘       │
+│                                       │
+└───────────────────────────────────────┘`,
       },
       lifeCode: {
     html: `<!DOCTYPE html>
@@ -1071,7 +1085,6 @@ h1 {
   <head>
     <meta charset="UTF-8" />
     <title>Modelo de Caja</title>
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Modelo de Caja en CSS</h1>
@@ -1088,8 +1101,8 @@ h1 {
 body {
   font-family: Arial, sans-serif;
   background-color: #eef2f3;
-  margin: 0;
-  padding: 20px;
+  margin: 0;                        /* Márgenes Fuera de body*/
+  padding: 20px;                    /* Márgenes Fuera de body*/
   color: #333;
 }
 
@@ -1099,13 +1112,13 @@ h1 {
 }
 
 .caja {
-  width: 300px;
-  padding: 20px;
-  border: 2px solid #333;
-  margin: 30px auto;
+  width: 300px;                     /* Ancho de la caja */
+  padding: 20px;                    /* Márgenes dentro de la caja*/
+  border: 2px solid #333;           /* Borde: ancho y color */
+  margin: 30px auto;                /* Margen: top y bottom, left y right */ 
   background-color: #f5f5f5;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 8px;                /* Radio de bordes */
 }`
   },
     },
@@ -1159,7 +1172,6 @@ h1 {
   <head>
     <meta charset="UTF-8">
     <title>Posicionamiento en CSS</title>
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Ejemplo de Posicionamiento</h1>
@@ -1183,7 +1195,7 @@ h1 {
 }
 
 .contenedor {
-  position: relative;
+  position: relative;                /* Posición relativa */
   height: 300px;
   background: #eee;
   border: 2px dashed #ccc;
@@ -1192,13 +1204,13 @@ h1 {
 }
 
 .caja {
-  position: absolute;
-  top: 50px;
-  left: 100px;
+  position: absolute;                /* Posición absoluta */
+  top: 50px;                         /* Posición arriba */
+  left: 100px;                       /* Posición a la izquierda */
   width: 200px;
   height: 100px;
   background: lightblue;
-  display: flex;
+  display: flex;                     /* Alineación, Lo veremos en los siguientes niveles */
   align-items: center;
   justify-content: center;
   font-weight: bold;
@@ -1254,7 +1266,6 @@ h1 {
   <head>
     <meta charset="UTF-8">
     <title>Ejemplo de Display</title>
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Demostración de display en CSS</h1>
@@ -1342,10 +1353,10 @@ h1 {
         content:
           "Flexbox trabaja en un solo eje (principal o cruzado). Usa `flex-direction: row` para organizar horizontalmente, o `column` para vertical. `justify-content` controla la alineación en el eje principal y `align-items` en el cruzado.",
         example: `.contenedor {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: flex;                     /* Alineación con flex */
+  flex-direction: column;            /* Alineación en columna */
+  justify-content: space-between;    /* Alineación separada */
+  align-items: center;               /* Alineación items */
   gap: 20px;
 }`,
       },
@@ -1355,7 +1366,6 @@ h1 {
   <head>
     <meta charset="UTF-8" />
     <title>Ejemplo Flexbox Básico</title>
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Distribución con Flexbox</h1>
@@ -1380,10 +1390,10 @@ h1 {
 }
 
 .contenedor {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 20px;
+  display: flex;                     /* Alineación con flex */
+  justify-content: space-around;     /* Alineación horizontal */
+  align-items: center;               /* Alineación vertical */
+  gap: 20px;                         /* Espacio entre elementos */
   background: #e0e0e0;
   padding: 20px;
   height: 200px;
@@ -1433,7 +1443,7 @@ h1 {
           "`justify-items` y `align-items` controlan el contenido dentro de cada celda. `justify-content` y `align-content` afectan la cuadrícula completa. Usa `auto` y `fr` para adaptarte al contenido y al espacio disponible.",
         example: `.contenedor {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr;    /* Alineación en filas */
   justify-items: center;
   align-items: center;
 }`,
@@ -1444,7 +1454,6 @@ h1 {
   <head>
     <meta charset="UTF-8" />
     <title>Ejemplo de CSS Grid</title>
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Demostración de CSS Grid</h1>
@@ -1527,24 +1536,133 @@ h1 {
   <head>
     <meta charset="UTF-8" />
     <title>Botón con Transición</title>
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Botón Animado</h1>
-    <button class="boton">Pasa el mouse</button>
+    <div class="container">
+      <h1>Botones Animados</h1>
+      <p class="subtitle">Pasa el mouse sobre cada botón para ver diferentes efectos de animación y transición</p>
+      
+      <div class="button-container">
+        <div class="button-box">
+          <h3>Elevación</h3>
+          <button class="boton boton-1">Pasa el mouse</button>
+        </div>
+        
+        <div class="button-box">
+          <h3>Onda</h3>
+          <button class="boton boton-2">Pasa el mouse</button>
+        </div>
+        
+        <div class="button-box">
+          <h3>Borde</h3>
+          <button class="boton boton-3">Pasa el mouse</button>
+        </div>
+        
+        <div class="button-box">
+          <h3>Pulso</h3>
+          <button class="boton boton-4">Pasa el mouse</button>
+        </div>
+        
+        <div class="button-box">
+          <h3>3D</h3>
+          <button class="boton boton-5">Pasa el mouse</button>
+        </div>
+        
+        <div class="button-box">
+          <h3>Rotación</h3>
+          <button class="boton boton-6">Pasa el mouse</button>
+        </div>
+        
+        <div class="button-box">
+          <h3>Carga</h3>
+          <button class="boton boton-7">Pasa el mouse</button>
+        </div>
+        
+        <div class="button-box">
+          <h3>Deslizamiento</h3>
+          <button class="boton boton-8">Pasa el mouse</button>
+        </div>
+      </div>
+      
+      <div class="instrucciones">
+        <h3>Efectos Implementados</h3>
+        <ul>
+          <li><strong>Elevación:</strong> Movimiento hacia arriba con sombra</li>
+          <li><strong>Onda:</strong> Efecto de onda radial desde el punto de clic</li>
+          <li><strong>Borde:</strong> Cambio de estilo de contorno a relleno</li>
+          <li><strong>Pulso:</strong> Animación pulsante con sombra expansiva</li>
+          <li><strong>3D:</strong> Rotación en perspectiva 3D</li>
+          <li><strong>Rotación:</strong> Movimiento oscilante al pasar el mouse</li>
+          <li><strong>Carga:</strong> Degradado animado en el fondo</li>
+          <li><strong>Deslizamiento:</strong> Transición de color con efecto de deslizamiento</li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>`,
-    css: `body {
-  font-family: Arial, sans-serif;
-  padding: 40px;
-  text-align: center;
-  background-color: #f0f0f0;
+    css: `* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+    
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1a2980, #26d0ce);
+  padding: 20px;
+}
+    
+.container {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  width: 100%;
+}
+    
 h1 {
   margin-bottom: 30px;
+  color: #1a2980;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+    
+.subtitle {
+  color: #444;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+    
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+    
+.button-box {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  width: 250px;
+}
+    
+.button-box h3 {
+  margin-bottom: 15px;
+  color: #1a2980;
+}
+    
 .boton {
   background-color: royalblue;
   color: white;
@@ -1553,11 +1671,205 @@ h1 {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+    
+/* Botón 1: Efecto hover básico */
+.boton-1:hover {
+  background-color: darkblue;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+    
+/* Botón 2: Efecto de onda */
+.boton-2::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+    
+.boton-2:hover::after {
+  animation: onda 0.7s ease-out;
 }
 
-.boton:hover {
-  background-color: darkblue;
+@keyframes onda {
+  0% {
+    transform: scale(0.1, 0.1) translate(-50%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(20, 20) translate(-50%);
+    opacity: 0;
+  }
+}
+    
+/* Botón 3: Efecto de borde */
+.boton-3 {
+  background: transparent;
+  color: royalblue;
+  border: 2px solid royalblue;
+}
+    
+.boton-3:hover {
+  background-color: royalblue;
+  color: white;
+  box-shadow: 0 0 15px rgba(65, 105, 225, 0.6);
+  letter-spacing: 1px;
+}
+    
+/* Botón 4: Efecto pulsante */
+.boton-4:hover {
+  animation: pulse 1.5s infinite;
+}
+    
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(65, 105, 225, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(65, 105, 225, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(65, 105, 225, 0);
+  }
+}
+    
+/* Botón 5: Efecto 3D */
+.boton-5 {
+  transform: perspective(500px) rotateY(15deg);
+  background: linear-gradient(to right, royalblue, #4169e1cc);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+    
+.boton-5:hover {
+  transform: perspective(500px) rotateY(-15deg);
+  background: linear-gradient(to left, royalblue, #4169e1cc);
+  letter-spacing: 2px;
+}
+    
+/* Botón 6: Efecto de rotación */
+.boton-6:hover {
+  animation: rotate 0.7s ease;
+}
+    
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+    
+/* Botón 7: Efecto de carga */
+.boton-7 {
+  position: relative;
+  z-index: 1;
+}
+    
+.boton-7::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, darkblue, #1a2980, #26d0ce, darkblue);
+  z-index: -1;
+  background-size: 400%;
+  border-radius: 8px;
+  opacity: 0;
+  transition: all 0.4s;
+}
+    
+.boton-7:hover::before {
+  opacity: 1;
+  animation: gradient 8s linear infinite;
+}
+    
+@keyframes gradient {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+    
+.boton-7:hover {
+  color: white;
+  transform: translateY(-5px);
+}
+    
+/* Botón 8: Efecto de deslizamiento */
+.boton-8 {
+  background: linear-gradient(to right, royalblue 50%, darkblue 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease;
+}
+    
+.boton-8:hover {
+  background-position: left bottom;
+  transform: scale(1.05);
+}
+    
+/* Instrucciones */
+.instrucciones {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #e3f2fd;
+  border-radius: 10px;
+  text-align: left;
+}
+    
+.instrucciones h3 {
+  color: #1a2980;
+  margin-bottom: 15px;
+}
+    
+.instrucciones ul {
+  padding-left: 20px;
+}
+    
+.instrucciones li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+    
+/* Responsive */
+@media (max-width: 768px) {
+  .button-container {
+    gap: 20px;
+  }
+      
+  .button-box {
+    width: 100%;
+    max-width: 300px;
+  }
 }`
   },
     },
