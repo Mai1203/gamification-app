@@ -352,11 +352,15 @@ de contenido.</p>`,
       intro: {
         question: "🧾 ¿Qué es un formulario en HTML?",
         content:
-          "Un formulario permite al usuario introducir datos (nombre, correo, comentarios, etc.) y enviarlos al servidor para su procesamiento. Se define con la etiqueta <form>.",
+          "Un formulario permite al usuario introducir datos (nombre, correo, comentarios, Contraseña, etc.) y enviarlos al servidor para su procesamiento. Se define con la etiqueta <form>.",
         code: 
 `<form action="procesar.php" method="post">
   <label for="nombre">Nombre:</label>
   <input type="text" id="nombre" name="nombre">
+
+  <label for="contraseña">Constraseña:</label>
+  <input type="password" id="contraseña" name="contraseña">
+
   <button type="submit">Enviar</button>
 </form>`,
       },
@@ -366,19 +370,20 @@ de contenido.</p>`,
         "<label>",
         "<button>",
         "type",
-        "name",
         "required",
       ],
       tips: [
         "✔️ Usa <label> para cada campo para mejorar la accesibilidad.",
         "✔️ Conecta <label> con <input> usando el atributo for.",
         "✔️ Usa el atributo required en campos obligatorios.",
-        "✔️ Usa type='email', 'number', etc. para validaciones automáticas.",
+        "✔️ Usa type='email', 'number', 'password', etc. para validaciones automáticas.",
       ],
       extra: {
         title: "🧪 Tipos de campos comunes en formularios",
         content:
-          "Puedes usar distintos tipos de entrada como texto, correo, número, contraseña, etc. También puedes agrupar campos con <fieldset> y darles contexto con <legend>.",
+          `Puedes usar distintos tipos de entrada como texto, correo, número, contraseña, etc. También puedes agrupar campos con <fieldset> y darles contexto con <legend>.
+          
+          * En el código de prueba se muestran ejemplos de los tipos de campos comunes en HTML.`,
         example: 
 `<form>
   <fieldset>
@@ -401,24 +406,72 @@ de contenido.</p>`,
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Formulario Básico de Aprendizaje</title>
   </head>
   <body>
+    <h1>Formulario HTML</h1>
+    
     <form>
-      <fieldset>
-        <legend>Datos personales</legend>
-
-        <label for="correo">Correo electrónico:</label>
-        <input type="email" id="correo" name="correo" required>
-
-        <label for="edad">Edad:</label>
-        <input type="number" id="edad" name="edad">
-      </fieldset>
-
-      <label for="mensaje">Mensaje:</label>
-      <textarea id="mensaje" name="mensaje"></textarea>
-
-      <button type="submit">Enviar</button>
+        <!-- Grupo: Información Personal -->
+        <fieldset>
+            <legend>Información Personal</legend>
+            
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre"><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password"><br><br>
+            
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" min="18" max="99"><br><br>
+            
+            <label for="fecha">Fecha de nacimiento:</label>
+            <input type="date" id="fecha" name="fecha">
+        </fieldset>
+        
+        <!-- Grupo: Preferencias -->
+        <fieldset>
+            <legend>Preferencias</legend>
+            
+            <label for="mensaje">Mensaje:</label><br>
+            <textarea id="mensaje" name="mensaje" rows="4" cols="40"></textarea><br><br>
+            
+            <label>Intereses:</label><br>
+            <input type="checkbox" id="deportes" name="intereses" value="deportes">
+            <label for="deportes">Deportes</label><br>
+            
+            <input type="checkbox" id="musica" name="intereses" value="musica">
+            <label for="musica">Música</label><br>
+            
+            <input type="checkbox" id="lectura" name="intereses" value="lectura">
+            <label for="lectura">Lectura</label><br><br>
+            
+            <label>Género:</label><br>
+            <input type="radio" id="masculino" name="genero" value="masculino">
+            <label for="masculino">Masculino</label><br>
+            
+            <input type="radio" id="femenino" name="genero" value="femenino">
+            <label for="femenino">Femenino</label><br>
+            
+            <input type="radio" id="otro" name="genero" value="otro">
+            <label for="otro">Otro</label><br><br>
+            
+            <label for="pais">País:</label>
+            <select id="pais" name="pais">
+                <option value="">--Seleccione--</option>
+                <option value="es">España</option>
+                <option value="mx">México</option>
+                <option value="ar">Argentina</option>
+                <option value="co">Colombia</option>
+            </select>
+        </fieldset>
+        
+        <!-- Botones -->
+        <button type="submit">Enviar</button>
+        <button type="reset">Limpiar</button>
     </form>
   </body>
 </html>`,
