@@ -1,12 +1,12 @@
 // src/app/ui/dashboard/Recommendations.tsx
 'use client';
-import { getRecommendedLessons } from "@/utils/recomendations";
+import { useRecommendedLessons } from "@/app/hooks/recomendations";
 import Link from "next/link";
 import { Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Recommendations = () => {
-  const recommendations = getRecommendedLessons();
+  const recommendations = useRecommendedLessons();
 
   if (recommendations.length === 0) return null;
 

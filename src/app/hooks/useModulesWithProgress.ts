@@ -2,28 +2,7 @@ import { useEffect, useState } from "react";
 import { listenToUserProgress } from "@/app/services/progressService";
 import { initialModules } from "@/data/initialModules";
 import { useUser } from "@clerk/nextjs";
-
-type Lesson = {
-  title: string;
-  completed: boolean;
-  locked: boolean;
-};
-
-type ModuleWithProgress = {
-  id: string;
-  title: string;
-  description: string;
-  lessons: Lesson[];
-};
-
-type UserProgress = {
-  id: string;
-  lessons: {
-    completed: boolean;
-    locked: boolean;
-    title: string;
-  }[];
-};
+import {  UserProgress, ModuleWithProgress } from "@/types/modules";
 
 export const useModulesWithProgress = () => {
   const { user } = useUser();
