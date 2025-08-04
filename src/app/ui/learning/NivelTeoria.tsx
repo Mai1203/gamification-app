@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { MousePointerClick } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useSearchParams, useRouter } from "next/navigation";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
 import { theoryData } from "@/data/theory";
 import EditorLive from "./EditorLive";
@@ -99,13 +100,26 @@ export default function NivelTeoria() {
                   &lt;{modKey}&gt;
                 </p>
                 <div className="flex flex-wrap justify-center mt-3 gap-2 text-sm font-semibold">
-                  {levelData.tags.map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="bg-blue-200 px-3 py-1.5 rounded-lg whitespace-nowrap"
-                    >
-                      {tag}
-                    </span>
+                  {levelData.tags.map((tag: { label: string; description: string }) => (
+                    <Tooltip.Provider key={tag.label} delayDuration={100}>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <span className="bg-blue-200 px-3 py-1.5 rounded-lg whitespace-nowrap cursor-help">
+                            {tag.label}
+                          </span>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            side="top"
+                            className="z-50 rounded-md bg-black text-white px-3 py-2 text-xs shadow-lg animate-fade-in"
+                            sideOffset={5}
+                          >
+                            {tag.description || 'Sin descripción disponible'}
+                            <Tooltip.Arrow className="fill-black" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
                   ))}
                 </div>
               </div>

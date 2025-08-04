@@ -18,9 +18,12 @@ export const theoryData = {
   </body>
 </html>`,
       },
-      tags: ["<head>", "<body>"],
+      tags: [
+        { label: "<head>", description: "Contiene metadatos y configuraciones de la página." },
+        { label: "<body>", description: "Contiene el contenido visible del sitio web." }
+      ],
       tips: [
-        "✔️ Todas las etiquetas (excepto algunas) se abren y se cierran.",
+        "✔️ Todas las etiquetas (excepto algunas) se abren y se cierran <abrir></cerrar>",
         "✔️ Las etiquetas se pueden anidar: unas dentro de otras.",
         "✔️ Siempre debes cerrar correctamente las etiquetas.",
       ],
@@ -42,6 +45,7 @@ Ejemplo:
     <title>Mi Primera Página</title>
   </head>
   <body>
+    <!-- Editar aquí el contenido de la página -->
     <h1>¡Bienvenido!</h1>
   </body>
 </html>`,
@@ -63,7 +67,14 @@ Ejemplo:
 <h5>Subtítulo nivel 5</h5>
 <h6>Subtítulo menos importante</h6>`,
       },
-      tags: ["<h1>", "<h2>", "...", "<h5>", "<h6>", "<p>"],
+      tags: [
+        { label: "<h1>", description: "Encabezado principal, se usa para títulos importantes" },
+        { label: "<h2>", description: "Subtítulo, un poco menos importante que <h1>" },
+        { label: "...", description: "Representa otros niveles de encabezado intermedios" },
+        { label: "<h5>", description: "Encabezado de menor jerarquía, usado para subtítulos secundarios" },
+        { label: "<h6>", description: "El encabezado de menor jerarquía posible" },
+        { label: "<p>", description: "Define un párrafo de texto" }
+      ],
       tips: [
         "✔️ Usa <h1> solo una vez por página, como título principal.",
         "✔️ Usa <p> para separar párrafos, no <br> múltiples veces.",
@@ -81,7 +92,7 @@ de contenido.</p>`,
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Mi Primera Página con Párrafos</title>
   </head>
   <body>
     <h1>Este es un encabezado principal</h1>
@@ -109,7 +120,11 @@ de contenido.</p>`,
           "Un enlace permite conectar una página web con otra, o con un recurso externo. Se crea usando la etiqueta <a> y el atributo href.",
         code: `<a href="https://www.google.com">Ir a Google</a>`,
       },
-      tags: ["<a>", "href", "target"],
+      tags: [
+        { label: "<a>", description: "Define un enlace (hipervínculo) en HTML" },
+        { label: "href", description: "Especifica la URL del destino del enlace" },
+        { label: "target", description: "Indica dónde se abrirá el enlace (por ejemplo, en una nueva pestaña con '_blank')" }
+      ],
       tips: [
         "✔️ Usa enlaces para mejorar la navegación de tu sitio.",
         "✔️ El texto que pongas entre las etiquetas <a> es el que verá el usuario.",
@@ -126,7 +141,7 @@ de contenido.</p>`,
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Mi Primera Página con Enlaces</title>
   </head>
   <body>
     <a href="https://www.youtube.com/" target="_blank">Visitar YouTube en Sitio Externo</a>
@@ -145,8 +160,13 @@ de contenido.</p>`,
           "La etiqueta <img> se utiliza para mostrar imágenes en una página web. Es autocontenida y requiere los atributos 'src' y 'alt'.",
         code: `<img src="gato.jpg" alt="Un gato durmiendo">`,
       },
-      tags: ["<img>", "src", "alt"],
+      tags: [
+        { label: "<img>", description: "Inserta una imagen en la página HTML" },
+        { label: "src", description: "Especifica la ruta o URL de la imagen" },
+        { label: "alt", description: "Texto alternativo que describe la imagen, útil si no se carga o para accesibilidad" }
+      ],
       tips: [
+        "✔️ La etiqueta <img> no se cierra.",
         "✔️ Usa imágenes livianas para mejorar el rendimiento.",
         "✔️ Usa nombres de archivo sin espacios y descriptivos.",
         "✔️ Siempre incluye el atributo alt para mejorar la accesibilidad.",
@@ -161,7 +181,7 @@ de contenido.</p>`,
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Insertando una Imagen</title>
   </head>
   <body>
     <h2>Esto es una imagen</h2>
@@ -191,7 +211,11 @@ de contenido.</p>`,
   <li>Escribir contenido</li>
 </ol>`,
       },
-      tags: ["<ul>", "<ol>", "<li>"],
+      tags: [
+        { label: "<ul>", description: "Define una lista desordenada (con viñetas)" },
+        { label: "<ol>", description: "Define una lista ordenada (con números)" },
+        { label: "<li>", description: "Define un ítem o elemento dentro de una lista" }
+      ],
       tips: [
         "✔️ Usa <ul> para listas sin orden específico (viñetas).",
         "✔️ Usa <ol> cuando el orden importa (numeración).",
@@ -218,7 +242,7 @@ de contenido.</p>`,
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Listas Ordenadas y Desordenadas</title>
   </head>
   <body>
     <h2>Listas Desordenadas</h2>
@@ -276,7 +300,15 @@ de contenido.</p>`,
   </tfoot>
 </table>`,
       },
-      tags: ["<table>", "<thead>", "<tbody>", "<tfoot>", "<tr>", "<td>", "<th>" ],
+      tags: [
+        { label: "<table>", description: "Define una tabla" },
+        { label: "<thead>", description: "Agrupa el encabezado de una tabla" },
+        { label: "<tbody>", description: "Agrupa el contenido principal de una tabla" },
+        { label: "<tfoot>", description: "Agrupa el pie de una tabla" },
+        { label: "<tr>", description: "Define una fila dentro de la tabla" },
+        { label: "<td>", description: "Define una celda de datos dentro de una fila" },
+        { label: "<th>", description: "Define una celda de encabezado dentro de una fila" }
+      ],
       tips: [
         "✔️ <thead> se usa para encabezados de columna (generalmente la primera fila).",
         "✔️ <tbody> se usa para contener los datos de cada fila.",
@@ -311,7 +343,7 @@ de contenido.</p>`,
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Tablas con Encabezados y columnas</title>
   </head>
   <body>
     <h2>Tabla de Edades</h2>
@@ -365,12 +397,14 @@ de contenido.</p>`,
 </form>`,
       },
       tags: [
-        "<form>",
-        "<input>",
-        "<label>",
-        "<button>",
-        "type",
-        "required",
+        { label: "<form>", description: "Define un formulario para la recopilación de datos del usuario" },
+        { label: "<input>", description: "Define un campo de entrada para que el usuario introduzca datos" },
+        { label: "<label>", description: "Define una etiqueta para un elemento <input>" },
+        { label: "<button>", description: "Define un botón clickeable" },
+        { label: "type", description: "Atributo que especifica el tipo de entrada de un <input> o <button>" },
+        { label: "checkbox", description: "Valor del atributo 'type' que define una casilla de verificación" },
+        { label: "radio", description: "Valor del atributo 'type' que define un botón de opción" },
+        { label: "required", description: "Atributo que indica que un campo debe completarse antes de enviar el formulario" }
       ],
       tips: [
         "✔️ Usa <label> para cada campo para mejorar la accesibilidad.",
@@ -516,13 +550,13 @@ de contenido.</p>`,
 </body>`,
       },
       tags: [
-        "<header>",
-        "<nav>",
-        "<main>",
-        "<section>",
-        "<article>",
-        "<aside>",
-        "<footer>",
+        { label: "<header>", description: "Define el encabezado de una página o sección, generalmente incluye logotipos o títulos" },
+        { label: "<nav>", description: "Define una sección que contiene enlaces de navegación" },
+        { label: "<main>", description: "Representa el contenido principal del documento, único por página" },
+        { label: "<section>", description: "Define una sección temática dentro del contenido" },
+        { label: "<article>", description: "Define contenido independiente y auto-contenido como publicaciones o entradas de blog" },
+        { label: "<aside>", description: "Contiene contenido relacionado pero no esencial, como barras laterales o widgets" },
+        { label: "<footer>", description: "Define el pie de página de una sección o página, usualmente con información de contacto o derechos" }
       ],
       tips: [
         "✔️ Usa etiquetas semánticas en lugar de múltiples <div>.",
@@ -549,7 +583,7 @@ de contenido.</p>`,
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Navegación con HTML</title>
   </head>
   <body>
     <header>
@@ -602,14 +636,16 @@ de contenido.</p>`,
 </video>`,
       },
       tags: [
-        "<audio>",
-        "<video>",
-        "<source>",
-        "controls",
-        "autoplay",
-        "loop",
-        "muted",
-        "poster",
+        { label: "<audio>", description: "Incorpora contenido de audio en la página web" },
+        { label: "<video>", description: "Incorpora contenido de video en la página web" },
+        { label: "<source>", description: "Especifica múltiples recursos multimedia para <audio> o <video>" },
+        { label: "controls", description: "Muestra los controles de reproducción (play, pausa, volumen)" },
+        { label: "width", description: "Define el ancho del reproductor de video" },
+        { label: "height", description: "Define la altura del reproductor de video" },
+        { label: "autoplay", description: "Hace que el medio se reproduzca automáticamente al cargar" },
+        { label: "loop", description: "Hace que el medio se repita en bucle" },
+        { label: "muted", description: "Comienza el medio silenciado" },
+        { label: "poster", description: "Define una imagen que se muestra antes de que se reproduzca el video" }
       ],
       tips: [
         "✔️ Usa el atributo controls para mostrar los botones de reproducción.",
@@ -631,7 +667,7 @@ de contenido.</p>`,
         html: `<!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Primera Página</title>
+    <title>Reproducción de Audio y Video</title>
   </head>
   <body>
     <h1>🎵 Audio y 🎥 Video en HTML</h1>
@@ -677,13 +713,13 @@ de contenido.</p>`,
 </nav>`,
       },
       tags: [
-        "alt-text",
-        "aria-label",
-        "semantic-html",
-        "keyboard-navigation",
-        "contrast-ratio",
-        "skip-links",
-        "focus-indicators",
+        { label: "alt-text", description: "Texto alternativo que describe imágenes para lectores de pantalla" },
+        { label: "aria-label", description: "Proporciona una etiqueta accesible a elementos sin texto visible" },
+        { label: "semantic-html", description: "Uso de etiquetas HTML con significado claro para mejorar la accesibilidad" },
+        { label: "keyboard-navigation", description: "Permite navegar por el sitio usando solo el teclado" },
+        { label: "contrast-ratio", description: "Relación de contraste entre el texto y el fondo para una mejor legibilidad" },
+        { label: "skip-links", description: "Enlaces que permiten saltar directamente al contenido principal" },
+        { label: "focus-indicators", description: "Muestra visualmente qué elemento está enfocado al navegar con teclado" }
       ],
       tips: [
         "✔️ Prioriza etiquetas semánticas: <nav> es más significativo que <div class='menu'>",
@@ -713,7 +749,7 @@ de contenido.</p>`,
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TuplaCore - Accesibilidad</title>
+  <title>Accesibilidad con Semantic HTML</title>
   <style>
     :focus { outline: 3px solid #0066cc; }
     .skip-link { 
@@ -784,7 +820,12 @@ p {
   text-align: center;
 }`,
       },
-      tags: ["selector", "clase", "id", "etiqueta"],
+      tags: [
+        { label: "selector", description: "Patrón que se usa para seleccionar elementos HTML a los que aplicar estilos" },
+        { label: "clase", description: "Selector que apunta a los elementos con un atributo class específico, usando un punto (.)" },
+        { label: "id", description: "Selector que apunta a un elemento con un id específico, usando una almohadilla (#)" },
+        { label: "etiqueta", description: "Selector que aplica estilos a todas las etiquetas HTML específicas, como h1, p, etc." }
+      ],
       tips: [
         "✔️ Usa clases (.clase) para aplicar estilos a varios elementos.",
         "✔️ Usa IDs (#id) solo cuando el elemento es único en la página.",
@@ -878,9 +919,9 @@ body {
 }`,
       },
       tags: [
-        "color",
-        "background-color",
-        "background-image",
+        { label: "color", description: "Define el color del texto dentro de un elemento HTML" },
+        { label: "background-color", description: "Establece el color de fondo de un elemento" },
+        { label: "background-image", description: "Permite usar una imagen como fondo de un elemento" }
       ],
       tips: [
         "✔️ Usa colores contrastantes para asegurar buena legibilidad.",
@@ -964,11 +1005,12 @@ p {
 }`,
       },
       tags: [
-        "tipografía",
-        "fuentes",
-        "font-family",
-        "alineación",
-        "legibilidad",
+        { label: "font-family", description: "Especifica la familia de fuente usada para el texto" },
+        { label: "font-size", description: "Define el tamaño del texto" },
+        { label: "font-style", description: "Establece el estilo de la fuente, como normal o cursiva" },
+        { label: "font-weight", description: "Determina el grosor del texto, como normal o bold" },
+        { label: "text-align", description: "Controla la alineación horizontal del texto" },
+        { label: "line-height", description: "Establece el espacio vertical entre líneas de texto" }
       ],
       tips: [
         "✔️ Usa siempre fuentes de respaldo: 'Roboto', sans-serif.",
@@ -1046,12 +1088,10 @@ h1 {
 }`,
       },
       tags: [
-        "box model",
-        "padding",
-        "margin",
-        "border",
-        "espaciado",
-        "estructura",
+        { label: "width", description: "Define el ancho de un elemento" },
+        { label: "padding", description: "Espacio interior entre el contenido y el borde del elemento" },
+        { label: "margin", description: "Espacio exterior entre el elemento y los que lo rodean" },
+        { label: "border", description: "Define el borde alrededor del contenido y el padding de un elemento" }
       ],
       tips: [
         "✔️ Usa margin para separar elementos entre sí.",
@@ -1145,7 +1185,17 @@ h1 {
   background: lightblue;
 }`,
       },
-      tags: ["position", "relative", "absolute", "fixed", "sticky", "layout"],
+      tags: [
+        { label: "position", description: "Define cómo se posiciona un elemento en la página (static, relative, absolute, fixed, sticky)" },
+        { label: "relative", description: "El elemento se posiciona relativo a su posición original" },
+        { label: "absolute", description: "El elemento se posiciona relativo al contenedor más cercano con posición distinta de static" },
+        { label: "fixed", description: "El elemento se posiciona respecto al viewport, no se mueve al hacer scroll" },
+        { label: "sticky", description: "El elemento se comporta como relative hasta que llega a un punto en el scroll y se vuelve fixed" },
+        { label: "top", description: "Define la distancia entre el borde superior del contenedor y el elemento posicionado" },
+        { label: "left", description: "Define la distancia entre el borde izquierdo del contenedor y el elemento posicionado" },
+        { label: "right", description: "Define la distancia entre el borde derecho del contenedor y el elemento posicionado" },
+        { label: "bottom", description: "Define la distancia entre el borde inferior del contenedor y el elemento posicionado" }
+      ],
       tips: [
         "✔️ Usa relative para pequeños ajustes sin sacar al elemento del flujo.",
         "✔️ Usa absolute dentro de un contenedor con position: relative.",
@@ -1245,7 +1295,13 @@ h1 {
   width: 100px;
 }`,
       },
-      tags: ["display", "bloques", "inline", "ocultar", "layout"],
+      tags: [
+        { label: "display", description: "Define cómo se comporta un elemento en el flujo del documento (block, inline, flex, etc.)" },
+        { label: "block", description: "Hace que el elemento ocupe todo el ancho disponible y comience en una nueva línea" },
+        { label: "inline", description: "Hace que el elemento no comience en una nueva línea y solo ocupe el ancho necesario" },
+        { label: "inline-block", description: "Combina características de inline y block, permitiendo tamaño ajustable sin romper la línea" },
+        { label: "none", description: "Oculta completamente el elemento, como si no existiera en el DOM visualmente" }
+      ],
       tips: [
         "✔️ Usa block para secciones grandes (div, header, section).",
         "✔️ Usa inline-block si necesitas un diseño flexible con tamaño personalizado.",
@@ -1337,11 +1393,13 @@ h1 {
 </div>`,
       },
       tags: [
-        "flexbox",
-        "justify-content",
-        "align-items",
-        "flex-direction",
-        "gap",
+        { label: "flex", description: "Convierte un contenedor en un flex container, habilitando el uso de propiedades flexibles" },
+        { label: "justify-content", description: "Controla la alineación horizontal de los elementos dentro del contenedor flex" },
+        { label: "align-items", description: "Controla la alineación vertical de los elementos dentro del contenedor flex" },
+        { label: "flex-direction", description: "Define la dirección principal del eje flex (row, column, etc.)" },
+        { label: "gap", description: "Establece el espacio entre elementos dentro del contenedor flex" },
+        { label: "flex-wrap", description: "Permite que los elementos se envuelvan a la siguiente línea si no caben" },
+        { label: "flex-grow", description: "Determina cuánto puede crecer un elemento en relación con los demás dentro del contenedor" }
       ],
       tips: [
         "✔️ Usa Flexbox para centrar elementos sin márgenes complicados.",
@@ -1431,7 +1489,14 @@ h1 {
   <div>Elemento 4</div>
 </div>`,
       },
-      tags: ["grid", "grid-template-columns", "gap", "fr", "repeat"],
+      tags: [
+        { label: "grid", description: "Convierte un contenedor en un grid container, permitiendo distribuir elementos en filas y columnas" },
+        { label: "grid-template-columns", description: "Define el número y tamaño de las columnas del grid" },
+        { label: "grid-template-rows", description: "Define el número y tamaño de las filas del grid" },
+        { label: "gap", description: "Establece el espacio entre las filas y/o columnas del grid" },
+        { label: "fr", description: "Unidad fraccional que representa una parte del espacio disponible dentro del grid" },
+        { label: "repeat", description: "Función que permite repetir patrones en la definición de filas o columnas" }
+      ],
       tips: [
         "✔️ Usa `fr` para dividir espacio de forma proporcional.",
         "✔️ Usa `repeat()` para simplificar columnas repetidas.",
@@ -1512,7 +1577,16 @@ h1 {
   background-color: darkblue;
 }`,
       },
-      tags: ["transition", "hover", "ease", "transform", "timing-function"],
+      tags: [
+        { label: "transition", description: "Permite aplicar una animación suave entre cambios de propiedades CSS" },
+        { label: "transform", description: "Aplica transformaciones como rotación, escalado o traslación a un elemento" },
+        { label: "rotate", description: "Gira un elemento en el eje Z (2D) o en otros ejes (3D) si se especifica" },
+        { label: "hover", description: "Selector que aplica estilos cuando el usuario pasa el cursor sobre un elemento" },
+        { label: "ease", description: "Función de temporización que inicia lento, acelera al medio y termina lento" },
+        { label: "timing-function", description: "Define cómo se acelera o desacelera una animación o transición" },
+        { label: "animation", description: "Permite aplicar una secuencia de estilos definidos en keyframes a un elemento" },
+        { label: "keyframes", description: "Define los pasos intermedios de una animación CSS" }
+      ],
       tips: [
         "✔️ Usa `transition` para mejorar la experiencia sin distraer.",
         "✔️ Anima solo propiedades compatibles (como color, transform).",
@@ -1889,11 +1963,11 @@ h1 {
 }`,
       },
       tags: [
-        "responsive",
-        "media queries",
-        "max-width",
-        "min-width",
-        "breakpoints",
+        { label: "responsive", description: "Diseño que se adapta automáticamente a diferentes tamaños de pantalla y dispositivos" },
+        { label: "media queries", description: "Reglas CSS que aplican estilos específicos dependiendo del ancho, alto o tipo de dispositivo" },
+        { label: "max-width", description: "Establece el ancho máximo que puede ocupar un elemento" },
+        { label: "min-width", description: "Establece el ancho mínimo que debe tener un elemento" },
+        { label: "breakpoints", description: "Puntos definidos en los que el diseño cambia para adaptarse a diferentes tamaños de pantalla" }
       ],
       tips: [
         "✔️ Diseña pensando primero en móvil (mobile first).",
