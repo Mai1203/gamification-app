@@ -81,9 +81,6 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
   const resetCode = () => {
     setHtmlCode(defaultHtml);
     setCssCode(defaultCss || '');
-    if (editorRef.current) {
-      editorRef.current.setValue(mode === 'css' ? defaultCss : defaultHtml);
-    }
   };
 
   // Handle editor mount

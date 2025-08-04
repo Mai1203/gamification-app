@@ -45,7 +45,7 @@ Ejemplo:
     <title>Mi Primera Página</title>
   </head>
   <body>
-    <!-- Editar aquí el contenido de la página -->
+    <!-- Escribe tu código aquí-->
     <h1>¡Bienvenido!</h1>
   </body>
 </html>`,
@@ -117,7 +117,7 @@ de contenido.</p>`,
       intro: {
         question: "🌐 ¿Qué es un enlace en HTML?",
         content:
-          "Un enlace permite conectar una página web con otra, o con un recurso externo. Se crea usando la etiqueta <a> y el atributo href.",
+          "Un enlace conecta una página con otra o con un recurso externo. Se crea con la etiqueta <a> y el atributo href, que indica la dirección del enlace. Los atributos en HTML dan información extra sobre un elemento.",
         code: `<a href="https://www.google.com">Ir a Google</a>`,
       },
       tags: [
