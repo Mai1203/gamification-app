@@ -75,9 +75,10 @@ export default function Page() {
       )}
 
       <AnimatedText 
-        type="bounce" 
-        stagger={0.05}
-        duration={0.4}
+        type="slideLeft"
+        mode="chars"
+        stagger={0.3}
+        duration={0.6}
         className="text-2xl font-bold m-5 dark:text-white"
       >
         {isSignedIn ? `¡Hola, ${user?.firstName}!` : "¡Bienvenido a EdoCode!"}

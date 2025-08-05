@@ -35,7 +35,7 @@ export default function Home() {
               <AnimatedText 
                 type="bounce" 
                 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white"
-                stagger={0.05}
+                stagger={0.5}
                 mode="words"
                 duration={0.4}
               >
@@ -45,8 +45,8 @@ export default function Home() {
               {/* Descripción con animación máquina de escribir */}
               <AnimatedText 
                 type="typewriter" 
-                duration={0.05}
-                stagger={0.03}
+                duration={6}
+                stagger={0.06}
                 className="text-xl text-gray-600 dark:text-gray-300"
               >
                 Aprende HTML, CSS y JavaScript de manera interactiva y efectiva.
