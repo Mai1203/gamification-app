@@ -11,6 +11,7 @@ import { AnimationConfety } from "../animation/animationConfety"
 import CompletionCard from "./completionCard";
 import { unlockBadgeForUser } from "@/app/services/badgeService";
 import { badges } from "@/data/badgeData";
+import { theoryData } from "@/data/theory";
 
 export default function PagFinal({ score, total }: { score: number; total: number }) {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -22,6 +23,9 @@ export default function PagFinal({ score, total }: { score: number; total: numbe
   const [newBadgeUnlocked, setNewBadgeUnlocked] = useState<number | null>(null);
   const maxLevel = 10;
   const hasUpdated = useRef(false);
+
+  const moduleTheory = theoryData[modKey as keyof typeof theoryData];
+  const levelData = moduleTheory?.[levelParam as keyof typeof moduleTheory];
   
   useEffect(() => {
     if (modKey === "css" && levelParam === maxLevel.toString()) {
@@ -79,7 +83,6 @@ export default function PagFinal({ score, total }: { score: number; total: numbe
     }
   };
 
-  // Mostrar tarjeta de insignia desbloqueada si es necesario
   if (newBadgeUnlocked) {
     const badge = badges.find(b => b.id === newBadgeUnlocked);
     
@@ -141,17 +144,27 @@ export default function PagFinal({ score, total }: { score: number; total: numbe
             >
               <Trophy className="w-20 h-20 text-amber-500" />
             </motion.div>
-  
+
             <h2 className="text-3xl font-bold text-indigo-700 dark:text-white">¡Actividad completada! 🎉</h2>
-  
+
             <p className="text-lg font-medium text-zinc-800 dark:text-zinc-300">
               Obtuviste <span className="text-indigo-600 dark:text-indigo-300 font-bold">{score}</span> de {total} respuestas correctas.
             </p>
-  
+
+            {/* Texto de resumen agregado */}
+            <div className="bg-white/50 dark:bg-indigo-600/30 rounded-xl p-4 border border-indigo-200 dark:border-indigo-400/50">
+              <h3 className="font-semibold text-indigo-800 dark:text-indigo-200 mb-1">
+                Resumen del módulo: {levelData.title.split(" – ")[1]}
+              </h3>
+              <p className="text-zinc-700 dark:text-zinc-200 text-sm">
+                {levelData.resume}
+              </p>
+            </div>
+
             <p className="text-zinc-600 dark:text-zinc-400 italic">
               ¡Sigue así, estás aprendiendo muy bien! 🚀
             </p>
-  
+
             <button
               onClick={handleClick}
               className="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg transition cursor-pointer"

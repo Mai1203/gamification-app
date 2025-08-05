@@ -19,6 +19,7 @@ export const theoryData = {
 </html>`,
       },
       tags: [
+        { label: "Pasa el mouse por aquí", description: "Mueve el cursor sobre el elemento HTML y ve la información de ayuda que aparece" },
         { label: "<head>", description: "Contiene metadatos y configuraciones de la página." },
         { label: "<body>", description: "Contiene el contenido visible del sitio web." }
       ],
@@ -51,6 +52,7 @@ Ejemplo:
 </html>`,
         css: ""
       },
+      resume: "¡Dominaste los fundamentos de HTML! Ahora comprendes la estructura básica de un documento HTML, incluyendo las etiquetas esenciales como <head> para metadatos y <body> para el contenido visible. Aprendiste que HTML es un lenguaje de marcado que define la estructura de las páginas web."
     },
     "2": {
       title: "📝 Nivel 2 – Encabezados y párrafos en HTML",
@@ -109,6 +111,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "¡Aprendiste a crear encabezados y párrafos en HTML! Aprendemos que los encabezados (h1, h2, etc.) se utilizan para organizar el contenido de una página web, mientras que los párrafos (p) se utilizan para establecer el contenido en líneas más pequeñas."
     },
     "3": {
       title: "🔗 Nivel 3 – Enlaces en HTML",
@@ -149,6 +152,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "¡Aprendiste a crear enlaces en HTML! Aprendemos que los enlaces (a) se utilizan para mejorar la navegación de una página web y que se crean con la etiqueta <a> y el atributo href."
     },
     "4": {
       title: "🖼️ Nivel 4 – Imágenes en HTML",
@@ -190,6 +194,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "¡Aprendiste a insertar imágenes en HTML! Aprendemos que las imágenes (img) se utilizan para mostrar imágenes en una página web y que se crean con la etiqueta <img> y el atributo src. También aprendiste que HTML es un lenguaje de marcado que define la estructura de las páginas web."
     },
     "5": {
       title: "📋 Nivel 5 – Listas en HTML",
@@ -262,6 +267,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "¡Aprendiste a estructurar contenido en HTML! Aprendemos que las listas (ul, ol) se utilizan para organizar contenido en una página web y que se crean con las etiquetas <ul> y <ol>."
     },
     "6": {
       title: "📊 Nivel 6 – Tablas en HTML",
@@ -376,6 +382,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "¡Aprendiste a crear tablas en HTML! Aprendemos que las tablas (table) se utilizan para organizar datos en filas y columnas y que se crean con la etiqueta <table>. también aprendiste que las etiquetas <thead>, <tbody>, <tfoot> y <tr> se utilizan para definir encabezados, cuerpo y pie de página de una tabla. y las etiquetas <td> y <th> se utilizan para definir celdas de datos."
     },
     "7": {
       title: "📨 Nivel 7 – Formularios en HTML",
@@ -511,6 +518,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "¡Aprendiste a construir formularios en HTML! Aprendemos que los formularios (form) se utilizan para recopilar datos del usuario y que se crean con la etiqueta <form>. También aprendiste que las etiquetas <fieldset>, <legend>, <label>, <input>, <textarea>, <select>, <option>, <button> y <optgroup> se utilizan para definir los diferentes elementos de un formulario."
     },
     "8": {
       title: "🧠 Nivel 8 – Semántica en HTML5",
@@ -615,6 +623,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "¡Aprendiste a utilizar semántica en HTML5! Aprendemos que la semántica se refiere al significado del contenido y que se utiliza para mejorar la accesibilidad de una página web. También aprendiste que las etiquetas <header>, <nav>, <main>, <section>, <article>, <aside>, <footer> se utilizan para definir el contenido principal, navegación, contenido principal, sección, artículo, contenido relacionado y pie de página de una página web."
     },
     "9": {
       title: "🎵 Nivel 9 – Multimedia en HTML (Audio y Video)",
@@ -687,6 +696,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "¡Aprendiste a reproducir contenido multimedia en HTML! Aprendemos que los archivos de audio (audio) y video (video) se utilizan para reproducir contenido multimedia directamente en el navegador, sin necesidad de plugins externos. también a usar los atributos controls, autoplay, loop, width y height"
     },
     "10": {
       title: "♿ Nivel 10 – Accesibilidad básica en HTML",
@@ -792,6 +802,7 @@ de contenido.</p>`,
 </html>`,
         css: ""
       },
+      resume: "Dominaste las técnicas de accesibilidad WCAG: implementación de landmarks (banner, main, contentinfo), atributos ARIA (label, describedby, current), manejo de focus, skip links, y contraste 4.5:1. Ahora construyes experiencias que superan las pruebas de lectores de pantalla y cumplen con los estándares AA de accesibilidad."
     },
   },
   css: {
@@ -891,6 +902,7 @@ body {
   padding-left: 10px;
 }`
       },
+      resume: "!Aprendiste a usar selectores de CSS para aplicar estilos a elementos específicos en una página web. para selectores de clase, puedes usar el punto (.) para seleccionar elementos con un atributo class específico, usando un punto (.) y el ID para seleccionar elementos con un atributo id específico, usando una almohadilla (#)."
     },
     "2": {
       title: "🌈 Nivel 2 – Propiedades de color y fondo en CSS",
@@ -979,6 +991,7 @@ body {
   font-size: 18px;
 }`
   },
+  resume: "!Aprendiste a cambiar el color del texto, el fondo y aplicar estilos visuales utilizando las propiedades color, background-color y background-image. Aprendemos que se pueden controlar el color de un elemento con la propiedad color, que se puede controlar con un valor hexadecimal, RGB, HSL o por nombre. y que se pueden controlar el fondo de un elemento con la propiedad background-color, que se puede controlar con un valor hexadecimal, RGB, HSL o por nombre. y que se pueden controlar el fondo de un elemento con la propiedad background-image, que se puede controlar con una imagen en la ruta de la página."
     },
     "3": {
       title: "✍️ Nivel 3 – Tipografía y fuentes en CSS",
@@ -1070,6 +1083,7 @@ h1 {
   color: #e67e22;                             /* Color de fuente */
 }`
   },
+  resume: "!Aprendiste a crear fuentes, estilos y colores en CSS. Aprendemos que los estilos (style) se pueden aplicar a elementos HTML y que se crean con la etiqueta <style>. También aprendiste que las etiquetas <link> se utilizan para incluir hojas de estilo externos en una página web. y las etiquetas font-family, font-size, font-style, font-weight, text-align, line-height, color, background-color y background-image se utilizan para controlar el estilo de fuentes, colores y fondos de un elemento."
     },
     "4": {
       title: "📦 Nivel 4 – Box Model (Modelo de Caja)",
@@ -1161,6 +1175,7 @@ h1 {
   border-radius: 8px;                /* Radio de bordes */
 }`
   },
+  resume: "!Aprendiste a crear bordes, márgenes, radio de bordes y bordes en CSS. Aprendemos que los bordes se pueden controlar con la propiedad border, que se puede controlar con el ancho y color del borde, y que se pueden controlar los márgenes con la propiedad margin. También aprendiste que se pueden controlar el radio de bordes con la propiedad border-radius. y a darle espacio dentro de la caja a un elemento con la propiedad padding."
     },
     "5": {
       title: "📍 Nivel 5 – Posicionamiento en CSS",
@@ -1267,6 +1282,7 @@ h1 {
   border: 1px solid #333;
 }`
   },
+  resume: "!Aprendiste a dar posicionamiento a un elemento en CSS. Aprendemos que se pueden controlar el posicionamiento de un elemento con la propiedad position, que se puede controlar con la propiedad top, left, right y bottom. También aprendiste que se pueden controlar el alineamiento de un elemento con la propiedad display."
     },
     "6": {
       title: "📐 Nivel 6 – Propiedad display en CSS",
@@ -1370,6 +1386,7 @@ h1 {
   text-align: center;
 }`
   },
+  resume: "!Aprendiste los diferentes tipos de display en CSS. Aprendemos que se pueden controlar el alineamiento de un elemento con la propiedad display, que se puede controlar con el valor block, inline, inline-block, none. También aprendiste que se pueden controlar el tamaño de un elemento con la propiedad width, que se puede controlar con un valor en pixeles o porcentaje. y que se pueden controlar el espacio entre elementos con la propiedad margin, que se puede controlar con un valor en pixeles o porcentaje."
     },
     "7": {
       title: "📦 Nivel 7 – Flexbox básico en CSS",
@@ -1466,6 +1483,7 @@ h1 {
   text-align: center;
 }`
   },
+  resume: "!Aprendiste a utilizar Flexbox para alinear y distribuir elementos dentro de un contenedor, de forma horizontal o vertical, con propiedades como display: flex, justify-content y align-items. Aprendemos que se pueden controlar el alineamiento de un elemento con la propiedad justify-content, que se puede controlar con el valor flex-start, flex-end, center, space-between, space-around y space-evenly. y que se pueden controlar el alineamiento de un elemento con la propiedad align-items."
     },
     "8": {
       title: "🔲 Nivel 8 – Grid básico en CSS",
@@ -1559,6 +1577,7 @@ h1 {
   font-weight: bold;
 }`
   },
+  resume: "!Aprendiste a crear un grid con CSS. Aprendemos que se pueden controlar el numero de elementos en filas y columnas con la propiedad grid-template-columns y grid-template-rows, que se pueden controlar con un valor en pixeles o porcentaje. y que se pueden controlar el espacio entre elementos con la propiedad gap, que se puede controlar con un valor en pixeles o porcentaje."
     },
     "9": {
       title: "🎞️ Nivel 9 – Transiciones en CSS",
@@ -1946,6 +1965,7 @@ h1 {
   }
 }`
   },
+  resume: "!Aprendiste a usar transiciones en CSS. Aprendemos que se pueden controlar el efecto de transición de un elemento con la propiedad transition, que se puede controlar con el valor de propiedades como background-color, transform, rotate, hover, ease, timing-function, animation, keyframes. y que se pueden controlar el tiempo de transición con la propiedad transition-duration, que se puede controlar con un valor en milisegundos o segundos."
     },
     "10": {
       title: "📱 Nivel 10 – Responsive Design con Media Queries",
@@ -2069,6 +2089,7 @@ h1 {
   }
 }`
   },
+  resume: "!Aprendiste a crear diseños responsivos en CSS. Aprendemos que se pueden controlar el diseño de un elemento con la propiedad responsive, que se puede controlar con el valor de propiedades como max-width, min-width, breakpoints. y que se pueden controlar el diseño de un elemento con la propiedad orientation, que se puede controlar con el valor horizontal o vertical."
     },
   },
 };
