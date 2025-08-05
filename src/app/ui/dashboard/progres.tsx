@@ -128,9 +128,9 @@ export default function Progres() {
                 onClick={() => setShowAllBadges(true)}
               >
                 <div className="aspect-square w-full max-w-[100px] rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center cursor-pointer">
-                  <span className="text-[min(3vw,1.5rem)] font-bold">+{unlockedBadges.length - 3}</span>
+                  <span className="text-[min(3vw,1.5rem)] text-gray-500 font-bold">+{unlockedBadges.length - 3}</span>
                 </div>
-                <span className="text-[min(2vw,0.6rem)] mt-1">Ver todas</span>
+                <span className="text-[min(2vw,0.8rem)] text-gray-500 mt-1">Ver todas</span>
               </motion.div>
             )}
           </div>
