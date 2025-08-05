@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Trophy } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -21,6 +21,7 @@ export default function PagFinal({ score, total }: { score: number; total: numbe
   const [final, setFinal] = useState(false);
   const [newBadgeUnlocked, setNewBadgeUnlocked] = useState<number | null>(null);
   const maxLevel = 10;
+  const hasUpdated = useRef(false);
   
   useEffect(() => {
     if (modKey === "css" && levelParam === maxLevel.toString()) {
@@ -30,44 +31,46 @@ export default function PagFinal({ score, total }: { score: number; total: numbe
     }
   }, [modKey, levelParam]); 
 
-  const unlockLevelBadge = async () => {
-    if (!isLoaded || !isSignedIn || !user?.id) return;
-
-    const levelNum = Number(levelParam);
-    const badgeId = modKey === "html" ? levelNum : levelNum + 10;
-
-    try {
-      const unlocked = await unlockBadgeForUser(user.id, badgeId);
-
-      if (unlocked) {
-        setNewBadgeUnlocked(badgeId);
+  useEffect(() => {
+    const updateOnLoad = async () => {
+      if (!isLoaded || !isSignedIn || !user?.id || hasUpdated.current) return;
+      
+      try {
+        await updateProgress(user.id, modKey, Number(levelParam)-1);
         
-        const badge = badges.find(b => b.id === badgeId);
-        if (badge) {
-          toast.success(
-            <div className="flex items-center">
-              <span className="text-2xl mr-2">{badge.emoji}</span>
-              <div>
-                <p className="font-bold">¡Insignia desbloqueada!</p>
-                <p>{badge.title}</p>
-              </div>
-            </div>,
-            { duration: 5000, position: 'top-center' }
-          );
+        const levelNum = Number(levelParam);
+        const badgeId = modKey === "html" ? levelNum : levelNum + 10;
+        const unlocked = await unlockBadgeForUser(user.id, badgeId);
+        
+        if (unlocked) {
+          setNewBadgeUnlocked(badgeId);
+          const badge = badges.find(b => b.id === badgeId);
+          
+          if (badge) {
+            toast.success(
+              <div className="flex items-center">
+                <span className="text-2xl mr-2">{badge.emoji}</span>
+                <div>
+                  <p className="font-bold">¡Insignia desbloqueada!</p>
+                  <p>{badge.title}</p>
+                </div>
+              </div>,
+              { duration: 4000, position: 'top-center' }
+            );
+          }
         }
+      } catch (error) {
+        console.error("Error actualizando progreso/insignia:", error);
+      } finally {
+        hasUpdated.current = true;
       }
-    } catch (error) {
-      console.error("Error desbloqueando insignia:" ,error);
-    }
-  }
+    };
+
+    updateOnLoad();
+  }, [isLoaded, isSignedIn, user, modKey, levelParam]);
 
   const handleClick = async () => {
     const nextLevel = Number(levelParam) + 1;
-
-    if (!isLoaded || !isSignedIn || !user?.id) return;
-
-    await updateProgress(user.id, modKey, Number(levelParam)-1);
-    await unlockLevelBadge();
 
     if (nextLevel > maxLevel) {
       router.push(`/learning?module=css&level=1`);
