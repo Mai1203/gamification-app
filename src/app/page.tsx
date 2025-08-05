@@ -1,10 +1,11 @@
-"use client";
+'use client';
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Header } from "@/app/ui/home/Header";
 import { Cards } from "@/app/ui/home/Cards";
 import { Footer } from "@/app/ui/home/Footer";
 import { Animation } from "@/app/ui/home/Animation"
+import AnimatedText from "@/app/ui/animatedText";
 
 export default function Home() {
   return (
@@ -23,20 +24,34 @@ export default function Home() {
       <div className="relative z-10">
         <Header />
         <main className="container mx-auto px-4 py-16">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
             <motion.div
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="lg:w-1/2 space-y-6"
+              className="lg:w-1/2 space-y-7"
             >
-              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white">
+              {/* Texto principal con envoltura de palabras */}
+              <AnimatedText 
+                type="bounce" 
+                className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white"
+                stagger={0.05}
+                mode="words"
+                duration={0.4}
+              >
                 ¡Aprender jugando con desafíos reales!
-              </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300">
+              </AnimatedText>
+              
+              {/* Descripción con animación máquina de escribir */}
+              <AnimatedText 
+                type="typewriter" 
+                duration={0.05}
+                stagger={0.03}
+                className="text-xl text-gray-600 dark:text-gray-300"
+              >
                 Aprende HTML, CSS y JavaScript de manera interactiva y efectiva.
                 Construye proyectos reales mientras juegas y ganas puntos.
-              </p>
+              </AnimatedText>
     
               <div className="flex flex-col sm:flex-row gap-4">
                 <motion.button

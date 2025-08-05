@@ -12,6 +12,7 @@ import CompletionCard from "./completionCard";
 import { unlockBadgeForUser } from "@/app/services/badgeService";
 import { badges } from "@/data/badgeData";
 import { theoryData } from "@/data/theory";
+import AnimatedText from "../../animatedText";
 
 export default function PagFinal({ score, total }: { score: number; total: number }) {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -145,23 +146,36 @@ export default function PagFinal({ score, total }: { score: number; total: numbe
               <Trophy className="w-20 h-20 text-amber-500" />
             </motion.div>
 
-            <h2 className="text-3xl font-bold text-indigo-700 dark:text-white">¡Actividad completada! 🎉</h2>
+            <AnimatedText 
+              type="bounce" 
+              className="text-3xl font-bold text-indigo-700 dark:text-white"
+            >
+              ¡Actividad completada!
+            </AnimatedText>
 
-            <p className="text-lg font-medium text-zinc-800 dark:text-zinc-300">
+            <AnimatedText 
+              type="fadeIn" 
+              delay={0.3}
+              className="text-lg font-medium text-zinc-800 dark:text-zinc-300"
+            >
               Obtuviste <span className="text-indigo-600 dark:text-indigo-300 font-bold">{score}</span> de {total} respuestas correctas.
-            </p>
+            </AnimatedText>
 
             {/* Texto de resumen agregado */}
             <div className="bg-white/50 dark:bg-indigo-600/30 rounded-xl p-4 border border-indigo-200 dark:border-indigo-400/50">
-              <h3 className="font-semibold text-indigo-800 dark:text-indigo-200 mb-1">
-                Resumen del módulo: {levelData.title.split(" – ")[1]}
-              </h3>
+              <AnimatedText 
+                type="slideLeft" 
+                delay={0.5}
+                className="font-semibold text-indigo-800 dark:text-indigo-200 mb-1"
+              >
+                Resumen del módulo: {levelData?.title.split(" – ")[1]}
+              </AnimatedText>
               <p className="text-zinc-700 dark:text-zinc-200 text-sm">
                 {levelData.resume}
               </p>
             </div>
 
-            <p className="text-zinc-600 dark:text-zinc-400 italic">
+            <p className="text-zinc-600 dark:text-zinc-600 italic">
               ¡Sigue así, estás aprendiendo muy bien! 🚀
             </p>
 

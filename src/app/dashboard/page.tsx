@@ -9,6 +9,7 @@ import Carousel from "../ui/dashboard/carousel";
 import Recommendations from "../ui/dashboard/recommendations";
 import Card from "../ui/dashboard/card-score";
 import AnimationLoaded from "../ui/dashboard/animationLoaded";
+import AnimatedText from "../ui/animatedText";
 
 export default function Page() {
   const router = useRouter();
@@ -73,9 +74,14 @@ export default function Page() {
         </div>
       )}
 
-      <h1 className="text-2xl font-bold m-5 dark:text-white">
+      <AnimatedText 
+        type="bounce" 
+        stagger={0.05}
+        duration={0.4}
+        className="text-2xl font-bold m-5 dark:text-white"
+      >
         {isSignedIn ? `¡Hola, ${user?.firstName}!` : "¡Bienvenido a EdoCode!"}
-      </h1>
+      </AnimatedText>
 
       <div className="mb-6">
         {isSignedIn ? (
