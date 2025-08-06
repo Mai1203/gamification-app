@@ -69,7 +69,7 @@ export default function NivelTeoria() {
       <div className="w-full max-w-4xl mx-auto space-y-8 relative z-10">
         <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-zinc-800">
           <div className="mb-6">
-            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2 text-gray-600 dark:text-zinc-300">
               {levelData.title}
             </h2>
 
@@ -83,12 +83,12 @@ export default function NivelTeoria() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <div className="space-y-5">
-              <h3 className="text-xl font-bold flex items-center gap-2">
+              <h3 className="text-xl font-bold flex items-center gap-2 text-gray-600 dark:text-zinc-300">
                 {levelData.intro.question}
               </h3>
-              <p className="text-base">{levelData.intro.content}</p>
+              <p className="text-base text-gray-600 dark:text-zinc-300">{levelData.intro.content}</p>
               <div className="overflow-x-auto">
-                <pre className="bg-gray-50 dark:bg-zinc-800 p-4 rounded-lg text-sm border border-gray-200 dark:border-zinc-700 min-w-min">
+                <pre className="bg-gray-50 dark:bg-zinc-800 p-4 rounded-lg text-sm border border-gray-200 dark:border-zinc-700 min-w-min text-gray-600 dark:text-zinc-300">
                   {levelData.intro.code}
                 </pre>
               </div>
@@ -96,10 +96,10 @@ export default function NivelTeoria() {
 
             <div className="space-y-6">
               <div className="bg-yellow-100 p-4 rounded-xl text-center dark:text-black">
-                <p className="font-bold text-lg flex items-center justify-center gap-2">
+                <p className="font-bold text-lg flex items-center justify-center gap-2 text-gray-600">
                   &lt;{modKey}&gt;
                 </p>
-                <div className="flex flex-wrap justify-center mt-3 gap-2 text-sm font-semibold">
+                <div className="flex flex-wrap justify-center mt-3 gap-2 text-sm font-semibold text-gray-600">
                   {levelData.tags.map((tag: { label: string; description: string }) => (
                     <Tooltip.Provider key={tag.label} delayDuration={100}>
                       <Tooltip.Root>
@@ -125,10 +125,10 @@ export default function NivelTeoria() {
               </div>
 
               <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl text-sm shadow-sm border border-gray-100 dark:border-zinc-700">
-                <p className="font-bold mb-3 flex items-center gap-2">
+                <p className="font-bold mb-3 flex items-center gap-2 text-gray-600 dark:text-zinc-300">
                   <span className="text-green-500">✅</span> ¿Qué debes recordar?
                 </p>
-                <ul className="space-y-3">
+                <ul className="space-y-3 text-gray-600 dark:text-zinc-300">
                   {levelData.tips.map((tip: string, i: number) => (
                     <li key={i} className="flex items-start gap-2">
                       <span>•</span> {tip}
@@ -140,20 +140,20 @@ export default function NivelTeoria() {
           </div>
 
           <div className="mt-8 space-y-5">
-            <h3 className="text-xl font-bold flex items-center gap-2">
+            <h3 className="text-xl font-bold flex items-center gap-2 text-gray-600 dark:text-zinc-300">
               {levelData.extra.title}
             </h3>
-            <p className="text-base whitespace-pre-line">{levelData.extra.content}</p>
+            <p className="text-base whitespace-pre-line text-gray-600 dark:text-zinc-300">{levelData.extra.content}</p>
 
             <div className="overflow-x-auto">
-              <pre className="bg-gray-50 dark:bg-zinc-800 p-4 rounded-lg text-sm border border-gray-200 dark:border-zinc-700 min-w-min">
+              <pre className="bg-gray-50 dark:bg-zinc-800 p-4 rounded-lg text-sm border border-gray-200 dark:border-zinc-700 min-w-min text-gray-600 dark:text-zinc-300">
                 {levelData.extra.example}
               </pre>
             </div>
           </div>
 
           <div className="mt-10 space-y-6">
-            <h3 className="text-xl font-bold flex items-center gap-2">
+            <h3 className="text-xl font-bold flex items-center gap-2 text-gray-600 dark:text-zinc-300">
               <span className="text-purple-500">🧪</span> ¡Prueba el código!
             </h3>
             {modKey === "css" ? (
