@@ -15,7 +15,7 @@ const Recommendations = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-6 mt-8"
+      className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-6 mt-8 m-4"
     >
       <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
         <Lightbulb className="text-yellow-400" /> Recomendado para ti

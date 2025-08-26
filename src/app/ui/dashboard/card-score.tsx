@@ -73,7 +73,7 @@ const Card = () => {
       initial={{ x: 50, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-      className="mx-5 mb-5 grid grid-cols-1 md:grid-cols-3 gap-16"
+      className="mx-5 mb-5 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-16"
     >
       {cards.map((card, index) => (
         <motion.div

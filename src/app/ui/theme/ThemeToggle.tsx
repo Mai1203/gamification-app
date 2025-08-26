@@ -32,13 +32,13 @@ export const ThemeToggle = () => {
       aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
     >
       {isDark ? (
-        <Sun className="w-5 h-5 text-yellow-400" />
+        <Sun className="w-6 h-6 text-yellow-400" />
       ) : (
-        <Moon className="w-5 h-5 text-gray-800 dark:text-gray-200" />
+        <Moon className="w-6 h-6 text-gray-800 dark:text-gray-200" />
       )}
-      <span className="text-sm text-gray-700 dark:text-gray-300 md:hidden">
+      {/* <span className="text-sm text-gray-700 dark:text-gray-300 md:hidden">
         {isDark ? 'Modo claro' : 'Modo oscuro'}
-      </span>
+      </span> */}
     </button>
   );
 };

@@ -8,6 +8,7 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState(0); // 0: right, 1: left
+  const [isMobile, setIsMobile] = useState(false);
 
   const cards = [
     {
@@ -52,6 +53,20 @@ const Carousel = () => {
     }
   ];
 
+  // Detectar si estamos en un dispositivo móvil
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   const nextCard = useCallback(() => {
     setDirection(0);
     setCurrentIndex((prev) => (prev + 1) % cards.length);
@@ -88,12 +103,12 @@ const Carousel = () => {
 
   return (
     <div 
-      className="relative w-full h-[70vh] mx-auto rounded-2xl overflow-hidden"
+      className="relative w-full max-w-6xl mx-auto rounded-2xl overflow-hidden px-4"
       onMouseEnter={() => setIsPaused(true)} 
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Contenedor principal */}
-      <div className="h-full w-full overflow-hidden relative">
+      {/* Contenedor principal con márgenes */}
+      <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] overflow-hidden rounded-2xl shadow-xl">
         {cards.map((card, index) => (
           <motion.div
             key={index}
@@ -113,29 +128,37 @@ const Carousel = () => {
         ))}
       </div>
 
-      {/* Botones de navegación */}
+      {/* Botones de navegación - Mejorados y responsivos */}
       <button
         onClick={prevCard}
-        className="absolute left-7 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg text-xl backdrop-blur-sm z-20 transition-all"
+        className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full shadow-lg text-lg sm:text-xl backdrop-blur-sm z-20 transition-all"
         aria-label="Anterior"
+        style={{ 
+          transform: 'translateY(-50%)',
+          marginLeft: isMobile ? '0.5rem' : '1rem'
+        }}
       >
-        <span className="block w-6 h-6">◀</span>
+        <span className="block w-4 h-4 sm:w-5 sm:h-5 text-gray-400">◀</span>
       </button>
       <button
         onClick={nextCard}
-        className="absolute right-7 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg text-xl backdrop-blur-sm z-20 transition-all"
+        className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full shadow-lg text-lg sm:text-xl backdrop-blur-sm z-20 transition-all"
         aria-label="Siguiente"
+        style={{ 
+          transform: 'translateY(-50%)',
+          marginRight: isMobile ? '0.5rem' : '1rem'
+        }}
       >
-        <span className="block w-6 h-6">▶</span>
+        <span className="block w-4 h-4 sm:w-5 sm:h-5 text-gray-400">▶</span>
       </button>
 
-      {/* Indicadores de posición */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+      {/* Indicadores de posición - Mejorados */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20 bg-black/30 backdrop-blur-sm px-3 py-2 rounded-full">
         {cards.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
               currentIndex === index 
                 ? "bg-white scale-125" 
                 : "bg-white/50 hover:bg-white/80"
@@ -145,8 +168,8 @@ const Carousel = () => {
         ))}
       </div>
 
-      {/* Contador */}
-      <div className="absolute top-4 right-4 bg-black/30 text-white text-sm px-3 py-1 rounded-full backdrop-blur-sm z-20">
+      {/* Contador - Mejorado */}
+      <div className="absolute top-4 right-6 bg-black/50 text-white text-xs sm:text-sm px-3 py-1 rounded-full backdrop-blur-sm z-20">
         {currentIndex + 1} / {cards.length}
       </div>
     </div>

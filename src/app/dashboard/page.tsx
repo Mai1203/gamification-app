@@ -79,7 +79,7 @@ export default function Page() {
         mode="chars"
         stagger={0.3}
         duration={0.6}
-        className="text-2xl font-bold m-5 dark:text-white"
+        className="text-2xl font-bold m-5 dark:text-white text-gray-600"
       >
         {isSignedIn ? `¡Hola, ${user?.firstName}!` : "¡Bienvenido a EdoCode!"}
       </AnimatedText>
@@ -128,7 +128,7 @@ export default function Page() {
       </div>
 
       {/* Sección de exploración */}
-      <div className="mt-8 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-5 border border-indigo-100 dark:border-gray-700">
+      <div className="mt-8 mx-4 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-5 border border-indigo-100 dark:border-gray-700">
         <div className="flex items-start">
           <div className="flex-1">
             <h3 className="font-bold text-lg text-indigo-800 dark:text-indigo-300 mb-2">Aprende CSS Creativo</h3>

@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="relative z-10">
         <Header />
         <main className="container mx-auto py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-6">
             <Sidenav />
             <motion.div
               initial={{ y: 50, opacity: 0 }}

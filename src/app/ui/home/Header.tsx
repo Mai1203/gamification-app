@@ -28,14 +28,6 @@ export const Header = () => {
             </span>
           </Link>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-2 rounded-md focus:outline-none"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6 dark:text-white" /> : <Menu className="h-6 w-6 dark:text-white" />}
-          </button>
-
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-4">
             <ThemeToggle />
@@ -62,15 +54,38 @@ export const Header = () => {
               </SignedIn>
             </ClerkLoaded>
           </div>
+
+          {/* Mobile elements */}
+          <div className="md:hidden flex items-center gap-3">
+            <ClerkLoaded>
+              <SignedIn>
+                {/* Mostrar ThemeToggle y UserButton en móvil cuando está autenticado */}
+                <ThemeToggle />
+                <UserButton />
+              </SignedIn>
+              <SignedOut>
+                {/* Mostrar botón de hamburguesa solo cuando no está autenticado */}
+                <ThemeToggle />
+                <button
+                  className="p-2 rounded-md focus:outline-none"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                  {isMobileMenuOpen ? (
+                    <X className="h-6 w-6 text-gray-600 dark:text-white" />
+                  ) : (
+                    <Menu className="h-6 w-6 text-gray-600 dark:text-white" />
+                  )}
+                </button>
+              </SignedOut>
+            </ClerkLoaded>
+          </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 flex flex-col gap-4 items-start">
-            <ThemeToggle />
-
-            <ClerkLoaded>
-              <SignedOut>
+        {/* Mobile Dropdown Menu - Solo mostrar cuando no está autenticado */}
+        <ClerkLoaded>
+          <SignedOut>
+            {isMobileMenuOpen && (
+              <div className="md:hidden mt-4 flex flex-col gap-4 items-start">
                 <SignInButton forceRedirectUrl="/dashboard" mode="modal">
                   <button className="w-full flex items-center gap-2 px-4 py-2 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-zinc-800 rounded-lg transition-all duration-300 cursor-pointer">
                     <LogIn className="h-4 w-4" />
@@ -84,14 +99,10 @@ export const Header = () => {
                     Registrarse
                   </button>
                 </SignUpButton>
-              </SignedOut>
-
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </ClerkLoaded>
-          </div>
-        )}
+              </div>
+            )}
+          </SignedOut>
+        </ClerkLoaded>
       </div>
     </header>
   );
