@@ -13,28 +13,23 @@ type CodeFillProps = {
 
 export default function CodeFillGame({ content, answers, description }: CodeFillProps) {
   const gameRef = useRef<HTMLDivElement>(null);
+  const gameInstance = useRef<Phaser.Game | null>(null);
   const [score, setScore] = useState(0);
   const [total, setTotal] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
-  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const updateDimensions = () => {
-      if (gameRef.current) {
-        const { width, height } = gameRef.current.getBoundingClientRect();
-        setDimensions({ width, height });
-      }
+    const checkMobile = () => {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     };
-
-    updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-
-    return () => {
-      window.removeEventListener('resize', updateDimensions);
-    };
+    
+    setIsMobile(checkMobile());
   }, []);
 
   useEffect(() => {
+    if (!gameRef.current) return;
+
     class CodeScene extends Phaser.Scene {
       inputs: Phaser.GameObjects.DOMElement[] = [];
       answers: string[];
@@ -43,6 +38,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
       particlesEmitter: Phaser.GameObjects.Particles.ParticleEmitter | null = null;
       robot: Phaser.GameObjects.Image | null = null;
       scoreText: Phaser.GameObjects.Text | null = null;
+      inputFocus: boolean = false;
 
       constructor() {
         super("CodeScene");
@@ -70,7 +66,8 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
         })
 
         const lines = content.split("\n");
-        const baseFontSize = Math.max(12, Math.min(16, width / 50));
+        // Ajustar tamaño de fuente para móviles
+        const baseFontSize = isMobile ? Math.max(10, Math.min(14, width / 60)) : Math.max(12, Math.min(16, width / 50));
         const baseStyle = { 
           fontSize: `${baseFontSize}px`,
           fontFamily: "'Fira Code', monospace",
@@ -78,16 +75,16 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
           padding: { left: 5, right: 5 }
         };
 
-        // POSICIÓN AJUSTADA DEL ROBOT - Responsiva
-        const robotX = width < 768 ? width * 0.1 : width * 0.12;
-        const robotY = height < 600 ? height * 0.75 : height * 0.8;
+        // POSICIÓN AJUSTADA DEL ROBOT - Más arriba en móviles
+        const robotX = isMobile ? width * 0.1 : width * 0.12;
+        const robotY = isMobile ? height * 0.8 : height * 0.8;
         this.robot = this.add.image(robotX, robotY, "robot")
-          .setScale(width < 768 ? 0.04 : 0.06)
+          .setScale(isMobile ? 0.035 : 0.06)
           .setAlpha(0);
 
         this.tweens.add({
           targets: this.robot,
-          x: width * 0.15,
+          x: isMobile ? width * 0.12 : width * 0.15,
           alpha: 1,
           duration: 1200,
           ease: "Back.out",
@@ -104,20 +101,20 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
           }
         });
 
-        // BURBUJA DE TEXTO CON POSICIÓN AJUSTADA - Responsiva
-        const bubbleWidth = width < 768 ? width * 0.7 : width * 0.4;
-        const bubbleX = width < 768 ? width * 0.15 : width * 0.2;
-        const bubbleY = height < 600 ? height * 0.7 : height * 0.75;
+        // BURBUJA DE TEXTO CON POSICIÓN AJUSTADA - Más arriba en móviles
+        const bubbleWidth = isMobile ? width * 0.8 : width * 0.4;
+        const bubbleX = isMobile ? width * 0.1 : width * 0.2;
+        const bubbleY = isMobile ? height * 0.8 : height * 0.75;
         
         const bubble = this.add.graphics();
         bubble.fillStyle(0x2d3748, 0.95);
-        bubble.fillRoundedRect(bubbleX, bubbleY, bubbleWidth, 80, 16);
+        bubble.fillRoundedRect(bubbleX, bubbleY, bubbleWidth, isMobile ? 70 : 80, 16);
         bubble.lineStyle(2, 0x4f46e5, 1);
-        bubble.strokeRoundedRect(bubbleX, bubbleY, bubbleWidth, 80, 16);
+        bubble.strokeRoundedRect(bubbleX, bubbleY, bubbleWidth, isMobile ? 70 : 80, 16);
 
         // TEXTO DE LA BURBUJA CON POSICIÓN AJUSTADA
-        const descFontSize = Math.max(12, Math.min(16, width / 55));
-        this.add.text(bubbleX + 20, bubbleY + 20, description, {
+        const descFontSize = isMobile ? Math.max(10, Math.min(14, width / 65)) : Math.max(12, Math.min(16, width / 55));
+        this.add.text(bubbleX + 15, bubbleY + 15, description, {
           font: `${descFontSize}px 'Inter', sans-serif`,
           color: "#e2e8f0",
           wordWrap: { width: bubbleWidth - 30 },
@@ -132,9 +129,11 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
           padding: { x: 10, y: 5 }
         }).setOrigin(1, 0);
 
-        let y = 40;
-        const lineSpacing = height < 600 ? 25 : 30;
-        const inputWidth = width < 768 ? 80 : 110;
+        // Ajustar espaciado para el código
+        let y = isMobile ? 20 : 40; 
+        const lineSpacing = isMobile ? 35 : 40; 
+        const inputWidth = isMobile ? 70 : 90;
+        const inputHeight = isMobile ? 36 : 32;
         
         lines.forEach((line) => {
           const parts = line.split("____");
@@ -152,10 +151,12 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
               y += lineSpacing;
             }
             
+            // Fondo para el texto de código
             const bg = this.add.graphics();
             bg.fillStyle(0x1e293b, 0.85);
-            bg.fillRoundedRect(x - 6, y - 4, textWidth + 12, 28, 6);
+            bg.fillRoundedRect(x - 6, y - 4, textWidth + 12, isMobile ? 26 : 28, 6);
 
+            // Texto de código
             this.add.text(x, y, part, {
               ...baseStyle,
               color: "#f1f5f9",
@@ -171,7 +172,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
             x += textWidth + 10;
 
             if (i < parts.length - 1) {
-              const inputFontSize = Math.max(12, Math.min(14, width / 60));
+              const inputFontSize = isMobile ? Math.max(10, Math.min(12, width / 70)) : Math.max(12, Math.min(14, width / 60));
               
               // Verificar si hay espacio para el input
               if (x + inputWidth > maxLineWidth) {
@@ -179,13 +180,14 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
                 y += lineSpacing;
               }
               
-              const input = this.add.dom(x, y + 5).createFromHTML(`
+              const input = this.add.dom(x, y + (isMobile ? 3 : 5)).createFromHTML(`
                 <input 
                   name="input"
                   type="text" 
                   class="code-input"
                   style="
                     width: ${inputWidth}px;
+                    height: ${inputHeight}px;
                     font-size: ${inputFontSize}px;
                     font-family: 'Fira Code', monospace;
                     padding: 5px 10px;
@@ -198,10 +200,34 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
                     text-align: center;
                     transition: all 0.3s ease;
                     margin-left: 10px;
+                    min-height: 44px;
                   " 
                   placeholder="etiqueta"
                 />
               `);
+              
+              // SOLUCIÓN PARA MÓVILES: Manejar correctamente los eventos táctiles
+              const inputElement = input.node.querySelector('input') as HTMLInputElement;
+              if (inputElement) {
+                // Prevenir que Phaser capture los eventos
+                inputElement.addEventListener('touchstart', (e) => {
+                  e.stopPropagation();
+                  this.inputFocus = true;
+                }, { passive: false });
+                
+                inputElement.addEventListener('mousedown', (e) => {
+                  e.stopPropagation();
+                  this.inputFocus = true;
+                });
+                
+                inputElement.addEventListener('focus', () => {
+                  this.inputFocus = true;
+                });
+                
+                inputElement.addEventListener('blur', () => {
+                  this.inputFocus = false;
+                });
+              }
               
               this.inputs.push(input);
               this.total++;
@@ -213,13 +239,13 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
         });
 
         this.scoreText?.setText(`Puntuación: ${this.score}/${this.total}`);
-        const verifyButtonContainer = this.add.container(width / 2, y + 30);
+        const verifyButtonContainer = this.add.container(width / 2, y + 40);
 
         // BOTÓN CON ESTILOS RESPONSIVOS
-        const buttonFontSize = Math.max(14, Math.min(16, width / 55));
+        const buttonFontSize = isMobile ? Math.max(12, Math.min(14, width / 65)) : Math.max(14, Math.min(16, width / 55));
         const verifyButton = this.add.dom(0, 0).createFromHTML(`
           <button class="verify-button" style="
-            padding: 0.6rem 1.5rem;
+            padding: ${isMobile ? '0.5rem 1.2rem' : '0.6rem 1.5rem'};
             font-size: ${buttonFontSize}px;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
@@ -234,8 +260,9 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
             overflow: hidden;
             display: block;
             width: 100%;
-            max-width: 220px;
+            max-width: ${isMobile ? '180px' : '220px'};
             margin: 0 auto;
+            min-height: 44px;
           ">
             Verificar
             <span style="
@@ -276,6 +303,13 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
         verifyButton.addListener("mouseout");
         verifyButton.on("mouseout", () => {
           verifyButton.setScale(1);
+        });
+
+        // Desactivar la captura de eventos táctiles de Phaser cuando un input tiene el foco
+        this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+          if (this.inputFocus) {
+            pointer.event.preventDefault();
+          }
         });
       }
 
@@ -403,10 +437,10 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
 
     const config: Phaser.Types.Core.GameConfig = {
       type: Phaser.AUTO,
-      width: dimensions.width,
-      height: dimensions.height,
+      width: gameRef.current.clientWidth,
+      height: gameRef.current.clientHeight,
       backgroundColor: "#0f172a",
-      parent: gameRef.current || undefined,
+      parent: gameRef.current,
       scene: CodeScene,
       dom: {
         createContainer: true,
@@ -414,12 +448,32 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
       scale: {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH
+      },
+      input: {
+        touch: {
+          capture: !isMobile
+        }
       }
     };
 
-    const game = new Phaser.Game(config);
-    return () => game.destroy(true);
-  }, [content, answers, description, dimensions]);
+    gameInstance.current = new Phaser.Game(config);
+
+    const handleResize = () => {
+      if (gameInstance.current && gameRef.current) {
+        gameInstance.current.scale.resize(gameRef.current.clientWidth, gameRef.current.clientHeight);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (gameInstance.current) {
+        gameInstance.current.destroy(true);
+        gameInstance.current = null;
+      }
+    };
+  }, [content, answers, description, isMobile]);
 
   if(gameComplete){
     return <PagFinalizar score={score} total={total} />
@@ -427,7 +481,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div ref={gameRef} className="w-full h-[70vh] min-h-[400px] max-h-[800px] max-w-6xl rounded-xl overflow-hidden shadow-2xl" />
+      <div ref={gameRef} className="w-full h-[70vh] min-h-[500px] max-h-[800px] max-w-6xl rounded-xl overflow-hidden shadow-2xl" />
     </div>
   );
 }
