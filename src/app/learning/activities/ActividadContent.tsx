@@ -16,6 +16,8 @@ export default function ActividadContent() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     const fetchData = async () => {
       try {
         setIsLoading(true);

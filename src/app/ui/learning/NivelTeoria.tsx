@@ -23,6 +23,7 @@ export default function NivelTeoria() {
   const [showAnimations, setShowAnimations] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     // Detectar tamaño de pantalla
     const checkResponsive = () => {
       setShowAnimations(window.innerWidth >= 1024); // Solo mostrar animaciones en pantallas grandes
