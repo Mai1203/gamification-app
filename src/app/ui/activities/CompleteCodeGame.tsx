@@ -16,6 +16,24 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
   const [score, setScore] = useState(0);
   const [total, setTotal] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+
+  useEffect(() => {
+    // Actualizar dimensiones según el tamaño del contenedor
+    const updateDimensions = () => {
+      if (gameRef.current) {
+        const { width, height } = gameRef.current.getBoundingClientRect();
+        setDimensions({ width, height });
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, []);
 
   useEffect(() => {
     class CodeScene extends Phaser.Scene {
@@ -38,8 +56,12 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
       }
 
       create() {
+        // OBTENER DIMENSIONES DE LA CÁMARA PRINCIPAL
+        const width = this.cameras.main.width;
+        const height = this.cameras.main.height;
+        
         this.add.particles(0, 0, "particle1", {
-          x: { min: 0, max: 880 },
+          x: { min: 0, max: width },
           y: 0,
           lifespan: 6000,
           speedY: { min: 20, max: 60 },
@@ -50,21 +72,24 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
         })
 
         const lines = content.split("\n");
+        const baseFontSize = Math.max(12, Math.min(16, width / 50));
         const baseStyle = { 
-          fontSize: "16px", // Tamaño reducido
+          fontSize: `${baseFontSize}px`,
           fontFamily: "'Fira Code', monospace",
           fill: "#e2e8f0",
           padding: { left: 5, right: 5 }
         };
 
-        // POSICIÓN AJUSTADA DEL ROBOT
-        this.robot = this.add.image(-100, 480, "robot") // Y reducido de 480 a 380
-          .setScale(0.06)
+        // POSICIÓN AJUSTADA DEL ROBOT - Responsiva
+        const robotX = width < 768 ? width * 0.1 : width * 0.12;
+        const robotY = height < 600 ? height * 0.75 : height * 0.8;
+        this.robot = this.add.image(robotX, robotY, "robot")
+          .setScale(width < 768 ? 0.04 : 0.06)
           .setAlpha(0);
 
         this.tweens.add({
           targets: this.robot,
-          x: 100,
+          x: width * 0.15,
           alpha: 1,
           duration: 1200,
           ease: "Back.out",
@@ -81,39 +106,48 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
           }
         });
 
-        // BURBUJA DE TEXTO CON POSICIÓN AJUSTADA
+        // BURBUJA DE TEXTO CON POSICIÓN AJUSTADA - Responsiva
+        const bubbleWidth = width < 768 ? width * 0.7 : width * 0.4;
+        const bubbleX = width < 768 ? width * 0.15 : width * 0.2;
+        const bubbleY = height < 600 ? height * 0.7 : height * 0.75;
+        
         const bubble = this.add.graphics();
         bubble.fillStyle(0x2d3748, 0.95);
-        bubble.fillRoundedRect(160, 450, 320, 80, 16); // Y reducido de 450 a 350
+        bubble.fillRoundedRect(bubbleX, bubbleY, bubbleWidth, 80, 16);
         bubble.lineStyle(2, 0x4f46e5, 1);
-        bubble.strokeRoundedRect(160, 450, 320, 80, 16);
+        bubble.strokeRoundedRect(bubbleX, bubbleY, bubbleWidth, 80, 16);
 
         // TEXTO DE LA BURBUJA CON POSICIÓN AJUSTADA
-        this.add.text(190, 470, description, {
-          font: "16px 'Inter', sans-serif",
+        const descFontSize = Math.max(12, Math.min(16, width / 55));
+        this.add.text(bubbleX + 20, bubbleY + 20, description, {
+          font: `${descFontSize}px 'Inter', sans-serif`,
           color: "#e2e8f0",
-          wordWrap: { width: 280 },
+          wordWrap: { width: bubbleWidth - 30 },
           align: "center"
         });
 
-        this.scoreText = this.add.text(850, 30, `Puntuación: ${this.score}/${this.total}`, {
-          font: "16px 'Inter', sans-serif",
+        // Texto de puntuación - Posición responsiva
+        this.scoreText = this.add.text(width - 20, 20, `Puntuación: ${this.score}/${this.total}`, {
+          font: `${descFontSize}px 'Inter', sans-serif`,
           color: "#e2e8f0",
           backgroundColor: "#4f46e5",
           padding: { x: 10, y: 5 }
         }).setOrigin(1, 0);
 
-        let y = 30;
+        let y = 40;
+        const lineSpacing = height < 600 ? 25 : 30;
+        const inputWidth = width < 768 ? 80 : 110;
+        
         lines.forEach((line) => {
           const parts = line.split("____");
-          let x = 40;
+          let x = 30;
 
           parts.forEach((part, i) => {
             const textWidth = this.measureTextWidth(part, baseStyle.fontSize, baseStyle.fontFamily);
             
             const bg = this.add.graphics();
             bg.fillStyle(0x1e293b, 0.85);
-            bg.fillRoundedRect(x - 6, y - 4, textWidth + 12, 28, 6); // Altura ajustada
+            bg.fillRoundedRect(x - 6, y - 4, textWidth + 12, 28, 6);
 
             this.add.text(x, y, part, {
               ...baseStyle,
@@ -130,14 +164,15 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
             x += textWidth + 10;
 
             if (i < parts.length - 1) {
+              const inputFontSize = Math.max(12, Math.min(14, width / 60));
               const input = this.add.dom(x, y + 5).createFromHTML(`
                 <input 
                   name="input"
                   type="text" 
                   class="code-input"
                   style="
-                    width: 110px;
-                    font-size: 14px;
+                    width: ${inputWidth}px;
+                    font-size: ${inputFontSize}px;
                     font-family: 'Fira Code', monospace;
                     padding: 5px 10px;
                     border-radius: 6px;
@@ -148,7 +183,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
                     outline: none;
                     text-align: center;
                     transition: all 0.3s ease;
-                    margin-left: 30px;
+                    margin-left: 10px;
                   " 
                   placeholder="etiqueta"
                 />
@@ -156,21 +191,22 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
               
               this.inputs.push(input);
               this.total++;
-              x += 120; // Espacio reducido
+              x += inputWidth + 15;
             }
           });
 
-          y += 30; // Espaciado reducido
+          y += lineSpacing;
         });
 
         this.scoreText?.setText(`Puntuación: ${this.score}/${this.total}`);
-        const verifyButtonContainer = this.add.container(400, y + 30);
+        const verifyButtonContainer = this.add.container(width / 2, y + 30);
 
-        // BOTÓN CON POSICIÓN AJUSTADA
+        // BOTÓN CON ESTILOS RESPONSIVOS
+        const buttonFontSize = Math.max(14, Math.min(16, width / 55));
         const verifyButton = this.add.dom(0, 0).createFromHTML(`
           <button class="verify-button" style="
-            padding: 0.75rem 2rem;
-            font-size: clamp(0.875rem, 2vw, 1rem);
+            padding: 0.6rem 1.5rem;
+            font-size: ${buttonFontSize}px;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
             border: none;
@@ -285,6 +321,10 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
       }
 
       handleSuccess() {
+        // OBTENER DIMENSIONES DE LA CÁMARA PRINCIPAL
+        const width = this.cameras.main.width;
+        const height = this.cameras.main.height;
+        
         if (this.particlesEmitter) {
           this.particlesEmitter.setConfig({
             quantity: 20,
@@ -309,7 +349,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
         if (this.robot) {
           this.tweens.add({
             targets: this.robot,
-            scale: 0.08,
+            scale: this.robot.scale * 1.3,
             duration: 500,
             yoyo: true,
             repeat: 1,
@@ -317,7 +357,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
           });
         }
         
-        const successText = this.add.text(400, 300, "¡Perfecto!", {
+        const successText = this.add.text(width / 2, height / 2, "¡Perfecto!", {
           font: "48px 'Inter', sans-serif",
           color: "#10b981",
           stroke: "#022c22",
@@ -350,8 +390,8 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
 
     const config: Phaser.Types.Core.GameConfig = {
       type: Phaser.AUTO,
-      width: 800,
-      height: 600,
+      width: dimensions.width,
+      height: dimensions.height,
       backgroundColor: "#0f172a",
       parent: gameRef.current || undefined,
       scene: CodeScene,
@@ -366,7 +406,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
 
     const game = new Phaser.Game(config);
     return () => game.destroy(true);
-  }, [content, answers, description]);
+  }, [content, answers, description, dimensions]);
 
   if(gameComplete){
     return <PagFinalizar score={score} total={total} />
@@ -374,7 +414,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div ref={gameRef} className="w-full h-[600px] max-w-4xl rounded-xl overflow-hidden shadow-2xl" />
+      <div ref={gameRef} className="w-full h-[70vh] min-h-[400px] max-h-[600px] max-w-6xl rounded-xl overflow-hidden shadow-2xl" />
     </div>
   );
 }
