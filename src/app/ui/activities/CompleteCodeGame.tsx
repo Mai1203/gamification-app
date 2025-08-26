@@ -19,7 +19,6 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 
   useEffect(() => {
-    // Actualizar dimensiones según el tamaño del contenedor
     const updateDimensions = () => {
       if (gameRef.current) {
         const { width, height } = gameRef.current.getBoundingClientRect();
@@ -56,7 +55,6 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
       }
 
       create() {
-        // OBTENER DIMENSIONES DE LA CÁMARA PRINCIPAL
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
         
@@ -142,8 +140,17 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
           const parts = line.split("____");
           let x = 30;
 
+          // Dividir líneas largas
+          const maxLineWidth = width - 60; // Margen de 30px a cada lado
+          
           parts.forEach((part, i) => {
             const textWidth = this.measureTextWidth(part, baseStyle.fontSize, baseStyle.fontFamily);
+            
+            // Si el texto es demasiado ancho, dividirlo en múltiples líneas
+            if (x + textWidth > maxLineWidth) {
+              x = 30;
+              y += lineSpacing;
+            }
             
             const bg = this.add.graphics();
             bg.fillStyle(0x1e293b, 0.85);
@@ -165,6 +172,13 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
 
             if (i < parts.length - 1) {
               const inputFontSize = Math.max(12, Math.min(14, width / 60));
+              
+              // Verificar si hay espacio para el input
+              if (x + inputWidth > maxLineWidth) {
+                x = 30;
+                y += lineSpacing;
+              }
+              
               const input = this.add.dom(x, y + 5).createFromHTML(`
                 <input 
                   name="input"
@@ -321,7 +335,6 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
       }
 
       handleSuccess() {
-        // OBTENER DIMENSIONES DE LA CÁMARA PRINCIPAL
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
         
@@ -414,7 +427,7 @@ export default function CodeFillGame({ content, answers, description }: CodeFill
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div ref={gameRef} className="w-full h-[70vh] min-h-[400px] max-h-[600px] max-w-6xl rounded-xl overflow-hidden shadow-2xl" />
+      <div ref={gameRef} className="w-full h-[70vh] min-h-[400px] max-h-[800px] max-w-6xl rounded-xl overflow-hidden shadow-2xl" />
     </div>
   );
 }
