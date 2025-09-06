@@ -85,7 +85,7 @@ export default function ProjectsPage() {
     <div className="p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold dark:text-white mb-1">Mis Proyectos</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-700 dark:text-white mb-1">Mis Proyectos</h1>
           <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
             Crea y gestiona tus proyectos HTML/CSS
           </p>
@@ -122,7 +122,7 @@ export default function ProjectsPage() {
               onClick={() => handleEditProject(project)}
             >
               <div className="p-4 sm:p-5">
-                <h3 className="font-semibold text-base sm:text-lg mb-3 dark:text-white line-clamp-2 leading-tight" style={{ minHeight: '2.5rem' }}>
+                <h3 className="font-semibold text-base sm:text-lg mb-3 text-gray-700 dark:text-white line-clamp-2 leading-tight" style={{ minHeight: '2.5rem' }}>
                   {project.title}
                 </h3>
                 <div className="flex items-center text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2">
