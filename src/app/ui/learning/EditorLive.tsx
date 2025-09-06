@@ -9,12 +9,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 type Props = {
   defaultHtml: string;
   defaultCss?: string;
-  mode?: 'html' | 'css'; // Nuevo prop para identificar el módulo
+  mode?: 'html' | 'css';
+  onHtmlChange?: (html: string) => void;
+  onCssChange?: (css: string) => void;
 };
 
 type IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor;
 
-export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html' }: Props) {
+export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html', onHtmlChange, onCssChange }: Props) {
   const [htmlCode, setHtmlCode] = useState(defaultHtml);
   const [cssCode, setCssCode] = useState(defaultCss);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -37,6 +39,15 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
     </body>
     </html>
   `;
+
+  // Notificar cambios a los componentes padres
+  useEffect(() => {
+    onHtmlChange?.(htmlCode);
+  }, [htmlCode, onHtmlChange]);
+
+  useEffect(() => {
+    onCssChange?.(cssCode);
+  }, [cssCode, onCssChange]);
 
   // Toggle fullscreen mode
   const toggleFullscreen = () => {

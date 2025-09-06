@@ -1,5 +1,5 @@
 'use client';
-import { Layout, Palette, House } from 'lucide-react';
+import { Layout, Palette, House, FolderOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -9,6 +9,7 @@ const links = [
   { name: 'Inicio', href: '/dashboard', icon: House },
   { name: 'HTML Básico', href: '/dashboard/html', icon: Layout },
   { name: 'CSS Creativo', href: '/dashboard/css', icon: Palette },
+  { name: 'Proyectos', href: '/dashboard/projects', icon: FolderOpen },
 ];
 
 export default function NavLinks() {
