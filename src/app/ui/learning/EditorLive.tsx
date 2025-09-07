@@ -129,7 +129,7 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
               onClick={() => setViewMode('code')}
               className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
                 viewMode === 'code' 
-                  ? 'bg-white dark:bg-zinc-600 shadow' 
+                  ? 'bg-white text-gray-400 dark:bg-zinc-600 shadow' 
                   : 'text-gray-500 dark:text-gray-400'
               }`}
             >
@@ -140,7 +140,7 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
               onClick={() => setViewMode('preview')}
               className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
                 viewMode === 'preview' 
-                  ? 'bg-white dark:bg-zinc-600 shadow' 
+                  ? 'bg-white text-gray-400 dark:bg-zinc-600 shadow' 
                   : 'text-gray-500 dark:text-gray-400'
               }`}
             >
@@ -151,7 +151,7 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
               onClick={() => setViewMode('split')}
               className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
                 viewMode === 'split' 
-                  ? 'bg-white dark:bg-zinc-600 shadow' 
+                  ? 'bg-white text-gray-400 dark:bg-zinc-600 shadow' 
                   : 'text-gray-500 dark:text-gray-400'
               }`}
             >
@@ -166,7 +166,7 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
           {/* Botones de acción */}
           <button
             onClick={resetCode}
-            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+            className="p-2 rounded-lg hover:bg-gray-200 text-gray-500 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
             title="Resetear código"
           >
             <RotateCw size={18} />
@@ -174,7 +174,7 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
           
           <button
             onClick={copyToClipboard}
-            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+            className="p-2 rounded-lg hover:bg-gray-200 text-gray-500 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
             title="Copiar código"
           >
             {copied ? <Check size={18} className="text-green-500" /> : <Copy size={18} />}
@@ -182,7 +182,7 @@ export default function EditorLive({ defaultHtml, defaultCss = '', mode = 'html'
           
           <button
             onClick={toggleFullscreen}
-            className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+            className="p-2 rounded-lg hover:bg-gray-200 text-gray-500 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
             title={isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
           >
             {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}

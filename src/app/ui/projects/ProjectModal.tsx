@@ -87,14 +87,14 @@ export default function ProjectModal({ project, onClose, onProjectUpdated }: Pro
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Título del proyecto"
-              className="text-xl font-bold bg-transparent border-none focus:outline-none dark:text-white flex-1 mr-4"
+              className="text-xl font-bold bg-transparent border-none focus:outline-none text-gray-700 dark:text-white flex-1 mr-4"
             />
             <button onClick={onClose} className="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white cursor-pointer">
               <X size={24} />
             </button>
           </div>
 
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden relative">
             <EditorLive
               defaultHtml={html}
               defaultCss={css}
