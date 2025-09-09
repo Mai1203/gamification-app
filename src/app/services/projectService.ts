@@ -19,6 +19,7 @@ export interface Project {
   css: string;
   createdAt: Date;
   updatedAt: Date;
+  status?: 'active' | 'completed' | 'pending';
 }
 
 // Crear un nuevo proyecto dentro del usuario
@@ -73,7 +74,6 @@ export const getUserProjects = async (userId: string): Promise<Project[]> => {
   return projects;
 };
 
-// Obtener un proyecto específico de un usuario
 export const getProject = async (userId: string, projectId: string): Promise<Project | null> => {
   const projectRef = doc(db, 'users', userId, 'projects', projectId);
   const projectSnap = await getDoc(projectRef);
@@ -89,5 +89,18 @@ export const getProject = async (userId: string, projectId: string): Promise<Pro
     css: data.css,
     createdAt: data.createdAt.toDate(),
     updatedAt: data.updatedAt.toDate(),
+  };
+};
+
+export const getUserProjectStats = async (userId: string): Promise<{
+  total: number;
+  active: number;
+  completed: number;
+}> => {
+  const projects = await getUserProjects(userId);
+  return {
+    total: projects.length,
+    active: projects.filter(p => p.status === 'active').length,
+    completed: projects.filter(p => p.status === 'completed').length
   };
 };
