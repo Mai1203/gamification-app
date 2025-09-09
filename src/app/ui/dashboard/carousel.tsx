@@ -47,7 +47,7 @@ const Carousel = () => {
       title: "Proyectos Reales",
       description: "Desarrolla sitios completos aplicando todo lo aprendido",
       emoji: "🚀",
-      link: "/dashboard/html",
+      link: "/dashboard/projects",
       imageUrl: "/img/carousel-projects.png",
       color: "from-red-500 to-amber-600"
     }
