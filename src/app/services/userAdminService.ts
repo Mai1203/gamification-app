@@ -1,4 +1,3 @@
-// src/app/services/userAdminService.ts
 import { 
   collection, 
   getDocs, 
@@ -10,37 +9,30 @@ import {
   startAfter,
   getDoc,
   DocumentData,
-  QueryDocumentSnapshot
+  QueryDocumentSnapshot,
+  Timestamp
 } from 'firebase/firestore';
 import { db } from '../lib/firebaseConfig';
-import { Project } from './projectService';
 
 export interface User {
   id: string;
   name: string;
   email: string;
-  isAdmin?: boolean;
   createdAt: string;
-  lastLogin?: string;
   progress?: {
     html: number;
     css: number;
   };
-  projects?: Project[]; // Tipo específico en lugar de any[]
-}
-
-interface Lesson {
-  completed: boolean;
-  // Agrega otras propiedades que puedan existir en tus lecciones
-  locked?: boolean;
-  title?: string;
-  // ... otras propiedades según tu estructura de datos
 }
 
 export interface UserStats {
   totalUsers: number;
   totalAdmins: number;
   activeToday: number;
+}
+
+interface Lesson {
+  completed: boolean;
 }
 
 const ITEMS_PER_PAGE = 10;
@@ -72,32 +64,18 @@ const calculateModuleProgress = async (userId: string, moduleId: string): Promis
 
 // Obtener lista de usuarios con paginación
 export const getUsers = async (
-  lastVisible: QueryDocumentSnapshot<DocumentData> | null = null, 
-  searchTerm: string = ''
+  lastVisible: QueryDocumentSnapshot<DocumentData> | null = null
 ): Promise<{ 
   users: User[], 
   lastVisible: QueryDocumentSnapshot<DocumentData> | null, 
   hasMore: boolean 
 }> => {
   try {
-    let q;
-    const usersCollection = collection(db, 'users');
-    
-    if (searchTerm) {
-      q = query(
-        usersCollection,
-        where('name', '>=', searchTerm),
-        where('name', '<=', searchTerm + '\uf8ff'),
-        orderBy('name'),
-        limit(ITEMS_PER_PAGE)
-      );
-    } else {
-      q = query(
-        usersCollection,
-        orderBy('name'),
-        limit(ITEMS_PER_PAGE)
-      );
-    }
+    let q = query(
+      collection(db, 'users'),
+      orderBy('name'),
+      limit(ITEMS_PER_PAGE)
+    );
 
     if (lastVisible) {
       q = query(q, startAfter(lastVisible));
@@ -108,31 +86,22 @@ export const getUsers = async (
 
     for (const document of querySnapshot.docs) {
       const data = document.data();
-      
-      // Verificar si es administrador
-      const adminDocRef = doc(db, 'admins', document.id);
-      const adminDoc = await getDoc(adminDocRef);
-      const isAdmin = adminDoc.exists();
 
-      // Obtener progreso de HTML y CSS desde la ruta correcta
-      const htmlProgress = await calculateModuleProgress(document.id, 'html');
-      const cssProgress = await calculateModuleProgress(document.id, 'css');
-
-      // Obtener proyectos del usuario (puede ser opcional para mejorar rendimiento)
-      // const projects = await getUserProjects(document.id);
+      // Calcular progresos en paralelo
+      const [htmlProgress, cssProgress] = await Promise.all([
+        calculateModuleProgress(document.id, 'html'),
+        calculateModuleProgress(document.id, 'css')
+      ]);
 
       users.push({
         id: document.id,
         name: data.name || 'Sin nombre',
         email: data.email,
-        isAdmin: isAdmin,
         createdAt: data.createdAt,
-        lastLogin: data.lastLogin,
         progress: {
           html: htmlProgress,
           css: cssProgress
         }
-        // projects: projects // Descomentar si quieres cargar proyectos aquí
       });
     }
 
@@ -147,17 +116,94 @@ export const getUsers = async (
   }
 };
 
+// Buscar usuarios por nombre o email
+export const searchUsers = async (searchTerm: string): Promise<User[]> => {
+  try {
+    // Consultas separadas para nombre y email
+    const nameQuery = query(
+      collection(db, 'users'),
+      where('name', '>=', searchTerm),
+      where('name', '<=', searchTerm + '\uf8ff'),
+      orderBy('name')
+    );
+    
+    const emailQuery = query(
+      collection(db, 'users'),
+      where('email', '>=', searchTerm),
+      where('email', '<=', searchTerm + '\uf8ff'),
+      orderBy('email')
+    );
+
+    // Ejecutar ambas consultas en paralelo
+    const [nameSnapshot, emailSnapshot] = await Promise.all([
+      getDocs(nameQuery),
+      getDocs(emailQuery)
+    ]);
+
+    // Combinar resultados y eliminar duplicados
+    const combinedDocs = [...nameSnapshot.docs, ...emailSnapshot.docs];
+    const uniqueDocs = combinedDocs.filter((doc, index, self) => 
+      index === self.findIndex(d => d.id === doc.id)
+    );
+
+    const users: User[] = [];
+
+    for (const document of uniqueDocs) {
+      const data = document.data();
+
+      // Calcular progresos en paralelo
+      const [htmlProgress, cssProgress] = await Promise.all([
+        calculateModuleProgress(document.id, 'html'),
+        calculateModuleProgress(document.id, 'css')
+      ]);
+
+      users.push({
+        id: document.id,
+        name: data.name || 'Sin nombre',
+        email: data.email,
+        createdAt: data.createdAt,
+        progress: {
+          html: htmlProgress,
+          css: cssProgress
+        }
+      });
+    }
+
+    // Ordenar por nombre
+    users.sort((a, b) => a.name.localeCompare(b.name));
+
+    return users;
+  } catch (error) {
+    console.error('Error buscando usuarios:', error);
+    throw error;
+  }
+};
+
 // Obtener estadísticas de usuarios
 export const getUserStats = async (): Promise<UserStats> => {
   try {
-    const usersSnapshot = await getDocs(collection(db, 'users'));
-    const adminsSnapshot = await getDocs(collection(db, 'admins'));
+    const [usersSnapshot, adminsSnapshot] = await Promise.all([
+      getDocs(collection(db, 'users')),
+      getDocs(collection(db, 'admins'))
+    ]);
     
-    // Calcular usuarios activos hoy (ejemplo simplificado)
-    const today = new Date().toISOString().split('T')[0];
+    // Calcular usuarios activos hoy
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayTimestamp = Timestamp.fromDate(today);
+    
     const activeUsers = usersSnapshot.docs.filter(document => {
       const userData = document.data();
-      return userData.lastLogin && userData.lastLogin.includes(today);
+      if (!userData.lastLogin) return false;
+      
+      let lastLogin: Timestamp;
+      if (typeof userData.lastLogin === 'string') {
+        lastLogin = Timestamp.fromDate(new Date(userData.lastLogin));
+      } else {
+        lastLogin = userData.lastLogin;
+      }
+      
+      return lastLogin.toMillis() >= todayTimestamp.toMillis();
     });
 
     return {

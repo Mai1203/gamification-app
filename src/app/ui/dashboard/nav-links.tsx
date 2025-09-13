@@ -52,7 +52,7 @@ export default function NavLinks() {
           whileTap={{ scale: 0.98, transition: { duration: 0.2 } }}
         >
           <Link
-            href="/admin"
+            href="/dashboard/admin"
             className={clsx(
               'w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300',
               'hover:bg-indigo-50 hover:text-black dark:hover:bg-zinc-800 dark:hover:text-white',
