@@ -64,7 +64,6 @@ export default function AdminPage() {
   }, []);
 
   useEffect(() => {
-    // Solo cargar una vez cuando todo esté listo y no se haya cargado antes
     if (isCurrentUserLoaded && !isAdminLoading && !initialLoadDone.current) {
       if (!isAdmin) {
         redirect("/dashboard");
